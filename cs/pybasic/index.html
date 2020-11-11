@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Python 入門">
+    <meta name="author" content="Python Code School">
+    <title>Python 入門 | 碼寶程式教育中心</title>
+    <link rel="icon" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/monokai-sublime.min.css">
+    <link rel="stylesheet" href="/static/main.css?201110">
+    <link rel="canonical" href="https://open.pyone.tw/">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark navbar-pyone">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#home-menu" aria-controls="home-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#home">Pyone</a>
+
+      <div class="collapse navbar-collapse" id="home-menu">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link nav-home" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#sec01">Top</a></li>
+            <li class="nav-item" id="ex-count"><a class="nav-link ex-count" href="#"></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div id="home" class="jumbotron jumbotron-pyone">
+      <div class="container">
+        <h1>Python Basic</h1>
+        <p class="lead">Python 入門</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="sec01" class="section-divider"></div>
+      <section class="section-chapter code-desc">
+        <h2>程式基本概念</h2>
+        <div class="row extra-link">
+            <div class="col-lg-4">
+                <a class="btn btn-lg btn-block btn-success" href="#ifelse" role="button">決策</a>
+            </div>
+            <div class="col-lg-4">
+                <a class="btn btn-lg btn-block btn-success" href="#forloop" role="button">for 迴圈</a>
+            </div>
+            <div class="col-lg-4">
+                <a class="btn btn-lg btn-block btn-success" href="#whileloop" role="button">while 迴圈</a>
+            </div>
+        </div>
+
+        <h3>Output (輸出)</h3>
+
+        <h4>基本輸出</h4>
+        <pre>
+            <code class="python">
+            # print(要輸出的內容)
+            # 參數可放任何型態的資料
+
+            # print(1個參數)
+            print('The world is flat.')
+            # print(0個參數)
+            print()
+            # print(2個以上參數，逗號分隔)
+            print('The world is flat.', '(世界是平的)')
+            </code>
+        </pre>
+
+        <h4>輸出單行字串</h4>
+        <pre>
+            <code class="python">
+            # 單引號 (字串單引號 vs. 英文單引號)
+            print('What\'s dangerous is not to evolve.')
+            # 雙引號
+            print("What's dangerous is not to evolve.")
+            </code>
+        </pre>
+
+        <h4>輸出不同類別</h4>
+        <pre>
+            <code class="python">
+            # 字串 str (string)
+            print('123', type('123'))
+            # 整數 int (integer)
+            print(123, type(123))
+            </code>
+        </pre>
+
+        <h3>Input (輸入)</h3>
+
+        <h4>基本輸入</h4>
+        <pre>
+            <code class="python">
+            # input(提示訊息)
+            # 參數建議放字串
+
+            # input(0個參數)
+            input()
+            # input(1個參數)
+            input('What is your name? ')
+            </code>
+        </pre>
+
+        <h3>Math (計算)</h3>
+
+        <h4>算術運算</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). print-eqs
+            # 輸出運算結果
+            # 請為所有算式設定 print() 函式
+            """
+
+            # 加(+)、減(-)、乘(*)、除(/)
+            7 + 2
+            7 - 2
+            7 * 2
+            7 / 2
+            # 商數(//)、餘數(%)
+            7 // 2
+            7 % 2
+            # 指數 (次方)
+            7 ** 2
+            </code>
+        </pre>
+
+        <h4>兩數相加</h4>
+        <pre>
+            <code class="python">
+            # 輸入兩個整數字串存到變數 a 和 b
+            a = input('a: ')
+            b = input('b: ')
+
+            # 因為任何輸入都是字串
+            # 所以必須使用 int() 轉成整數
+            a = int(a)
+            b = int(b)
+            print('sum:', a+b)
+            </code>
+        </pre>
+
+        <h4>程式錯誤種類</h4>
+        <pre>
+            <code class="python">
+            """
+            # 題意：將 a 和 b 以算術加法合計
+
+            1. 語法錯誤 Syntax Error  : 不可執行
+            2. 執行錯誤 Runtime Error : 可以執行，過程出錯
+            3. 邏輯錯誤 Logic Error   : 可以執行，不會出錯，結果不符預期
+            4. 語意錯誤 Semantic Error: 即邏輯錯誤
+
+            type(data) 檢查資料的類別
+            int('123') 將數字轉成整數 -> integer
+            str(123)   將整數轉成數字 -> string
+            """
+
+            a = b = 1
+            a = input('Input a number: ))
+            b = 123
+            print('type of a:', type(a))
+            print('type of b:', type(b))
+            print(a + b)
+            </code>
+        </pre>
+
+        <h4>數的次方</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). pow-np
+            # 數的次方
+            # 使用指數運算 **
+            # 輸入 n 和 p
+            # 計算 n 的 p 次方
+
+            [輸入與輸出]
+            n: 2
+            p: 10
+            n to the power of p is 1024
+            """
+
+            n = input('n: ')
+            p = 0
+            print('n to the power of p is', n)
+            </code>
+        </pre>
+
+        <div class="row extra-link">
+            <div class="col-lg-4">
+                <a target="_blank" rel="noopener noreferrer" class="btn btn-lg btn-block btn-info" href="https://www.youtube.com/watch?v=Zh3Yz3PiXZw" role="button">Alternative Math</a>
+            </div>
+        </div>
+
+        <h4>Variable (變數)</h4>
+        <pre>
+            <code class="html">
+            # 變數作用：存取資料
+            # 變數命名法：
+            # 1. snake_case, my_full_name
+            # 2. camelCase,  myFullName
+            # 3. PascalCase, MyFullName
+            </code>
+        </pre>
+
+        <h4>整數變數與記憶體</h4>
+        <pre>
+            <code class="python">
+            a = 1
+            print(a)
+            print(type(a))
+            print(id(a))
+            print()
+            a = 2
+            print(a)
+            print(type(a))
+            print(id(a))
+            </code>
+        </pre>
+
+        <h4>你的姓名</h4>
+        <pre>
+            <code class="python">
+            # ex(+). yourname-v1
+            # 你的姓名
+            # 為每一句加上英文句點
+            # 分別輸入姓和名，合併姓名存到一個變數
+
+            user_name = input('What is your name? ')
+            print('1. Your name is', user_name)
+            print('2. Your name is ' + user_name)
+            print('3. Your name is %s' % user_name)
+            print('4. Your name is {}'.format(user_name))
+            print(f'5. Your name is {user_name}')
+            </code>
+        </pre>
+
+        <pre>
+            <code class="python">
+            # ex(+). yourname-v2
+            # 你的姓名
+            # 保留上題完成的英文句點
+            # 分別輸入姓和名，不得合併存到一個變數
+
+            first_name = input('First name? ')
+            last_name = ''
+            print('1. Your name is', first_name)
+            print('2. Your name is ' + first_name)
+            print('3. Your name is %s' % first_name)
+            print('4. Your name is {}'.format(first_name))
+            print(f'5. Your name is {first_name}')
+            </code>
+        </pre>
+
+        <h4>關鍵字 (不可設為變數)</h4>
+        <pre>
+            <code class="html">
+            False      await      else       import     pass
+            None       break      except     in         raise
+            True       class      finally    is         return
+            and        continue   for        lambda     try
+            as         def        from       nonlocal   while
+            assert     del        global     not        with
+            async      elif       if         or         yield
+            </code>
+        </pre>
+
+        <div id="ifelse" class="section-divider"></div>
+        <h3>Decision making (決策) <span class="text-dark">- 決策式(分支或選擇結構)</span></h3>
+
+        <h4>if 條件式</h4>
+        <pre>
+            <code class="python">
+            print("Bala: Let's hang out.\n")
+            weather = 'sunny'
+            if weather == 'sunny':
+                print("Sure. Why not?")
+            </code>
+        </pre>
+
+        <h4>if-else <span class="text-muted">條件-否則式</span></h4>
+        <pre>
+            <code class="python">
+            print("Bala: Let's hang out.\n")
+            weather = input('How is the weather? ')
+            if weather == 'sunny':
+                print("Sure. Why not?")
+            else:
+                print("I want to stay at home.")
+            </code>
+        </pre>
+
+        <h4>兩層巢狀決策</h4>
+        <pre>
+            <code class="python">
+            furry = True
+            small = True
+            if furry:
+                if small:
+                    print("It's a cat!")
+                else:
+                    print("It's a bear!")
+            else:
+                if small:
+                    print("It's a skink!")
+                else:
+                    print("It's a crocodile!")
+            </code>
+        </pre>
+
+        <h4>三層巢狀決策</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). third-born
+            # 三層巢狀決策
+            # 判斷第三個孩子的性別
+            """
+
+            first_born  = 'M'
+            second_born = 'F'
+
+            if first_born == 'M':
+                print('First Son')
+                if second_born == 'M':
+                    print('Second Son')
+                else:
+                    print('Second Daughter')
+            else:
+                print('First Daughter')
+                if second_born == 'M':
+                    print('Second Son')
+                else:
+                    print('Second Daughter')
+            </code>
+        </pre>
+
+        <div id="forloop" class="section-divider"></div>
+        <h3>Repetition (重複) <span class="text-dark">- <span class="text-danger">for loop</span> 迴圈式(迴圈或重複結構)</span></h3>
+
+        <h4>輸出指定符號</h4>
+        <pre>
+            <code class="python">
+            for i in range(5):
+                print('*')
+            </code>
+        </pre>
+
+        <h4>輸出指定數列</h4>
+        <pre>
+            <code class="python">
+            for i in range(5):
+                print(i)
+            </code>
+        </pre>
+
+        <h4>迴圈與決策</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). diff-stars
+            # 不同星號數
+            # i 等於 3 時，輸出 ***，其他值則輸出 *
+
+            1 *
+            2 *
+            3 ***
+            4 *
+            5 *
+            """
+
+            # range(stop): 0 ~ stop-1
+            # range(start, stop): start ~ stop-1
+            for i in range(1, 6):
+                if False:
+                    print(i, '***')
+                else:
+                    print(i, '*')
+            </code>
+        </pre>
+
+        <h4>星號三角</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). triangles
+            # 正左直角
+            1 *
+            2 **
+            3 ***
+            4 ****
+            5 *****
+
+            # 倒左直角
+            1 *****
+            2 ****
+            3 ***
+            4 **
+            5 *
+
+            # 正右直角
+            1     *
+            2    **
+            3   ***
+            4  ****
+            5 *****
+
+            # 倒右直角
+            1 *****
+            2  ****
+            3   ***
+            4    **
+            5     *
+
+            # 金字塔形
+            1     *
+            2    ***
+            3   *****
+            4  *******
+            5 *********
+            """
+
+            for i in range(1, 6):
+                print(i, '*'*i)
+            </code>
+        </pre>
+
+        <h4>區分作用命名</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). same-for
+            # 相同迴圈結果
+            # 不得增加程式行數
+            # range() 參數不得直接放整數或算式，但可放變數
+            """
+
+            i = 5
+            for i in range(i):
+                print('i:', i)
+                i = i * 2
+                print('Double of i =', i)
+
+            print('-'*20)
+
+            for i in range(i):
+                print('i:', i)
+                i = i * 2
+                print('Double of i =', i)
+            </code>
+        </pre>
+
+        <div id="whileloop" class="section-divider"></div>
+        <h3>Repetition (重複) <span class="text-dark">- <span class="text-danger">while loop</span> 迴圈式(迴圈或重複結構)</span></h3>
+
+        <h4>while 布林變數</h4>
+        <pre>
+            <code class="python">
+            isplus = True
+            total = 0
+            while isplus:
+                total = total + 1
+                print(total)
+                if total == 10:
+                    isplus = False
+            </code>
+        </pre>
+
+        <h4>while 布林值</h4>
+        <pre>
+            <code class="python">
+            total = 0
+            while True:
+                total += 1
+                print(total)
+                if total == 10:
+                    break
+            </code>
+        </pre>
+
+        <h4>等差數列</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). arithmetic-seq
+            # 等差數列
+            # 維持使用一個條件式
+            # 比較雙方維持 total 和 10
+
+            # 比較運算子
+            == 等於     != 不等於
+            >= 大於等於  > 大於
+            <= 小於等於  < 小於
+
+            [輸入與輸出]
+            step: 2
+            2
+            4
+            6
+            8
+            10
+
+            step: 3
+            3
+            6
+            9
+
+            step: 4
+            4
+            8
+            """
+
+            total = 0
+            while True:
+                total += 1
+                print(total)
+                if total == 10:
+                    break
+            </code>
+        </pre>
+
+        <h4>while 條件式</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). while-condition
+            # 條件迴圈式
+            # while 依條件式決定是否執行
+            # 程式行數必須減至 4 行
+            """
+
+            total = 0
+            while False:
+                total += 1
+                print(total)
+                if total == 10:
+                    break
+            </code>
+        </pre>
+
+        <h4>迴圈式差異</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). for-vs-while
+            # 迴圈式差異
+            # 分別以 for loop 及 while loop 逐列輸出 1~10
+            # 程式行數必須均為 4 行
+            """
+
+            print('# for loop')
+            print('# while loop')
+            </code>
+        </pre>
+
+        <h4>無窮迴圈</h4>
+        <pre>
+            <code class="python">
+            # 以 [Ctrl] + [C] 強制中斷
+
+            while True:
+                print('infinite')
+            </code>
+        </pre>
+
+        <h4>迴圈選取三角</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). pick-triangle
+            # 迴圈選取三角
+            """
+
+            n = 5
+            while True:
+                print('1.正左直角 2.倒左直角')
+                print('3.正右直角 4.倒右直角')
+                print('5.金字塔形 q.離開迴圈')
+                op = input('> ')
+                if op == 'q':
+                    break
+                # 依選項輸出星號三角
+                if True:
+                    for i in range(1, n+1):
+                        print(i)
+                elif True:
+                    for i in range(1, n+1):
+                        print(i)
+            </code>
+        </pre>
+      </section>
+
+      <section class="section-chapter code-desc">
+        <h3>基礎錯誤處理</h3>
+
+        <h4>輸出錯誤</h4>
+        <pre>
+            <code class="html">
+            # 輸出字串 Hickory Dickory Dock
+            print(Hickory Dickory Dock)
+
+            # 輸出字串 It's a small world
+            print('It's a small world')
+
+            # 輸出字串 Hi, there!
+            print("Hi, there!'')
+
+            # 輸出字串 Hello, World!
+            prnit("Hello, World!")
+            </code>
+        </pre>
+
+        <h4>輸入錯誤</h4>
+        <pre>
+            <code class="html">
+            # 提示輸入名字
+            input('Your name? ') = name
+            print(name)
+
+            # 輸入名字後即輸出
+            input(print('Your name? '))
+
+            # 提示輸入 n 個名字，保留變數 n 的設定
+            n = 3
+            input('Please input', n, 'names:')
+
+            # 姓名分開輸入及儲存，一行寫完
+            first_name, last_name = input('First name? '),
+            print(first_name, last_name)
+            </code>
+        </pre>
+
+        <h4>變數名稱問題</h4>
+        <pre>
+            <code class="html">
+            # 輸出字串 Hidden Figures (使用符號問題)
+            movie name = Hidden Figures
+            print(movie name)
+
+            # 輸出字串 John, Jane, Jack (使用數字問題)
+            3names = "John, Jane, Jack"
+            print(3names)
+
+            # 輸出字串 data (使用符號問題)
+            var-1 = "data"
+            print(var-1)
+
+            # 輸出字串 Hi there! (使用符號問題)
+            'greeting' = 'Hi there!'
+            print(greeting)
+            </code>
+        </pre>
+
+        <h4>變數內容問題</h4>
+        <pre>
+            <code class="html">
+            # 輸出字串 1912/01/01
+            DateOfBirth = 1912/01/01
+            print(DateOfBirth)
+
+            # 輸出字串 2018-08-18
+            date = "2018"-"08"-"18"
+            print(date)
+
+            # 輸出字串
+            """
+            IMDb
+            Female
+            Celebrities
+            """
+            my_favorites = "IMDb \nFemale \Celebrities"
+            print(my_favorites)
+
+            # 輸出整數和 700
+            lscore = 3OO
+            rscore = 4OO
+            print(lscore+rscore)
+            </code>
+        </pre>
+
+        <h4>變數內容相同</h4>
+        <pre>
+            <code class="html">
+            # 輸出字串 Ha Ha Ha
+            # 設定 3 個變數，內容相同，一行寫完
+            msg1 = "Ha ", msg2 = "Ha ", msg3 = "Ha "
+            msg123 = msg1 + msg2 + msg3
+            print(msg123)
+            </code>
+        </pre>
+
+        <h4>輸出參數問題</h4>
+        <pre>
+            <code class="html">
+            name = input(Name:)
+            print('Hi!', name, print('Have a nice day!'))
+            print(question = print('May I help you? '))
+            </code>
+        </pre>
+
+        <h4>覆蓋 input() 函式</h4>
+        <pre>
+            <code class="html">
+            input = input('Input a number: ')
+            print(input)
+            name = input('Input a name: ')
+            </code>
+        </pre>
+
+        <h4>覆蓋 int() 函式</h4>
+        <pre>
+            <code class="html">
+            int = input('Input an integer: ')
+            print(int)
+            print(int('123'))
+            </code>
+        </pre>
+
+        <h4>決策式錯誤</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). debug-if
+            # 決策式錯誤
+            # 避免增加程式行數
+
+            [輸入與輸出]
+            How much would you like to deposit? 100
+            Enjoy your mug!
+            Have a nice day!
+
+            How much would you like to deposit? 101
+            You get a free toaster!
+            Congratulations!
+            Have a nice day!
+            """
+
+            deposit = input('How much would you like to deposit? '))
+            if int(deposit) > 100
+                print('You get a free toaster!')
+            freeToaster = true
+                if freeToaster:
+                print('Congratulations!')
+            else:
+                print('Enjoy your mug!')
+            print('Have a nice day!')
+            </code>
+        </pre>
+
+        <h4>迭代迴圈錯誤</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). debug-for
+            # 迭代迴圈錯誤
+            # 避免增加程式行數
+
+            [輸入與輸出]
+            n: 5
+            *
+            **
+            ***
+            ****
+            *****
+            """
+
+            for i in range(input('n: '):
+            print('*'*n+1)
+            </code>
+        </pre>
+
+        <h4>條件迴圈錯誤</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). debug-while
+            # 條件迴圈錯誤
+            # 避免增加程式行數
+
+            [輸入與輸出]
+            start: 10
+            10
+            9
+            8
+            7
+            6
+            5
+            4
+            3
+            2
+            1
+            Time's Up!
+            """
+
+            countdown = input('start: ')
+            While false:
+                print(countdone)
+                countdown -= 1
+                if countdown === 0:
+                    print('Time's Up!')
+                break
+            </code>
+        </pre>
+      </section>
+      <hr class="footer-hr">
+
+      <footer>
+        <p>&copy; 碼寶程式教育中心</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <script src="/static/jquery.slim.min.js"></script>
+    <script src="/static/popper.min.js"></script>
+    <script src="/static/bootstrap.min.js"></script>
+    <script src="/static/highlight.min.js"></script>
+    <script src="/static/clipboard.min.js"></script>
+    <script> hljs.initHighlightingOnLoad(); </script>
+    <script src="/static/main.js"></script>
+  </body>
+</html>
