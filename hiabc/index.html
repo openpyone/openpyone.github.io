@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-    <title>Type FJ</title>
+    <title>Hi ABC</title>
     <link rel="icon" href="/favicon.png">
     <link rel="stylesheet" href="/static/bootstrap.min.css">
     <style>
@@ -13,32 +13,48 @@
         h1 {
             margin: 5px 20px;
         }
+        .player-bg {
+            background-color: #addfa5;
+        }
 		.btn:hover {
 			cursor: pointer;
 		}
         .btn-lg {
             font-size: 32px;
             font-weight: bold;
-            margin: 5px 2px;
+            margin: 2px;
         }
         .btn-main {
             border: 1px solid #666;
             padding: 8px 3px 8px 1px;
-            width: 2.2em;
+            width: 2em;
+            border-radius: 0;
+        }
+        .face {
+            font-size: 64px;
         }
 	</style>
 </head>
 <body>
 	<div>
-        <h1 class="text-center">Type FJ
-            <button id="btnAlpha1" class="btn btn-primary">Alpha1</button>
-            <button id="btnAlpha2" class="btn btn-success">Alpha2</button>
-            <button id="btnAlpha3" class="btn btn-info">Alpha3</button>
+        <h1 class="text-center"><small>Hi ABC</small>
+            <button id="btnAlpha1" class="btn btn-dark">1</button>
+            <button id="btnAlpha2" class="btn btn-dark">2</button>
+            <button id="btnAlpha3" class="btn btn-dark">3</button>
+            <button id="btnPlayerRabbit" class="btn btn-light">&#128007;</button>
+            <button id="btnPlayerCat" class="btn btn-light">&#128008;</button>
+            <button id="btnPlayerDog" class="btn btn-light">&#128021;</button>
+            <button id="btnPlayerPig" class="btn btn-light">&#128022;</button>
+            <button id="btnPlayerChick" class="btn btn-light">&#128036;</button>
+            <button id="btnPlayerAnt" class="btn btn-light">&#128028;</button>
+            <button id="btnPlayerHoneybee" class="btn btn-light">&#128029;</button>
+            <button id="btnPlayerBug" class="btn btn-light">&#128027;</button>
         </h1>
         <hr>
 
         <div class="row">
-            <div id="board" class="col-lg-12 text-center">
+            <div id="face" class="col-lg-1 text-right face">&#128513;</div>
+            <div id="board" class="col-lg-11 text-left">
             </div>
         </div>
 	</div>
@@ -51,25 +67,34 @@
             food = ['&#127812;', '&#127815;', '&#127817;', '&#127820;', '&#127821;',
                     '&#127822;', '&#127825;', '&#127826;', '&#127827;', '&#127828;',
                     '&#127835;', '&#127839;', '&#127848;', '&#127849;', '&#127855;',
+                    '&#127865;', '&#129371;', '&#129380;', '&#127856;', '&#129367;',
             ];
+            goodfaces = ['&#128513;', '&#128512;', '&#128526;', '&#128516;'];
+            badfaces = ['&#128518;', '&#128530;', '&#128534;', '&#128544;', '&#128562;', '&#128580;', '&#128548;', '&#128557;'];
             alpha0 = [];
             alpha1 = Array.from('asdfghjkl');
             alpha2 = Array.from('qwertyuiop');
             alpha3 = Array.from('zxcvbnm');
             islower = true;
             current = 0;
-            M = 6;
-            N = 12;
+            M = 7;
+            N = 18;
             // local variables
             var nums = initBoard(nums, 1);
             // $('#btn1').text();
-            $('body').on('keydown', function(event) {
-                checkPos(String.fromCharCode(event.which));
+            $('body').on('keyup', function(event) {
+                movePos(String.fromCharCode(event.which));
             });
 
             $('button[id^="btnAlpha"]').on('click', function() {
                 var version = parseInt(this.id.slice(-1));
                 nums = initBoard(nums, version);
+                // console.log(nums);
+            });
+
+            $('button[id^="btnPlayer"]').on('click', function() {
+                player = $(this).html();
+                nums = initBoard(nums, 1);
                 // console.log(nums);
             });
         });
@@ -118,6 +143,7 @@
                 }
                 items.push('<br>');
             }
+            $('#face').html(goodfaces[0]);
             $('#board').html(items.join(''));
             nums = randShuffle(nums);
             placeIcons(nums);
@@ -128,7 +154,8 @@
         function placeIcons(nums) {
             current = nums[0];
             $('#btn'+nums[0]).html(player);
-            for (var i = 1; i < food.length; i++) {
+            $('#btn'+nums[0]).addClass('player-bg');
+            for (var i = 1; i <= food.length; i++) {
                 $('#btn'+nums[i]).html(food[i-1]);
             }
         }
@@ -173,16 +200,23 @@
             }
         }
 
-        function checkPos(keyCode) {
+        function movePos(keyCode) {
+            var isMove = false;
+            if (keyCode >= 1 && keyCode <= 3) {
+                $('#btnAlpha'+keyCode).click();
+            }
             // console.log(keyCode);
+            $('#btn'+current).removeClass('player-bg');
             if ((current-N) >= 0) {
                 if ($('#btn'+(current-N)).html().toUpperCase() == keyCode) {
                     current = current-N;
+                    isMove = true;
                 }
             }
             if ((current+N) < M*N) {
                 if ($('#btn'+(current+N)).html().toUpperCase() == keyCode) {
                     current = current+N;
+                    isMove = true;
                 }
             }
 
@@ -190,6 +224,7 @@
             if ((current+1) <= rightBound) {
                 if ($('#btn'+(current+1)).html().toUpperCase() == keyCode) {
                     current = current+1;
+                    isMove = true;
                 }
             }
 
@@ -197,8 +232,20 @@
             if ((current-1) >= leftBound) {
                 if ($('#btn'+(current-1)).html().toUpperCase() == keyCode) {
                     current = current-1;
+                    isMove = true;
                 }
             }
+
+            if (keyCode >= 'A' && keyCode <= 'Z') {
+                if (isMove) {
+                    $('#face').html(goodfaces[randInt(0, goodfaces.length-1)]);
+                }
+                else {
+                    $('#face').html(badfaces[randInt(0, badfaces.length-1)]);
+                }
+            }
+
+            $('#btn'+current).addClass('player-bg');
             $('#btn'+current).html(player);
             clearLetters();
             setLetters();
