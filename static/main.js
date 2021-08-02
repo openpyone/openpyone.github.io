@@ -21,7 +21,7 @@ var pre = document.getElementsByTagName('pre');
 for (var i = 0; i < pre.length; i++) {
     var button = document.createElement('button');
     button.className = 'btn btn-copy btn-secondary';
-    button.textContent = 'Copy';
+    button.textContent = 'Copy #' + String(i+1).padStart(3, '0');
     pre[i].insertBefore(button, pre[i].firstChild);
 }
 var copyCode = new Clipboard('.btn-copy', {
