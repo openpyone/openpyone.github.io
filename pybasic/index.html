@@ -45,16 +45,19 @@
         <h2>程式基本概念</h2>
         <div class="row extra-link">
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-block btn-success" href="#ifelse" role="button">決策</a>
+                <a class="btn btn-lg btn-block btn-success" href="#domath">計算</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-block btn-success" href="#forloop" role="button">for 迴圈</a>
+                <a class="btn btn-lg btn-block btn-success" href="#ifelse">決策</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-block btn-success" href="#whileloop" role="button">while 迴圈</a>
+                <a class="btn btn-lg btn-block btn-success" href="#forloop">for 迴圈</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-block btn-success" href="#commonerr" role="button">基礎錯誤處理</a>
+                <a class="btn btn-lg btn-block btn-success" href="#whileloop">while 迴圈</a>
+            </div>
+            <div class="col-lg-4">
+                <a class="btn btn-lg btn-block btn-success" href="#commonerr">基礎錯誤處理</a>
             </div>
         </div>
 
@@ -131,6 +134,7 @@
             </code>
         </pre>
 
+        <div id="domath" class="section-divider"></div>
         <h3>Math (計算)</h3>
 
         <h4>算術運算</h4>
@@ -152,6 +156,27 @@
             7 % 2
             # 指數 (次方)
             7 ** 2
+            </code>
+        </pre>
+
+        <h4>運算子優先序 (Operator Precedence)</h4>
+        <pre>
+            <code class="python">
+            # 先乘除後加減
+            a = 7 + 2 - 3 * 2
+            print('a:', a)
+            b = 8 + 4 / 2 - 5 * 2
+            print('b:', b)
+            </code>
+        </pre>
+
+        <pre>
+            <code class="python">
+            # 指乘除餘加減
+            a = 8 * 2 + 7 - 9 // 4 * 3 ** 2
+            print('a:', a)
+            b = 27 % 5 * 6 ** 2 - 12 // 6
+            print('b:', b)
             </code>
         </pre>
 
@@ -218,7 +243,7 @@
 
         <div class="row extra-link">
             <div class="col-lg-4">
-                <a target="_blank" rel="noopener noreferrer" class="btn btn-lg btn-block btn-info" href="https://www.youtube.com/watch?v=Zh3Yz3PiXZw" role="button">Alternative Math</a>
+                <a target="_blank" rel="noopener noreferrer" class="btn btn-lg btn-block btn-info" href="https://www.youtube.com/watch?v=Zh3Yz3PiXZw">Alternative Math</a>
             </div>
         </div>
 
