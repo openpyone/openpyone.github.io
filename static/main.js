@@ -1,9 +1,10 @@
 $(function() {
     var pycode = $('code.python').length;
+    var cccode = $('code.cpp').length;
     var jscode = $('code.javascript').length;
     var bodyHTML = $('body').html();
     var excount = (bodyHTML.match(/ex\(\+\)/g) || []).length;
-    var sumCode = pycode + jscode;
+    var sumCode = pycode + cccode + jscode;
     var sumCode = sumCode == 0 ? '' : sumCode;
     $('#ex-count > a.nav-link').text(sumCode);
 });
