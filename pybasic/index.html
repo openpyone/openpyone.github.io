@@ -59,7 +59,10 @@
                 <a class="btn btn-lg btn-block btn-success" href="#whileloop">while 迴圈</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-block btn-success" href="#commonerr">基礎錯誤處理</a>
+                <a class="btn btn-lg btn-block btn-success" href="#commonerr">錯誤處理</a>
+            </div>
+            <div class="col-lg-4">
+                <a class="btn btn-lg btn-block btn-success" href="#solprob">解題練習</a>
             </div>
         </div>
 
@@ -68,8 +71,11 @@
         <h4>基本輸出</h4>
         <pre>
             <code class="python">
-            # print(要輸出的內容)
-            # 參數可放任何型態的資料
+            """
+            # 內建函式 print()
+            # 輸出訊息、變數內容或資料值
+            # print(參數：變數或資料值)
+            """
 
             # print(1個參數)
             print('Hello, World!')
@@ -84,6 +90,11 @@
         <h4>輸出單行字串</h4>
         <pre>
             <code class="python">
+            """
+            可用單引號或雙引號設定字串
+            必須成對
+            """
+
             # 單引號 (字串單引號 vs. 英文單引號)
             print('What\'s going on?')
             # 雙引號
@@ -94,6 +105,12 @@
         <h4>輸出不同類別</h4>
         <pre>
             <code class="python">
+            """
+            # 內建函式 type()
+            # 回傳變數或資料值的類別
+            # type(參數：變數或資料值)
+            """
+
             # 字串 str (string)
             print('123', type('123'))
             # 整數 int (integer)
@@ -108,8 +125,11 @@
         <h4>基本輸入</h4>
         <pre>
             <code class="python">
-            # input(提示訊息)
-            # 參數建議放字串
+            """
+            # 內建函式 input()
+            # 接收並回傳使用者輸入的資料
+            # input(參數：建議設定字串)
+            """
 
             # input(0個參數)
             input()
@@ -118,21 +138,31 @@
             </code>
         </pre>
 
-        <h4>橫式選單提示</h4>
+        <h4>輸入轉整數</h4>
         <pre>
             <code class="python">
-            input('1.Create 2.Read 3.Update 4.Delete: ')
+            """
+            # 內建函式 int()
+            # 將變數或資料值轉為整數
+            # int(參數：整數字串)
+            """
+
+            n = int(input('Enter a number: '))
+            print(n)
             </code>
         </pre>
 
-        <h4>直式選單提示</h4>
+        <h4>輸入轉浮點數</h4>
         <pre>
             <code class="python">
-            print('L.Left')
-            print('R.Right')
-            print('U.Up')
-            print('D.Down')
-            input('> ')
+            """
+            # 內建函式 float()
+            # 將變數或資料值轉為浮點數
+            # float(參數：浮點數字串)
+            """
+
+            n = float(input('Enter a number: '))
+            print(n)
             </code>
         </pre>
 
@@ -143,8 +173,8 @@
         <pre>
             <code class="python">
             """
-            # ex(+). print-eqs
-            # 輸出算術運算
+            # ex(+).
+            # 輸出運算結果
             """
 
             # 加(+)、減(-)、乘(*)、除(/)
@@ -163,6 +193,11 @@
         <h4>運算子優先序 (Operator Precedence)</h4>
         <pre>
             <code class="python">
+            """
+            # ex(+).
+            # 估算結果
+            """
+
             # 先乘除後加減
             a = 7 + 2 - 3 * 2
             print('a:', a)
@@ -173,6 +208,11 @@
 
         <pre>
             <code class="python">
+            """
+            # ex(+).
+            # 估算結果
+            """
+
             # 指乘除餘加減
             a = 8 * 2 + 7 - 9 // 4 * 3 ** 2
             print('a:', a)
@@ -207,7 +247,7 @@
             3. 邏輯錯誤 Logic Error   : 可以執行，不會出錯，結果不符預期
             4. 語意錯誤 Semantic Error: 即邏輯錯誤
 
-            type(data): 檢查資料的類別
+            type(data): 回傳資料的類別
             int('987'): 將數字轉成整數 -> integer
             str(12345): 將整數轉成數字 -> string
             """
@@ -224,7 +264,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). pow-np
+            # ex(+).
             # 數的次方
             # 使用指數運算 **
             # 輸入 n 和 p
@@ -256,7 +296,6 @@
             # 變數命名法：
             # 1. snake_case, my_full_name
             # 2. camelCase,  myFullName
-            # 3. PascalCase, MyFullName
             """
 
             my_full_name = 'Robot 987'
@@ -282,7 +321,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). yourname-v1
+            # ex(+).
             # 你的姓名
             # 為每一句加上英文句點
             # 分別輸入姓和名，合併姓名存到 user_name
@@ -300,7 +339,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). yourname-v2
+            # ex(+).
             # 你的姓名
             # 保留上題完成的英文句點
             # 分別輸入姓和名，不得合併存到 user_name
@@ -392,7 +431,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). third-born
+            # ex(+).
             # 三層巢狀決策
             # 判斷第三個孩子的性別
             """
@@ -438,7 +477,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). diff-stars
+            # ex(+).
             # 三倍三顆星
             # i 為 3 的倍數時，輸出 ***，其他值則輸出 *
 
@@ -464,7 +503,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). triangles
+            # ex(+).
             # 星號三角
 
             # 正左直角
@@ -552,7 +591,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). same-for
+            # ex(+).
             # 區分作用命名
             # 使兩個相同迴圈輸出同樣結果
             # 不得增加程式行數
@@ -606,7 +645,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). arithmetic-seq
+            # ex(+).
             # 限定等差數列
             # 維持使用一個條件式
             # 比較雙方維持 total 和 10
@@ -648,7 +687,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). while-condition
+            # ex(+).
             # 條件迴圈式
             # while 依條件式決定是否執行
             # 程式行數必須減至 4 行
@@ -667,7 +706,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). for-vs-while
+            # ex(+).
             # 迴圈式差異
             # 分別以 for loop 及 while loop 逐列輸出 1~10
             # 程式行數必須均為 4 行
@@ -692,7 +731,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). pick-triangle
+            # ex(+).
             # 迴圈選取三角
             """
 
@@ -769,16 +808,14 @@
                 print('***')
             </code>
         </pre>
-      </section>
 
       <div id="commonerr" class="section-divider"></div>
-      <section class="section-chapter code-desc">
-        <h3>基礎錯誤處理</h3>
+        <h3>錯誤處理</h3>
 
         <h4>決策錯誤一</h4>
         <pre>
             <code class="python">
-            # ex(+). debug-if1
+            # ex(+).
 
             op = input('1.Create 2.Read 3.Update 4.Delete': )
             if op == 1:
@@ -795,7 +832,7 @@
         <h4>決策錯誤二</h4>
         <pre>
             <code class="python">
-            # ex(+). debug-if2
+            # ex(+).
 
             n = input(int('n: '))
             if n % 2 == 0:
@@ -808,7 +845,7 @@
         <h4>決策錯誤三</h4>
         <pre>
             <code class="python">
-            # ex(+). debug-if3
+            # ex(+).
 
             print('L.Left')
             print('R.Right')
@@ -831,7 +868,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). debug-if4
+            # ex(+).
             # 避免增加程式行數
 
             [輸入與輸出]
@@ -846,13 +883,14 @@
             """
 
             deposit = input('How much would you like to deposit? '))
+            freeToaster = False
             if int(deposit) > 100
                 print('You get a free toaster!')
             freeToaster = true
-                if freeToaster:
-                print('Congratulations!')
             else:
                 print('Enjoy your mug!')
+            if freeToaster:
+            print('Congratulations!')
             print('Have a nice day!')
             </code>
         </pre>
@@ -861,7 +899,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). debug-loop1
+            # ex(+).
             # 迴圈錯誤一
             # 避免增加程式行數
 
@@ -883,7 +921,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). debug-loop2
+            # ex(+).
             # 迴圈錯誤二
             # 避免增加程式行數
 
@@ -907,7 +945,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). debug-loop3
+            # ex(+).
             # 迴圈錯誤三
             # 避免增加程式行數
 
@@ -940,7 +978,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). debug-loop4
+            # ex(+).
             # 迴圈錯誤四
             # 避免增加程式行數
             """
@@ -959,7 +997,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). debug-loop5
+            # ex(+).
             # 迴圈錯誤五
             # 避免增加程式行數
 
@@ -998,7 +1036,7 @@
         <pre>
             <code class="python">
             """
-            # ex(+). debug-loop6
+            # ex(+).
             # 迴圈錯誤六
             # 避免增加程式行數
 
@@ -1034,6 +1072,261 @@
                     count = 1
                 print(count)
                 print('-'*10
+            </code>
+        </pre>
+
+        <h4>異常類別</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+).
+            # 異常類別與錯誤修正
+            # 1. 分母為 0 則輸出 0
+            # 2. 輸入資料存到變數 x
+            # 3. 確保 num1 為整數
+            # 4. 確保 range() 參數為整數
+            # 5. 能轉整數就轉，不能則輸出原值
+            """
+
+            test_error = input('1, 2, 3, 4 or 5: ')
+            if test_error == '1':
+                # ZeroDivisionError
+                incomes = (0, 140, 210, 0, 175, 280)
+                for i in range(1, len(incomes)):
+                    print(incomes[i] / incomes[i-1])
+            elif test_error == '2':
+                # NameError
+                print(x * 3)
+            elif test_error == '3':
+                # TypeError
+                num1 = input('The number: ')
+                num2 = 2
+                print(num1 + num2)
+            elif test_error == '4':
+                # TypeError
+                for i in range(input('The stop number: ')):
+                    print(i)
+            elif test_error == '5':
+                # ValueError
+                data = ('1', 'a', 'A')
+                for cell in data:
+                    print(int(cell))
+            </code>
+        </pre>
+
+        <h4>統一處理異常</h4>
+        <pre>
+            <code class="python">
+            try:
+                denom = int(input('Denominator? '))
+                if denom % 2 == 0 and denom != 0:
+                    x = 2
+
+                part1 = 10 * (1 / denom)
+                part2 = 5 + x * part1
+                if denom <= 10:
+                    result = 'Result: ' + str(part2)
+                else:
+                    result = 'Result: ' + int(part2)
+                print(result)
+            except:
+                print('Something went wrong.')
+            finally:
+                print('Test completed.')
+            </code>
+        </pre>
+
+        <h4>區分處理異常</h4>
+        <pre>
+            <code class="python">
+            try:
+                denom = int(input('Denominator? '))
+                if denom % 2 == 0 and denom != 0:
+                    x = 2
+
+                part1 = 10 * (1 / denom)
+                part2 = 5 + x * part1
+                if denom <= 10:
+                    result = 'Result: ' + str(part2)
+                else:
+                    result = 'Result: ' + int(part2)
+                print(result)
+            except ValueError:
+                print('You must enter an integer.')
+            except ZeroDivisionError:
+                print('The denominator must not be 0.')
+            except NameError:
+                print('Do not enter odd numbers.')
+            except TypeError:
+                print('The denominator should be less than or equal to 10.')
+            finally:
+                print('Test completed.')
+            </code>
+        </pre>
+
+        <h4>異常處理否則式</h4>
+        <pre>
+            <code class="python">
+            try:
+                denom = int(input('Denominator? '))
+                if denom % 2 == 0 and denom != 0:
+                    x = 2
+
+                part1 = 10 * (1 / denom)
+                part2 = 5 + x * part1
+                if denom <= 10:
+                    result = 'Result: ' + str(part2)
+                else:
+                    result = 'Result: ' + int(part2)
+                print(result)
+            except ValueError:
+                print('You must enter an integer.')
+            except ZeroDivisionError:
+                print('The denominator must not be 0.')
+            except NameError:
+                print('Do not enter odd numbers.')
+            except TypeError:
+                print('The denominator should be less than or equal to 10.')
+            else:
+                print('No exceptions or errors.')
+            finally:
+                print('Test completed.')
+            </code>
+        </pre>
+
+        <div id="solprob" class="section-divider"></div>
+        <h3>解題練習</h3>
+
+        <h4>哈囉！同學</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). 哈囉！同學
+            # 執行指令：
+            # python p1.py < d1.txt
+
+            [輸入]
+            Jane
+            John
+
+            [輸出]
+            hello, Jane
+            hello, John
+            """
+
+            while True:
+                try:
+                    s = input()
+                    print('hello, ' + s)
+                except EOFError:
+                    break
+            </code>
+        </pre>
+
+        <h4>奇數偶數</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). 奇數偶數
+            # 執行指令：
+            # python p1.py < d1.txt
+
+            [輸入]
+            8
+            21
+            7
+            12
+
+            [輸出]
+            even
+            odd
+            odd
+            even
+            """
+            </code>
+        </pre>
+
+        <h4>兩數相減</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). 兩數相減
+            # 執行指令：
+            # python p1.py < d1.txt
+
+            [輸入]
+            10 20
+            30 12
+
+            [輸出]
+            -10
+            18
+            """
+            </code>
+        </pre>
+
+        <h4>相差絕對值</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). 相差絕對值
+            # 執行指令：
+            # python p1.py < d1.txt
+
+            [輸入]
+            10 20
+            30 12
+
+            [輸出]
+            10
+            18
+            """
+            </code>
+        </pre>
+
+        <h4>任意數相加</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). 任意數相加
+            # 執行指令：
+            # python p1.py < d1.txt
+
+            [輸入]
+            5 9 1 6 8
+            9 8 7
+            1 7 3 8
+
+            [輸出]
+            29
+            24
+            19
+            """
+            </code>
+        </pre>
+
+        <h4>奇數菱形</h4>
+        <pre>
+            <code class="python">
+            """
+            # ex(+). 奇數菱形
+            # 執行指令：
+            # python p1.py < d1.txt
+
+            [輸入]
+            4
+            5
+            6
+
+            [輸出]
+            Must enter an odd number.
+              *
+             ***
+            *****
+             ***
+              *
+            Must enter an odd number.
+            """
             </code>
         </pre>
       </section>
