@@ -553,6 +553,7 @@
                     case 7: printf("Send \"%s\" to level %d\n", msg, 7);
                     case 8: printf("Send \"%s\" to level %d\n", msg, 8);
                     case 9: printf("Send \"%s\" to level %d\n", msg, 9);
+                            break;
                     default: printf("Wrong level!\n");
                 }
                 return 0;
@@ -720,6 +721,99 @@
             </code>
         </pre>
 
+        <h4>星號三角</h4>
+        <pre>
+            <code class="cpp">
+            #include &lt;stdio.h&gt;
+
+            int main() {
+                int n = 0;
+                int i = 0, j = 0;
+
+                printf("n: ");
+                scanf("%d", &n);
+                for (i = 1; i <= n; i++) {
+                    for (j = 1; j <= i; j++) {
+                        printf("*");
+                    }
+                    printf("\n");
+                }
+                return 0;
+            }
+            </code>
+        </pre>
+
+        <h4>指數計算</h4>
+        <pre>
+            <code class="cpp">
+            #include &lt;stdio.h&gt;
+
+            int main() {
+                int n = 0, p = 0;
+                int i;
+                int result = 1;
+
+                printf("n: ");
+                scanf("%d", &n);
+                printf("p: ");
+                scanf("%d", &p);
+
+                for (i = 0; i < p; i++) {
+                    result *= n;
+                }
+                printf("n ^ p = %d ^ %d = %d\n", n, p, result);
+                return 0;
+            }
+            </code>
+        </pre>
+
+        <h4>兩個迴圈變數</h4>
+        <pre>
+            <code class="cpp">
+            #include &lt;stdio.h&gt;
+
+            int main() {
+                int n = 0;
+                int i = 0, j = 0;
+                int k = 0;
+
+                printf("n: ");
+                scanf("%d", &n);
+                for (i = 1, j = 1; i <= n || j >= n*n; i+=2, j*=3) {
+                    k++;
+                }
+                printf("k: %d\n", k);
+                return 0;
+            }
+            </code>
+        </pre>
+
+        <h4>三層迴圈</h4>
+        <pre>
+            <code class="cpp">
+            #include &lt;stdio.h&gt;
+
+            int main() {
+                int start = 0, end = 0;
+                int i = 0, j = 0, k = 0;
+
+                printf("start: ");
+                scanf("%d", &start);
+                printf("end: ");
+                scanf("%d", &end);
+
+                for (i = start; i <= end; i++) {
+                    for (j = start; j <= end; j++) {
+                        for (k = start; k <= end; k++) {
+                            printf("%d * %d * %d = %d\n", i, j, k, i*j*k);
+                        }
+                    }
+                }
+                return 0;
+            }
+            </code>
+        </pre>
+
         <div id="whileloop" class="section-divider"></div>
         <h3>Repetition (重複) <span class="text-dark">- <span class="text-danger">while loop</span> 迴圈式(迴圈或重複結構)</span></h3>
 
@@ -850,7 +944,41 @@
                 } while (n != 0);
                 return 0;
             }
+            </code>
+        </pre>
 
+        <h4>帳戶金額存提</h4>
+        <pre>
+            <code class="cpp">
+            #include &lt;stdio.h&gt;
+
+            int main() {
+                int opt;
+                int money;
+                int balance = 0;
+
+                do {
+                    printf("| 1.Withdraw | 2.Deposit | 9.Exit |\n> ");
+                    scanf("%d", &opt);
+                    if (opt == 9) break;
+                    if (opt == 1 || opt == 2) {
+                        printf("Amount: ");
+                        scanf("%d", &money);
+                        if (opt == 1) {
+                            if (balance < money)
+                                printf("The balance is not enough.\n");
+                            else
+                                balance -= money;
+                        }
+                        else {
+                            balance += money;
+                        }
+                        printf("The balance is %d.\n", balance);
+                    }
+                } while (opt != 1 || opt != 2);
+
+                return 0;
+            }
             </code>
         </pre>
       </section>
