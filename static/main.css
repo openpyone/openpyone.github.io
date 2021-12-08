@@ -219,6 +219,10 @@ img.hasborder {
     border: solid 1px #666;
 }
 
+img.img-apcs {
+    margin-bottom: 100px;
+}
+
 /*.page-section {
     padding: 20px 0 10px;
 }*/
