@@ -47,22 +47,22 @@
         <h2>程式基本概念</h2>
         <div class="row extra-link">
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-block btn-success" href="#domath">計算</a>
+                <a class="btn btn-lg btn-block btn-success" href="#secmath">計算</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-block btn-success" href="#ifelse">決策</a>
+                <a class="btn btn-lg btn-block btn-success" href="#secif">決策</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-block btn-success" href="#forloop">for 迴圈</a>
+                <a class="btn btn-lg btn-block btn-success" href="#secfor">for 迴圈</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-block btn-success" href="#whileloop">while 迴圈</a>
+                <a class="btn btn-lg btn-block btn-success" href="#secwhile">while 迴圈</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-block btn-success" href="#commonerr">錯誤處理</a>
+                <a class="btn btn-lg btn-block btn-success" href="#secerror">錯誤處理</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-block btn-success" href="#solprob">解題練習</a>
+                <a class="btn btn-lg btn-block btn-success" href="#secjudge">解題練習</a>
             </div>
         </div>
 
@@ -166,15 +166,16 @@
             </code>
         </pre>
 
-        <div id="domath" class="section-divider"></div>
+        <div id="secmath" class="section-divider"></div>
         <h3>Math (計算)</h3>
 
-        <h4>輸出算術運算</h4>
+        <h4>七種算術運算</h4>
         <pre>
             <code class="python">
+            # 七種算術運算
             """
             # ex(+).
-            # 輸出運算結果
+            # 輸出算術運算結果
             """
 
             # 加(+)、減(-)、乘(*)、除(/)
@@ -183,6 +184,7 @@
             7 * 2
             7 / 2
             # 商數(//)、餘數(%)
+            # % 其實是模數運算
             7 // 2
             7 % 2
             # 指數 (次方)
@@ -190,15 +192,15 @@
             </code>
         </pre>
 
-        <h4>運算子優先序 (Operator Precedence)</h4>
+        <h4>先乘除後加減 - 運算子優先序</h4>
         <pre>
             <code class="python">
+            # 先乘除後加減
             """
             # ex(+).
-            # 估算結果
+            # 乘除 > 加減
             """
 
-            # 先乘除後加減
             a = 7 + 2 - 3 * 2
             print('a:', a)
             b = 8 + 4 / 2 - 5 * 2
@@ -206,14 +208,15 @@
             </code>
         </pre>
 
+        <h4>指乘除餘加減 - 運算子優先序</h4>
         <pre>
             <code class="python">
+            # 指乘除餘加減
             """
             # ex(+).
-            # 估算結果
+            # 指數 > 乘除、商數、餘數 > 加減
             """
 
-            # 指乘除餘加減
             a = 8 * 2 + 7 - 9 // 4 * 3 ** 2
             print('a:', a)
             b = 27 % 5 * 6 ** 2 - 12 // 6
@@ -232,7 +235,7 @@
             # 所以必須使用 int() 轉成整數
             a = int(a)
             b = int(b)
-            print('sum:', a+b)
+            print('Sum:', a+b)
             </code>
         </pre>
 
@@ -243,16 +246,16 @@
             # 題意：將 a 和 b 以算術加法合計
 
             1. 語法錯誤 Syntax Error  : 不可執行
-            2. 執行錯誤 Runtime Error : 可以執行，過程出錯
-            3. 邏輯錯誤 Logic Error   : 可以執行，不會出錯，結果不符預期
+            2. 執行錯誤 Runtime Error : 可以執行，過程顯示錯誤訊息
+            3. 邏輯錯誤 Logic Error   : 可以執行，不會顯示錯誤訊息，結果不符預期
             4. 語意錯誤 Semantic Error: 即邏輯錯誤
 
             type(data): 回傳資料的類別
-            int('987'): 將數字轉成整數 -> integer
-            str(12345): 將整數轉成數字 -> string
+            int('987'): 將數字字串轉成整數 -> integer
+            str(12345): 將整數轉成數字字串 -> string
             """
 
-            a = input('Input a number: ))
+            a = input('a: ))
             b = 123
             print('type of a:', type(a))
             print('type of b:', type(b))
@@ -263,9 +266,9 @@
         <h4>數的次方</h4>
         <pre>
             <code class="python">
+            # 數的次方
             """
             # ex(+).
-            # 數的次方
             # 使用指數運算 **
             # 輸入 n 和 p
             # 計算 n 的 p 次方
@@ -293,9 +296,16 @@
             <code class="python">
             """
             # 變數作用：存取資料
+            # 存：Set, Save, Store,
+            # 取：Get, Open, Fetch, Retrieve
+
+
             # 變數命名法：
-            # 1. snake_case, my_full_name
-            # 2. camelCase,  myFullName
+            1. snake_case, my_full_name
+            兩個以上單字，單字之間以底線連接
+
+            2. camelCase,  myFullName
+            兩個以上單字，第一個單字全小寫，第二個以上單字首字母大寫
             """
 
             my_full_name = 'Robot 987'
@@ -316,12 +326,12 @@
             </code>
         </pre>
 
-        <h4>你的姓名</h4>
+        <h4>姓名練習一</h4>
         <pre>
             <code class="python">
+            # 姓名練習一
             """
             # ex(+).
-            # 你的姓名
             # 為每一句加上英文句點
             # 分別輸入姓和名，合併姓名存到 user_name
             """
@@ -335,11 +345,12 @@
             </code>
         </pre>
 
+        <h4>姓名練習二</h4>
         <pre>
             <code class="python">
+            # 姓名練習二
             """
             # ex(+).
-            # 你的姓名
             # 保留上題完成的英文句點
             # 分別輸入姓和名，不得合併存到 user_name
             """
@@ -383,7 +394,7 @@
             </code>
         </pre>
 
-        <div id="ifelse" class="section-divider"></div>
+        <div id="secif" class="section-divider"></div>
         <h3>Decision making (決策) <span class="text-dark">- 決策式(分支或選擇結構)</span></h3>
 
         <h4>if 條件式</h4>
@@ -426,13 +437,15 @@
             </code>
         </pre>
 
-        <h4>三層巢狀決策</h4>
+        <h4>三個孩子 - 三層巢狀決策</h4>
         <pre>
             <code class="python">
+            # 三個孩子
             """
             # ex(+).
-            # 三層巢狀決策
-            # 判斷第三個孩子的性別
+            # 增加第三個孩子的性別判斷
+            # 在 Son 及 Daughter 後面，括號標註英文名字
+            # 英文名字不可重複命名
             """
 
             first_born  = 'M'
@@ -453,8 +466,16 @@
             </code>
         </pre>
 
-        <div id="forloop" class="section-divider"></div>
+        <div id="secfor" class="section-divider"></div>
         <h3>Repetition (重複) <span class="text-dark">- <span class="text-danger">for loop</span> 迴圈式(迴圈或重複結構)</span></h3>
+
+        <h4>輸出整數數列</h4>
+        <pre>
+            <code class="python">
+            for i in range(5):
+                print(i)
+            </code>
+        </pre>
 
         <h4>輸出指定符號</h4>
         <pre>
@@ -464,20 +485,12 @@
             </code>
         </pre>
 
-        <h4>輸出指定數列</h4>
-        <pre>
-            <code class="python">
-            for i in range(5):
-                print(i)
-            </code>
-        </pre>
-
         <h4>三倍三顆星</h4>
         <pre>
             <code class="python">
+            # 三倍三顆星
             """
             # ex(+).
-            # 三倍三顆星
             # i 為 3 的倍數時，輸出 ***，其他值則輸出 *
 
             1 *
@@ -501,9 +514,9 @@
         <h4>星號三角</h4>
         <pre>
             <code class="python">
+            # 星號三角
             """
             # ex(+).
-            # 星號三角
 
             # 正左直角
             i *
@@ -589,9 +602,9 @@
         <h4>區分作用命名</h4>
         <pre>
             <code class="python">
+            # 區分作用命名
             """
             # ex(+).
-            # 區分作用命名
             # 使兩個相同迴圈輸出同樣結果
             # 不得增加程式行數
             # range() 參數不得直接放整數或算式，但可放變數
@@ -612,7 +625,7 @@
             </code>
         </pre>
 
-        <div id="whileloop" class="section-divider"></div>
+        <div id="secwhile" class="section-divider"></div>
         <h3>Repetition (重複) <span class="text-dark">- <span class="text-danger">while loop</span> 迴圈式(迴圈或重複結構)</span></h3>
 
         <h4>while 布林變數</h4>
@@ -643,9 +656,9 @@
         <h4>限定等差數列</h4>
         <pre>
             <code class="python">
+            # 限定等差數列
             """
             # ex(+).
-            # 限定等差數列
             # 維持使用一個條件式
             # 比較雙方維持 total 和 10
             # 調整迴圈內的程式流程
@@ -685,13 +698,6 @@
         <h4>while 條件式</h4>
         <pre>
             <code class="python">
-            """
-            # ex(+).
-            # 條件迴圈式
-            # while 依條件式決定是否執行
-            # 程式行數必須減至 4 行
-            """
-
             total = 0
             while False:
                 total += 1
@@ -704,15 +710,19 @@
         <h4>迴圈式差異</h4>
         <pre>
             <code class="python">
-            """
-            # ex(+).
-            # 迴圈式差異
-            # 分別以 for loop 及 while loop 逐列輸出 1~10
-            # 程式行數必須均為 4 行
-            """
-
             print('# for loop')
+            t = 0
+            for i in range(10):
+                t += 1
+                print(t)
+
+            print('-'*20)
+
             print('# while loop')
+            t = 0
+            while t < 10:
+                t += 1
+                print(t)
             </code>
         </pre>
 
@@ -729,12 +739,12 @@
         <h4>迴圈選取三角</h4>
         <pre>
             <code class="python">
-            """
-            # ex(+).
             # 迴圈選取三角
             """
+            # ex(+).
+            # 依選項輸出星號三角
+            """
 
-            n = 5
             while True:
                 print('1.正左直角 2.倒左直角')
                 print('3.正右直角 4.倒右直角')
@@ -742,7 +752,8 @@
                 op = input('> ')
                 if op == 'q':
                     break
-                # 依選項輸出星號三角
+
+                n = int(input('n: '))
                 if True:
                     for i in range(1, n+1):
                         print(i)
@@ -808,13 +819,18 @@
             </code>
         </pre>
 
-      <div id="commonerr" class="section-divider"></div>
+      <div id="secerror" class="section-divider"></div>
         <h3>錯誤處理</h3>
 
         <h4>決策錯誤一</h4>
         <pre>
             <code class="python">
+            # 決策錯誤一
+            """
             # ex(+).
+            # 排除錯誤
+            # 避免增加程式行數
+            """
 
             op = input('1.Create 2.Read 3.Update 4.Delete': )
             if op == 1:
@@ -831,7 +847,12 @@
         <h4>決策錯誤二</h4>
         <pre>
             <code class="python">
+            # 決策錯誤二
+            """
             # ex(+).
+            # 排除錯誤
+            # 避免增加程式行數
+            """
 
             n = input(int('n: '))
             if n % 2 == 0:
@@ -844,7 +865,12 @@
         <h4>決策錯誤三</h4>
         <pre>
             <code class="python">
+            # 決策錯誤三
+            """
             # ex(+).
+            # 排除錯誤
+            # 避免增加程式行數
+            """
 
             print('L.Left')
             print('R.Right')
@@ -866,8 +892,10 @@
         <h4>決策錯誤四</h4>
         <pre>
             <code class="python">
+            # 決策錯誤四
             """
             # ex(+).
+            # 排除錯誤
             # 避免增加程式行數
 
             [輸入與輸出]
@@ -897,9 +925,10 @@
         <h4>迴圈錯誤一</h4>
         <pre>
             <code class="python">
+            # 迴圈錯誤一
             """
             # ex(+).
-            # 迴圈錯誤一
+            # 排除錯誤
             # 避免增加程式行數
 
             [輸入與輸出]
@@ -919,9 +948,10 @@
         <h4>迴圈錯誤二</h4>
         <pre>
             <code class="python">
+            # 迴圈錯誤二
             """
             # ex(+).
-            # 迴圈錯誤二
+            # 排除錯誤
             # 避免增加程式行數
 
             [輸入與輸出]
@@ -943,9 +973,10 @@
         <h4>迴圈錯誤三</h4>
         <pre>
             <code class="python">
+            # 迴圈錯誤三
             """
             # ex(+).
-            # 迴圈錯誤三
+            # 排除錯誤
             # 避免增加程式行數
 
             [輸入與輸出]
@@ -976,11 +1007,11 @@
         <h4>迴圈錯誤四</h4>
         <pre>
             <code class="python">
+            # 迴圈錯誤四
             """
             # ex(+).
-            # 迴圈錯誤四
+            # 排除錯誤
             # 避免增加程式行數
-            """
 
             total = 0
             while true:
@@ -995,9 +1026,10 @@
         <h4>迴圈錯誤五</h4>
         <pre>
             <code class="python">
+            # 迴圈錯誤五
             """
             # ex(+).
-            # 迴圈錯誤五
+            # 排除錯誤
             # 避免增加程式行數
 
             [輸入與輸出]
@@ -1034,9 +1066,10 @@
         <h4>迴圈錯誤六</h4>
         <pre>
             <code class="python">
+            # 迴圈錯誤六
             """
             # ex(+).
-            # 迴圈錯誤六
+            # 排除錯誤
             # 避免增加程式行數
 
             [輸入與輸出]
@@ -1074,12 +1107,12 @@
             </code>
         </pre>
 
-        <h4>異常類別</h4>
+        <h4>異常錯誤修正</h4>
         <pre>
             <code class="python">
+            # 異常錯誤修正
             """
             # ex(+).
-            # 異常類別與錯誤修正
             # 1. 分母為 0 則輸出 0
             # 2. 輸入資料存到變數 x
             # 3. 確保 num1 為整數
@@ -1113,7 +1146,7 @@
             </code>
         </pre>
 
-        <h4>統一處理異常</h4>
+        <h4>不分異常處理</h4>
         <pre>
             <code class="python">
             try:
@@ -1193,15 +1226,15 @@
             </code>
         </pre>
 
-        <div id="solprob" class="section-divider"></div>
+        <div id="secjudge" class="section-divider"></div>
         <h3>解題練習</h3>
 
         <h4>哈囉！同學</h4>
         <pre>
             <code class="python">
+            # 哈囉！同學
             """
-            # ex(+). 哈囉！同學
-            # 執行指令：
+            # ex(+).
             # python p1.py < d1.txt
 
             [輸入]
@@ -1225,9 +1258,9 @@
         <h4>奇數偶數</h4>
         <pre>
             <code class="python">
+            # 奇數偶數
             """
-            # ex(+). 奇數偶數
-            # 執行指令：
+            # ex(+).
             # python p1.py < d1.txt
 
             [輸入]
@@ -1248,9 +1281,9 @@
         <h4>兩數相減</h4>
         <pre>
             <code class="python">
+            # 兩數相減
             """
-            # ex(+). 兩數相減
-            # 執行指令：
+            # ex(+).
             # python p1.py < d1.txt
 
             [輸入]
@@ -1267,9 +1300,9 @@
         <h4>相差絕對值</h4>
         <pre>
             <code class="python">
+            # 相差絕對值
             """
-            # ex(+). 相差絕對值
-            # 執行指令：
+            # ex(+).
             # python p1.py < d1.txt
 
             [輸入]
@@ -1286,9 +1319,9 @@
         <h4>任意數相加</h4>
         <pre>
             <code class="python">
+            # 任意數相加
             """
-            # ex(+). 任意數相加
-            # 執行指令：
+            # ex(+).
             # python p1.py < d1.txt
 
             [輸入]
@@ -1304,12 +1337,12 @@
             </code>
         </pre>
 
-        <h4>奇數菱形</h4>
+        <h4>星號菱形</h4>
         <pre>
             <code class="python">
+            # 星號菱形
             """
-            # ex(+). 奇數菱形
-            # 執行指令：
+            # ex(+).
             # python p1.py < d1.txt
 
             [輸入]
