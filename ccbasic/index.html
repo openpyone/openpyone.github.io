@@ -1,49 +1,51 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">
     <meta name="description" content="C 語言入門">
     <meta name="author" content="Python Code School">
-    <title>C 語言入門 | 碼寶程式教育中心</title>
+    <title>C++ 入門 | 碼寶程式教育中心</title>
     <link rel="icon" href="/favicon.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap5.min.css">
     <link rel="stylesheet" href="/static/monokai-sublime.min.css">
-    <link rel="stylesheet" href="/static/main.css?211208">
+    <link rel="stylesheet" href="/static/main5.css?220313">
     <link rel="canonical" href="https://open.pyone.tw/">
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark navbar-pyone">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#home-menu" aria-controls="home-menu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="#home">Pyone</a>
-
-      <div class="collapse navbar-collapse" id="home-menu">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link nav-home" href="/">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#sec01">概念</a></li>
-            <li class="nav-item"><a class="nav-link" href="https://www.programiz.com/c-programming/online-compiler/" target="_blank" rel="noopener noreferrer">Programiz</a></li>
-            <li class="nav-item"><a class="nav-link" href="https://replit.com/languages/c" target="_blank" rel="noopener noreferrer">Replit</a></li>
-            <li class="nav-item" id="ex-count"><a class="nav-link ex-count" href="#"></a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div id="home" class="jumbotron jumbotron-pyone">
-      <div class="container">
-        <h1>C Language Basic</h1>
-        <p class="lead">C 語言入門</p>
-      </div>
-    </div>
-
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark navbar-main">
     <div class="container">
-      <div id="sec01" class="section-divider"></div>
-      <section class="section-chapter code-desc">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#home-menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#home">Pyone</a>
+
+        <div class="collapse navbar-collapse" id="home-menu">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link nav-home" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#ch01">概念</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://www.programiz.com/cpp-programming/online-compiler/" target="_blank" rel="noopener noreferrer">Programiz</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://replit.com/languages/cpp" target="_blank" rel="noopener noreferrer">Replit</a></li>
+                <li class="nav-item" id="ex-count"><a class="nav-link ex-count" href="#"></a></li>
+            </ul>
+        </div>
+  </div>
+</nav>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div id="home" class="jumbotron jumbotron-main">
+    <div class="container">
+        <h1>C++</h1>
+        <p class="lead">C++ 入門</p>
+    </div>
+</div>
+
+<div class="container">
+    <div id="ch01" class="section-divider"></div>
+    <section class="section-chapter code-desc">
         <h2 class="text-primary">程式基本概念</h2>
 
         <div class="row extra-link">
@@ -63,11 +65,12 @@
         <h4>第一支程式</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
-                // my first program in C
-                printf("Hello, World! \n");
+                // my first program in C++
+                cout << "Hello, World!" << endl;
                 // return an integer
                 return 0;
             }
@@ -77,15 +80,19 @@
         <h4>各種進位值</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int n = 987;
 
-                printf("Dec: %d\n", n);
-                printf("Oct: %o\n", n);
-                printf("Hex: %x\n", n);
-                printf("Hex: %X\n", n);
+                cout << "Dec: " << n << endl;
+                cout << "Oct: " << oct << n << endl;
+                cout << "Hex: " << hex << n << endl;
+                cout << "Hex: " << uppercase << hex << n << endl;
+                cout << "Oct: " << showbase << oct << n << endl;
+                cout << "Hex: " << showbase << hex << n << endl;
+                cout << "Hex: " << showbase << uppercase << hex << n << endl;
                 return 0;
             }
             </code>
@@ -96,17 +103,18 @@
         <h4>名字與年齡</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 char name[30];
                 int age;
 
-                printf("What is your name? ");
-                scanf("%s", name);
-                printf("How old are you? ");
-                scanf("%d", &age);
-                printf("\nYour name is %s, and you are %d years old. \n", name, age);
+                cout << "What is your name? ";
+                cin >> name;
+                cout << "How old are you? ";
+                cin >> age;
+                cout << "\nYour name is " << name << ", and you are " << age << " years old. \n";
                 return 0;
             }
             </code>
@@ -115,27 +123,29 @@
         <h4>兩數相加</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int n1, n2;
 
-                printf(" n1: ");
-                scanf("%d", &n1);
-                printf(" n2: ");
-                scanf("%d", &n2);
-                printf("Sum: %d\n", n1+n2);
+                cout << " n1: ";
+                cin >> n1;
+                cout << " n2: ";
+                cin >> n2;
+                cout << "Sum: " << n1+n2 << endl;
                 return 0;
             }
             </code>
         </pre>
 
-        <h4>Math (計算)</h4>
+        <h3>Math (計算)</h3>
 
         <h4>兩數相減</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int a = 333;
@@ -143,7 +153,7 @@
                 int diff;
                 diff = a - b;
 
-                printf("a - b = %d \n", diff);
+                cout << "a - b = " << diff << endl;
                 return 0;
             }
             </code>
@@ -152,18 +162,19 @@
         <h4>兩數相乘</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int a, b;
                 int product;
 
-                printf("1st number: ");
-                scanf("%d", &a);
-                printf("2nd number: ");
-                scanf("%d", &b);
+                cout << "1st number: ";
+                cin >> a;
+                cout << "2nd number: ";
+                cin >> b;
                 product = a * b;
-                printf("%d * %d = %d \n", a, b, product);
+                cout << a << " * " << b << " = " << product << endl;
                 return 0;
             }
             </code>
@@ -172,7 +183,8 @@
         <h4>和差問題</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int sum = 10;
@@ -181,8 +193,8 @@
                 large = (sum + diff) / 2;
                 small = (sum - diff) / 2;
 
-                printf("  Big number: %d\n", large);
-                printf("Small number: %d\n", small);
+                cout << "  Big number: " << large << endl;
+                cout << "Small number: " << small << endl;
                 return 0;
             }
             </code>
@@ -193,18 +205,23 @@
         <h4>名字欄寬</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            #include &lt;iomanip&gt;
+            using namespace std;
 
             int main() {
                 char name[30];
                 char divider[] = "--------------------";
 
-                printf("What is your name? ");
-                scanf("%s", name);
-                printf("%s\n", divider);
-                printf("My name is %s.\n", name);
-                printf("My name is %10s.\n", name);
-                printf("My name is %-10s.\n", name);
+                cout << "What is your name? ";
+                cin >> name;
+                cout << divider;
+                cout << "\nMy name is " << name << ".";
+                cout << "\nMy name is " << setw(10) << name << ".";
+                cout << "\nMy name is " << left << setw(10) << name << ".";
+                cout << "\nMy name is " << right << setw(10) << setfill('*') << name << ".";
+                cout << "\nMy name is " << name << ".";
+                cout << endl << setw(20) << setfill('-') << "" << endl;
                 return 0;
             }
             </code>
@@ -213,147 +230,46 @@
         <h4>整數與字元</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            #include &lt;iomanip&gt;
+            using namespace std;
 
             int main() {
                 int i = 65;
                 char c = 'A';
 
-                printf("%d\n", i);
-                printf("%d\n", c);
-                printf("%c\n", i);
-                printf("%c\n", c);
+                cout << i << endl;
+                cout << (int)c << endl;
+                cout << (char)i << endl;
+                cout << c << endl;
                 return 0;
             }
             </code>
         </pre>
-
-        <h4>資料型別長度</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-
-            int main() {
-                printf("         char   : %ld byte(s)\n", sizeof(char));
-                printf("         short  : %ld byte(s)\n", sizeof(short));
-                printf("         int    : %ld byte(s)\n", sizeof(int));
-                printf("         long   : %ld byte(s)\n", sizeof(long));
-                printf("unsigned short  : %ld byte(s)\n", sizeof(unsigned short));
-                printf("unsigned int    : %ld byte(s)\n", sizeof(unsigned int));
-                printf("unsigned long   : %ld byte(s)\n", sizeof(unsigned long));
-                printf("         float  : %ld byte(s)\n", sizeof(float));
-                printf("         double : %ld byte(s)\n", sizeof(double));
-                return 0;
-            }
-            </code>
-        </pre>
-
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr><th>Type</th><th>bytes(s)</th><th>Description</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>         char  </td><td>1 byte(s)</td><td>字元</td></tr>
-                <tr><td>         short </td><td>2 byte(s)</td><td>短整數</td></tr>
-                <tr><td>         int   </td><td>4 byte(s)</td><td>整數</td></tr>
-                <tr><td>         long  </td><td>8 byte(s)</td><td>長整數</td></tr>
-                <tr><td>unsigned short </td><td>2 byte(s)</td><td>無號短整數</td></tr>
-                <tr><td>unsigned int   </td><td>4 byte(s)</td><td>無號整數</td></tr>
-                <tr><td>unsigned long  </td><td>8 byte(s)</td><td>無號長整數</td></tr>
-                <tr><td>         float </td><td>4 byte(s)</td><td>單精度浮點數</td></tr>
-                <tr><td>         double</td><td>8 byte(s)</td><td>雙精度浮點數</td></tr>
-            </tbody>
-        </table>
-
-        <h4>整數範圍</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-            #include &lt;limits.h&gt;
-
-            int main() {
-                printf(" CHAR: %d ~ %d  \n", CHAR_MIN, CHAR_MAX);
-                printf(" SHRT: %d ~ %d  \n", SHRT_MIN, SHRT_MAX);
-                printf("  INT: %d ~ %d  \n", INT_MIN, INT_MAX);
-                printf(" LONG: %ld ~ %ld\n", LONG_MIN, LONG_MAX);
-                printf("UCHAR: %d \n", UCHAR_MAX);
-                printf("USHRT: %d \n", USHRT_MAX);
-                printf(" UINT: %u \n", UINT_MAX);
-                printf("ULONG: %lu\n", ULONG_MAX);
-                return 0;
-            }
-            </code>
-        </pre>
-
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr><th>Type</th><th>Range</th></tr>
-            </thead>
-            <tbody>
-                <tr><td> CHAR</td><td>-128 ~ 127</td></tr>
-                <tr><td> SHRT</td><td>-32768 ~ 32767</td></tr>
-                <tr><td>  INT</td><td>-2147483648 ~ 2147483647</td></tr>
-                <tr><td> LONG</td><td>-9223372036854775808 ~ 9223372036854775807</td></tr>
-                <tr><td>UCHAR</td><td>255</td></tr>
-                <tr><td>USHRT</td><td>65535</td></tr>
-                <tr><td> UINT</td><td>4294967295</td></tr>
-                <tr><td>ULONG</td><td>18446744073709551615</td></tr>
-            </tbody>
-        </table>
-
-        <h4>浮點數範圍</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-            #include &lt;float.h&gt;
-
-            int main() {
-                printf(" FLT_MIN : %g\n",  FLT_MIN);
-                printf(" FLT_MAX : %g\n",  FLT_MAX);
-                printf("-FLT_MIN : %g\n", -FLT_MIN);
-                printf("-FLT_MAX : %g\n", -FLT_MAX);
-                printf(" DBL_MIN : %g\n",  DBL_MIN);
-                printf(" DBL_MAX : %g\n",  DBL_MAX);
-                printf("-DBL_MIN : %g\n", -DBL_MIN);
-                printf("-DBL_MAX : %g\n", -DBL_MAX);
-                return 0;
-            }
-            </code>
-        </pre>
-
-        <table class="table table-bordered table-striped">
-            <thead class="thead-dark">
-                <tr><th>Type</th><th>Limit</th></tr>
-            </thead>
-            <tbody>
-                <tr><td> FLT_MIN</td><td>1.17549e-38</td></tr>
-                <tr><td> FLT_MAX</td><td>3.40282e+38</td></tr>
-                <tr><td>-FLT_MIN</td><td>-1.17549e-38</td></tr>
-                <tr><td>-FLT_MAX</td><td>-3.40282e+38</td></tr>
-                <tr><td> DBL_MIN</td><td>2.22507e-308</td></tr>
-                <tr><td> DBL_MAX</td><td>1.79769e+308</td></tr>
-                <tr><td>-DBL_MIN</td><td>-2.22507e-308</td></tr>
-                <tr><td>-DBL_MAX</td><td>-1.79769e+308</td></tr>
-            </tbody>
-        </table>
 
         <h4>兩數相除</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int dividend = 19;
                 int divisor1 = 3;
-                float divisor2 = 3.0;
+                float divisor2 = 6.0;
                 float answer1, answer2;
                 answer1 = dividend / divisor1;
                 answer2 = dividend / divisor2;
 
-                printf("answer1: %f\n", answer1);
-                printf("answer2: %.2f\n", answer2);
+                cout << "answer1: " << answer1 << endl;
+                cout << fixed;
+                cout.precision(2);
+                cout << "answer2: " << answer2 << endl;
                 answer1 = (float)dividend / divisor1;
-                printf("answer1: %.2f\n", answer1);
+                cout.precision(3);
+                cout << "answer1: " << answer1 << endl;
+                cout << scientific;
+                cout << "answer1: " << answer1 << endl;
                 return 0;
             }
             </code>
@@ -362,16 +278,17 @@
         <h4>兩數交換</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int a, b;
-                printf("Enter 2 different numbers: ");
-                scanf("%d %d", &a, &b);
+                cout << "Enter 2 different numbers: ";
+                cin >> a >> b;
                 int temp = a;
                 a = b;
                 b = temp;
-                printf("%d %d\n", a, b);
+                cout << a << " " << b << endl;
                 return 0;
             }
             </code>
@@ -383,15 +300,16 @@
         <h4>if 條件式</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
-            #include &lt;string.h&gt;
+            #include &lt;iostream&gt;
+            #include &lt;string&gt;
+            using namespace std;
 
             int main() {
-                char weather[] = "sunny";
+                string weather = "sunny";
 
-                printf("Let's hang out.\n");
-                if (strcmp(weather, "sunny") == 0) {
-                    printf("Sure. Why not?\n");
+                cout << "Let's hang out.\n";
+                if (weather.compare("sunny") == 0) {
+                    cout << "Sure. Why not?\n";
                 }
                 return 0;
             }
@@ -401,21 +319,22 @@
         <h4>if-else <span class="text-muted">條件-否則式</span></h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
-            #include &lt;string.h&gt;
+            #include &lt;iostream&gt;
+            #include &lt;string&gt;
+            using namespace std;
 
             int main() {
-                char weather[10];
+                string weather = "";
 
-                printf("Let's hang out.\n");
-                printf("How is the weather? ");
-                scanf("%s", weather);
+                cout << "Let's hang out.\n";
+                cout << "How is the weather? ";
+                cin >> weather;
 
-                if (strcmp(weather, "sunny") == 0) {
-                    printf("Sure. Why not?\n");
+                if (weather.compare("sunny") == 0) {
+                    cout << "Sure. Why not?\n";
                 }
                 else {
-                    printf("I want to stay at home.\n");
+                    cout << "I want to stay at home.\n";
                 }
                 return 0;
             }
@@ -423,21 +342,20 @@
         </pre>
 
         <h4>絕對值</h4>
-        <p class="code-desc">Why warning?</p>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
-            #include &lt;math.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int n;
-                printf("> ");
-                scanf("%d", &n);
-                printf("abs: %d\n", abs(n));
+                cout << "> ";
+                cin >> n;
+                cout << "abs: " << abs(n) << endl;
                 if (n < 0) {
                     n = -n;
                 }
-                printf("abs: %d\n", n);
+                cout << "abs: " << n << endl;
                 return 0;
             }
             </code>
@@ -447,16 +365,17 @@
         <p class="code-desc">Ternary Operator</p>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int a, b, c;
                 int max = 0;
-                printf("Enter 3 numbers: ");
-                scanf("%d %d %d", &a, &b, &c);
+                cout << "Enter 3 numbers: ";
+                cin >> a >> b >> c;
                 max = (a > b) ? a : b;
                 max = (max > c) ? max : c;
-                printf("%d\n", max);
+                cout << max << endl;
                 return 0;
             }
             </code>
@@ -465,28 +384,29 @@
         <h4>成績平均績點 (GPA)</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int grade;
 
-                printf("Your grade: ");
-                scanf("%d", &grade);
+                cout << "Your grade: ";
+                cin >> grade;
 
                 if (grade>=80) {
-                    printf("A, GPA is 4\n");
+                    cout << "A, GPA is 4\n";
                 }
                 else if (grade<80 && grade>=70) {
-                    printf("B, GPA is 3\n");
+                    cout << "B, GPA is 3\n";
                 }
                 else if (grade<70 && grade>=60) {
-                    printf("C, GPA is 2\n");
+                    cout << "C, GPA is 2\n";
                 }
                 else if (grade<60 && grade>=50) {
-                    printf("D, GPA is 1\n");
+                    cout << "D, GPA is 1\n";
                 }
                 else {
-                    printf("F, GPA is 0\n");
+                    cout << "F, GPA is 0\n";
                 }
                 return 0;
             }
@@ -496,66 +416,35 @@
         <h4>兩數運算</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int x, y;
                 char op;
 
-                printf("x: ");
-                scanf("%d", &x);
-                printf("y: ");
-                scanf("%d", &y);
-                printf("Choose an operation (+ - * / %%): ");
-                scanf(" %c", &op);
+                cout << "x: ";
+                cin >> x;
+                cout << "y: ";
+                cin >> y;
+                cout << "Choose an operation (+ - * / %): ";
+                cin >> op;
 
                 switch(op) {
-                    case '+': printf("%d", x + y);
+                    case '+': cout << x+y;
                               break;
-                    case '-': printf("%d", x - y);
+                    case '-': cout << x-y;
                               break;
-                    case '*': printf("%d", x * y);
+                    case '*': cout << x*y;
                               break;
-                    case '/': printf("%f\n", (float)x / y);
-                              printf("%d", x / y);
+                    case '/': cout << (float)x/y << endl;
+                              cout << x/y;
                               break;
-                    case '%': printf("%d", x % y);
+                    case '%': cout << x%y;
                               break;
-                    default: printf("Wrong operation!");
+                    default: cout << "Wrong operation!";
                 }
                 printf("\n");
-                return 0;
-            }
-            </code>
-        </pre>
-
-        <h4>分階傳訊</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-
-            int main() {
-                char msg[100];
-                int level;
-
-                printf("Message: ");
-                scanf("%[^\n]", msg);
-                printf("Level (1 to 9): ");
-                scanf("%d", &level);
-
-                switch(level) {
-                    case 1: printf("Send \"%s\" to level %d\n", msg, 1);
-                    case 2: printf("Send \"%s\" to level %d\n", msg, 2);
-                    case 3: printf("Send \"%s\" to level %d\n", msg, 3);
-                    case 4: printf("Send \"%s\" to level %d\n", msg, 4);
-                    case 5: printf("Send \"%s\" to level %d\n", msg, 5);
-                    case 6: printf("Send \"%s\" to level %d\n", msg, 6);
-                    case 7: printf("Send \"%s\" to level %d\n", msg, 7);
-                    case 8: printf("Send \"%s\" to level %d\n", msg, 8);
-                    case 9: printf("Send \"%s\" to level %d\n", msg, 9);
-                            break;
-                    default: printf("Wrong level!\n");
-                }
                 return 0;
             }
             </code>
@@ -564,8 +453,9 @@
         <h4>購買票券</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
-            #include &lt;ctype.h&gt;
+            #include &lt;iostream&gt;
+            #include &lt;cctype&gt;
+            using namespace std;
 
             int main() {
                 int price = 320;
@@ -574,15 +464,15 @@
                 int total;
                 int is_credit_card;
 
-                printf("How many tickets? ");
-                scanf("%d", &tickets);
-                printf("Do you have a credit card? (Y/n): ");
-                scanf(" %c", &credit_card);
+                cout << "How many tickets? ";
+                cin >> tickets;
+                cout << "Do you have a credit card? (Y/n): ";
+                cin >> credit_card;
 
                 credit_card = toupper(credit_card);
                 is_credit_card = credit_card == 'Y';
                 total = is_credit_card ? (int)price*tickets*0.8 : price*tickets;
-                printf("$%d for %d tickets.\n", total, tickets);
+                cout << "$" << total << " for " << tickets << " tickets." << endl;
                 return 0;
             }
             </code>
@@ -594,13 +484,14 @@
         <h4>五個星號</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int i;
 
                 for (i = 0; i < 5; i++) {
-                    printf("*\n");
+                    cout << '*' << endl;
                 }
                 return 0;
             }
@@ -610,13 +501,14 @@
         <h4>五個整數</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int i;
 
                 for (i = 0; i < 5; i++) {
-                    printf("%d\n", i);
+                    cout << i << endl;
                 }
                 return 0;
             }
@@ -626,13 +518,14 @@
         <h4>從一到五</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int i;
 
                 for (i = 1; i < 6; i++) {
-                    printf("%d *\n", i);
+                    cout << i << " *" << endl;
                 }
                 return 0;
             }
@@ -642,15 +535,16 @@
         <h4>數的兩倍</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int i;
 
                 for (i = 1; i < 6; i++) {
-                    printf("i: %d\n", i);
+                    cout << "i: " << i << endl;
                     i = i * 2;
-                    printf("Double of i: %d\n", i);
+                    cout << "Double of i: " << i << endl;
                 }
                 return 0;
             }
@@ -660,7 +554,8 @@
         <h4>大寫小寫</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 char upper = 'A';
@@ -668,13 +563,13 @@
                 int i;
 
                 for (i = 0; i < 26; i+=1) {
-                    printf("%c ", upper+i);
+                    cout << (char)(upper+i) << " ";
                 }
-                printf("\n");
+                cout << endl;
                 for (i = 0; i < 26; i+=1) {
-                    printf("%c ", lower+i);
+                    cout << (char)(lower+i) << " ";
                 }
-                printf("\n");
+                cout << endl;
                 return 0;
             }
             </code>
@@ -683,16 +578,17 @@
         <h4>倒數計時</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int n = 0;
                 int i = 0;
 
-                printf("n: ");
-                scanf("%d", &n);
+                cout << "n: ";
+                cin >> n;
                 for (i = n; i >= 1; i--) {
-                    printf("%d\n", i);
+                    cout << i << endl;
                 }
                 return 0;
             }
@@ -702,112 +598,20 @@
         <h4>數列三角</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int n = 0;
                 int i = 0, j = 0;
 
-                printf("n: ");
-                scanf("%d", &n);
+                cout << "n: ";
+                cin >> n;
                 for (i = 1; i <= n; i++) {
                     for (j = 1; j <= i; j++) {
-                        printf("%d ", j);
+                        cout << j << " ";
                     }
-                    printf("\n");
-                }
-                return 0;
-            }
-            </code>
-        </pre>
-
-        <h4>星號三角</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-
-            int main() {
-                int n = 0;
-                int i = 0, j = 0;
-
-                printf("n: ");
-                scanf("%d", &n);
-                for (i = 1; i <= n; i++) {
-                    for (j = 1; j <= i; j++) {
-                        printf("*");
-                    }
-                    printf("\n");
-                }
-                return 0;
-            }
-            </code>
-        </pre>
-
-        <h4>指數計算</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-
-            int main() {
-                int n = 0, p = 0;
-                int i;
-                int result = 1;
-
-                printf("n: ");
-                scanf("%d", &n);
-                printf("p: ");
-                scanf("%d", &p);
-
-                for (i = 0; i < p; i++) {
-                    result *= n;
-                }
-                printf("n ^ p = %d ^ %d = %d\n", n, p, result);
-                return 0;
-            }
-            </code>
-        </pre>
-
-        <h4>兩個迴圈變數</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-
-            int main() {
-                int n = 0;
-                int i = 0, j = 0;
-                int k = 0;
-
-                printf("n: ");
-                scanf("%d", &n);
-                for (i = 1, j = 1; i <= n || j >= n*n; i+=2, j*=3) {
-                    k++;
-                }
-                printf("k: %d\n", k);
-                return 0;
-            }
-            </code>
-        </pre>
-
-        <h4>三層迴圈</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-
-            int main() {
-                int start = 0, end = 0;
-                int i = 0, j = 0, k = 0;
-
-                printf("start: ");
-                scanf("%d", &start);
-                printf("end: ");
-                scanf("%d", &end);
-
-                for (i = start; i <= end; i++) {
-                    for (j = start; j <= end; j++) {
-                        for (k = start; k <= end; k++) {
-                            printf("%d * %d * %d = %d\n", i, j, k, i*j*k);
-                        }
-                    }
+                    cout << endl;
                 }
                 return 0;
             }
@@ -820,7 +624,8 @@
         <h4>整數累加</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int plus = 1;
@@ -828,29 +633,30 @@
 
                 while (plus) {
                     sum = sum + 1;
-                    printf("%d\n", sum);
+                    cout << sum << endl;
                     if (sum == 10) {
                         plus = 0;
                     }
                 }
                 return 0;
             }
+
             </code>
         </pre>
 
         <h4>布林變數</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
-            #include &lt;stdbool.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 bool plus = true;
                 int sum = 0;
 
                 while (plus) {
-                    sum = sum + 1;
-                    printf("%d\n", sum);
+                    sum++;
+                    cout << sum << endl;
                     if (sum == 10) {
                         plus = false;
                     }
@@ -863,14 +669,15 @@
         <h4>無條件進迴圈</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int sum = 0;
 
-                while (1) {
-                    sum = sum + 1;
-                    printf("%d\n", sum);
+                while (true) {
+                    sum++;
+                    cout << sum << endl;
                     if (sum == 10) {
                         break;
                     }
@@ -883,118 +690,61 @@
         <h4>非零即真</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            using namespace std;
 
             int main() {
                 int sum = 10;
 
                 while (sum) {
-                    printf("%d\n", sum);
+                    cout << sum << endl;
                     sum = sum - 1;
                 }
                 return 0;
             }
+
             </code>
         </pre>
 
         <h4>任意數合計</h4>
         <pre>
             <code class="cpp">
-            #include &lt;stdio.h&gt;
+            #include &lt;iostream&gt;
+            #include &lt;iomanip&gt;
+            using namespace std;
 
             int main() {
                 int n = 0;
                 int total = 0;
                 int i = 1;
 
-                printf("Enter integers (0 to end):\n");
+                cout << "Enter integers (0 to end):" << endl;
                 do {
-                    printf("%2d > ", i);
-                    if (scanf("%d", &n) != 1) {
-                        break;
-                    }
+                    cout << right << setw(2) << i << "> ";
+                    cin >> n;
                     while (getchar() != '\n');
                     total += n;
                     i++;
                 } while (n != 0);
-                printf("Total: %d\n", total);
+                cout << "Total: " << total << endl;
                 return 0;
             }
             </code>
         </pre>
+    </section>
+    <hr class="footer-hr">
 
-        <h4>與前數比大小</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-
-            int main() {
-                int num, n = 0, prev = 0;
-
-                do {
-                    printf("Enter a number (0 to end): ");
-                    scanf("%d", &n);
-                    if (n > prev) {
-                        printf("%d is larger than %d.\n", n, prev);
-                    }
-                    else if (n < prev) {
-                        printf("%d is smaller than %d.\n", n, prev);
-                    }
-                    prev = n;
-                } while (n != 0);
-                return 0;
-            }
-            </code>
-        </pre>
-
-        <h4>帳戶金額存提</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-
-            int main() {
-                int opt;
-                int money;
-                int balance = 0;
-
-                do {
-                    printf("| 1.Withdraw | 2.Deposit | 9.Exit |\n> ");
-                    scanf("%d", &opt);
-                    if (opt == 9) break;
-                    if (opt == 1 || opt == 2) {
-                        printf("Amount: ");
-                        scanf("%d", &money);
-                        if (opt == 1) {
-                            if (balance < money)
-                                printf("The balance is not enough.\n");
-                            else
-                                balance -= money;
-                        }
-                        else {
-                            balance += money;
-                        }
-                        printf("The balance is %d.\n", balance);
-                    }
-                } while (opt != 1 || opt != 2);
-
-                return 0;
-            }
-            </code>
-        </pre>
-      </section>
-      <hr class="footer-hr">
-
-      <footer>
+    <footer>
         <p>&copy; 碼寶程式教育中心</p>
-      </footer>
-    </div> <!-- /container -->
+    </footer>
+</div> <!-- /container -->
 
 
-    <script src="/static/jquery.min.js"></script>
-    <script src="/static/bootstrap.bundle.min.js"></script>
-    <script src="/static/highlight.min.js"></script>
-    <script src="/static/clipboard.min.js"></script>
-    <script> hljs.initHighlightingOnLoad(); </script>
-    <script src="/static/main.js"></script>
-  </body>
+<script src="/static/jquery.min.js"></script>
+<script src="/static/bootstrap5.bundle.min.js"></script>
+<script src="/static/highlight.min.js"></script>
+<script src="/static/clipboard.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script src="/static/main.js"></script>
+</body>
 </html>
