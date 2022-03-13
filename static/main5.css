@@ -95,7 +95,7 @@ pre code {
     border-radius: 0;
 }
 
-.btn-block {
+.btn-block .btn {
     width: 100%;
 }
 
