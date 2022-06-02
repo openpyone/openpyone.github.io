@@ -188,12 +188,12 @@ ul.none {
 
 .section-chapter .code-desc {
     background-color: #eee;
-    border-left: 5px solid #666;
+    border-left: 8px solid #666;
 }
 
 .section-chapter .memo-desc {
     background-color: #ffe3e1;
-    border-left: 5px solid #ce2516;
+    border-left: 8px solid #ce2516;
 }
 
 .section-chapter .list-group-item,
