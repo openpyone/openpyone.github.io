@@ -75,16 +75,28 @@
             <code class="python">
             """
             # 內建函式 print()
-            # 輸出訊息、變數內容或資料值
+            # 功能：輸出訊息、變數內容或資料值
             # print(參數：變數或資料值)
+
+            執行函式步驟：
+            1. 設定函式名稱
+            2. 放一對小括 ()
+            3. 放參數
             """
 
             # print(1個參數)
+            # 輸出一個字串
             print('Hello, World!')
+
             # print(0個參數)
+            # 單純換行
             print()
+
             # print(2個以上參數，逗號分隔)
+            # 參數輸出時，彼此之間空一白
             print('Hello, World!', 'I am R987.')
+
+            # 可以輸出中文或多國語言文字
             print('哈囉！我是 R987。')
             </code>
         </pre>
@@ -109,16 +121,24 @@
             <code class="python">
             """
             # 內建函式 type()
-            # 回傳變數或資料值的類別
+            # 功能：回傳變數或資料值的類別
             # type(參數：變數或資料值)
             """
 
             # 字串 str (string)
             print('123', type('123'))
+
             # 整數 int (integer)
             print(123, type(123))
+
             # 浮點數 float
             print(123.0, type(123.0))
+
+            # 布林數 bool (boolean)
+            # 例一：硬幣的正反面
+            # 例二：電源的開和關
+            print(True, type(True))
+            print(False, type(False))
             </code>
         </pre>
 
@@ -129,13 +149,21 @@
             <code class="python">
             """
             # 內建函式 input()
-            # 接收並回傳使用者輸入的資料
+            # 功能：接收並回傳使用者輸入的資料
             # input(參數：建議設定字串)
+
+            執行函式步驟：
+            1. 設定函式名稱
+            2. 放一對小括 ()
+            3. 放參數
             """
 
             # input(0個參數)
+            # 解題使用
             input()
+
             # input(1個參數)
+            # 練習或小作品使用
             input('What is your name? ')
             </code>
         </pre>
@@ -145,12 +173,12 @@
             <code class="python">
             """
             # 內建函式 int()
-            # 將變數或資料值轉為整數
-            # int(參數：整數字串)
+            # 功能：將「整數字串」或「浮點數」轉為整數
+            # int(參數)
             """
 
             n = int(input('Enter a number: '))
-            print(n)
+            print(n + 10)
             </code>
         </pre>
 
@@ -159,12 +187,42 @@
             <code class="python">
             """
             # 內建函式 float()
-            # 將變數或資料值轉為浮點數
-            # float(參數：浮點數字串)
+            # 將「浮點數字串」或「整數」轉為浮點數
+            # float(參數)
             """
 
             n = float(input('Enter a number: '))
-            print(n)
+            print(n + 0.25)
+            </code>
+        </pre>
+
+        <h4>字串格式化</h4>
+        <pre>
+            <code class="python">
+            """
+            字串格式化 (String Formatting)
+            1. 小數格式：保留小數位數
+            2. 對齊格式：(略，以後再講)
+
+            f-string 設定步驟：
+            1. 設定小寫 f
+            2. 接一對字串單引號 '' 或雙引號 ""
+            3. 視需要放字串常值
+            4. 變數或運算式放在一對大括 {} 中
+            5. 特定格式要在變數或運算式後接英文冒號 : 再設定
+            6. 小數位數例如 .2f 保留小數後 2 位
+            """
+
+            # |N = | 是字串常值
+            # |n| 是變數
+            n = 3
+            print(f'N = {n}')
+
+            # |PI = | 是字串常值
+            # |pi| 是變數
+            # |.4f| 是設定保留小數後 4 位
+            pi = 3.1415926
+            print(f'PI = {pi:.4f}')
             </code>
         </pre>
 
@@ -194,35 +252,39 @@
             </code>
         </pre>
 
-        <h4>先乘除後加減 - 運算子優先序</h4>
+        <h4>運算子優先序</h4>
         <pre>
             <code class="python">
-            # 先乘除後加減
+            # 運算子優先序
             """
             # ex(+).
-            # 乘除 > 加減
+            # 負號 > 小括 > 指數 > 乘除、商餘 > 加減
+            # 先乘除後加減
+            # 指乘除餘加減
+
+            # 整數和浮點數計算結果，會得到浮點數
+            例如 5 + 1.0 -> 6.0
+
+            Python 的 3 種除法：
+            1. /  : 一般除法，得到浮點數
+            2. // : 整數相除，取商數
+            3. %  : 整數相除，取餘數
             """
 
             a = 7 + 2 - 3 * 2
             print('a:', a)
+
             b = 8 + 4 / 2 - 5 * 2
             print('b:', b)
-            </code>
-        </pre>
 
-        <h4>指乘除餘加減 - 運算子優先序</h4>
-        <pre>
-            <code class="python">
-            # 指乘除餘加減
-            """
-            # ex(+).
-            # 指數 > 乘除、商數、餘數 > 加減
-            """
+            c = 8 * 2 + 7 - 9 / 4 * 3 ** 2
+            print('c:', c)
 
-            a = 8 * 2 + 7 - 9 // 4 * 3 ** 2
-            print('a:', a)
-            b = 27 % 5 * 6 ** 2 - 12 // 6
-            print('b:', b)
+            d = (8 + -4) / 2 - 5 * 2
+            print('d:', d)
+
+            e = 27 % 5 * 6 ** 2 - 12 // 6
+            print('e:', e)
             </code>
         </pre>
 
@@ -257,9 +319,9 @@
             """
 
             a = input('a: ))
-            b = 123
-            print('type of a:', type(a))
-            print('type of b:', type(b))
+            b = (input(b: ')
+            print(f'a = {a}', type(a))
+            print(f'b = {b}', type(b))
             print(a + b)
             </code>
         </pre>
@@ -286,9 +348,9 @@
             </code>
         </pre>
 
-        <div class="row extra-link">
+        <div class="row quick-link">
             <div class="col-lg-4">
-                <a target="_blank" rel="noopener noreferrer" class="btn btn-lg btn-block btn-info" href="https://www.youtube.com/watch?v=Zh3Yz3PiXZw">Alternative Math</a>
+                <a target="_blank" rel="noopener noreferrer" class="btn btn-lg btn-info" href="https://www.youtube.com/watch?v=Zh3Yz3PiXZw">Alternative Math</a>
             </div>
         </div>
 
@@ -316,14 +378,23 @@
             </code>
         </pre>
 
-        <h4>整數變數與記憶體</h4>
+        <h4>記憶體與變數</h4>
         <pre>
             <code class="python">
+            """
+            記憶體：如資料盒，是實際存放資料的空間
+            變數：如便利貼，可以在不同資料盒間貼來貼去
+            """
+
             a = 1
             print(a, type(a))
             print(id(a), '\n')
 
             a = 2
+            print(a, type(a))
+            print(id(a), '\n')
+
+            a = '1'
             print(a, type(a))
             print(id(a), '\n')
             </code>
@@ -386,15 +457,26 @@
             </code>
         </pre>
 
-        <h4>檢查資料類別</h4>
+        <h4>簡單異常處理</h4>
         <pre>
             <code class="python">
-            s = '123'
-            i = 123
-            print(isinstance(s, str))
-            print(isinstance(s, int))
-            print(isinstance(i, str))
-            print(isinstance(i, int))
+            # 簡單異常處理
+            """
+            try:
+                可能會發生異常錯誤的程式
+                以及相關程式
+            except:
+                發生錯誤時的處理
+                可以寫 pass 表示略過
+            """
+            n = input('n: ')
+
+            try:
+                n = int(n)
+                print(f'The square of n is {n**2}.')
+            except:
+                print(f"'{n}' is not an integer.")
+            print(type(n)
             </code>
         </pre>
 
