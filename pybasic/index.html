@@ -259,7 +259,7 @@
             # 運算子優先序
             """
             # ex(+).
-            # 負號 > 小括 > 指數 > 乘除、商餘 > 加減
+            # 小括 > 指數 > 乘除、商餘 > 加減
             # 先乘除後加減
             # 指乘除餘加減
 
@@ -1460,24 +1460,29 @@
         <h4>無回傳值</h4>
         <pre>
             <code class="python">
+            # 定義一個函式
             def f(x):
                 print(x**2)
 
-            f(2)
-            f(3)
-            f(5)
+            n = int(input('n: '))
+            # 呼叫一個函式
+            f(n)
             </code>
         </pre>
 
         <h4>回傳結果</h4>
         <pre>
             <code class="python">
+            # 定義一個函式
             def f(x, y):
+                # 回傳處理結果
                 return x**y
 
-            print(f(2, 2))
-            print(f(3, 3))
-            print(f(5, 5))
+            a = int(input('a: '))
+            b = int(input('b: '))
+            # 呼叫一個函式，將回傳值存到一個變數
+            result = f(a, b)
+            print(f'Result: {result}')
             </code>
         </pre>
 
