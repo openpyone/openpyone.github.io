@@ -53,13 +53,13 @@
                 <a class="btn btn-lg btn-success" href="#secmath">計算</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-success" href="#secif">決策</a>
+                <a class="btn btn-lg btn-success" href="#secif">if 決策</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-success" href="#secfor">for迴圈</a>
+                <a class="btn btn-lg btn-success" href="#secfor">for 迴圈</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-success" href="#secwhile">while迴圈</a>
+                <a class="btn btn-lg btn-success" href="#secwhile">while 迴圈</a>
             </div>
             <div class="col-lg-4">
                 <a class="btn btn-lg btn-success" href="#secerror">錯誤處理</a>
@@ -95,10 +95,10 @@
 
             # print(2個以上參數，逗號分隔)
             # 參數輸出時，彼此之間空一白
-            print('Hello, World!', 'I am R987.')
+            print('Hello, World!', 'I am Robot 987.')
 
             # 可以輸出中文或多國語言文字
-            print('哈囉！我是 R987。')
+            print('哈囉！我是機器人 R987。')
             </code>
         </pre>
 
@@ -345,7 +345,7 @@
 
             n = input('n: ')
             p = 0
-            print('n to the power of p is', n)
+            print(f'n to the power of p = {n}')
             </code>
         </pre>
 
@@ -383,6 +383,9 @@
         <pre>
             <code class="python">
             """
+            記憶體 vs. 變數
+            資料盒 vs. 便利貼
+
             記憶體：如資料盒，是實際存放資料的空間
             變數：如便利貼，可以在不同資料盒間貼來貼去
             """
@@ -515,14 +518,14 @@
             small = True
             if furry:
                 if small:
-                    print("It's a cat!")
+                    print("Cat")
                 else:
-                    print("It's a bear!")
+                    print("Bear")
             else:
                 if small:
-                    print("It's a skink!")
+                    print("Gecko")
                 else:
-                    print("It's a crocodile!")
+                    print("Crocodile")
             </code>
         </pre>
 
@@ -714,6 +717,32 @@
             </code>
         </pre>
 
+        <h4>for迴圈否則式</h4>
+        <pre>
+            <code class="python">
+            for i in range(10):
+                if i % 2 == 0:
+                    continue
+                print(i)
+            else:
+                print('***')
+            </code>
+        </pre>
+
+        <h4>for迴圈否則式 (中斷迴圈)</h4>
+        <pre>
+            <code class="python">
+            for i in range(10):
+                if i % 2 == 0:
+                    continue
+                if i == 7:
+                    break
+                print(i)
+            else:
+                print('***')
+            </code>
+        </pre>
+
         <div id="secwhile" class="section-divider"></div>
         <h3>Repetition(重複) <span class="text-dark">- <span class="text-danger">while loop</span>迴圈式(迴圈或重複結構)</span></h3>
 
@@ -849,32 +878,6 @@
                 elif True:
                     for i in range(1, n+1):
                         print(i)
-            </code>
-        </pre>
-
-        <h4>for迴圈否則式</h4>
-        <pre>
-            <code class="python">
-            for i in range(10):
-                if i % 2 == 0:
-                    continue
-                print(i)
-            else:
-                print('***')
-            </code>
-        </pre>
-
-        <h4>for迴圈否則式 (中斷迴圈)</h4>
-        <pre>
-            <code class="python">
-            for i in range(10):
-                if i % 2 == 0:
-                    continue
-                if i == 7:
-                    break
-                print(i)
-            else:
-                print('***')
             </code>
         </pre>
 
