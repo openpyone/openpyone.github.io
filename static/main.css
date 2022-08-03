@@ -180,17 +180,39 @@ ul.none {
     color: #604f98;
 }
 
+.section-chapter.code-desc > div.desc,
+.section-chapter.memo-desc > div.desc,
+.section-chapter.code-desc > p,
+.section-chapter.memo-desc > p,
 .section-chapter .code-desc,
 .section-chapter .memo-desc {
+    font-family: Consolas, "Microsoft JhengHei";
+    padding: 10px 10px 2px;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.section-chapter.code-desc > p,
+.section-chapter.memo-desc > p {
     padding: 10px;
+}
+
+.section-chapter.code-desc > p code,
+.section-chapter.memo-desc > p code,
+.section-chapter .code-desc code,
+.section-chapter .memo-desc code {
     font-size: 18px;
 }
 
+.section-chapter.code-desc > div.desc,
+.section-chapter.code-desc > p,
 .section-chapter .code-desc {
     background-color: #eee;
     border-left: 8px solid #666;
 }
 
+.section-chapter.memo-desc > div.desc,
+.section-chapter.memo-desc > p,
 .section-chapter .memo-desc {
     background-color: #ffe3e1;
     border-left: 8px solid #ce2516;
@@ -211,6 +233,17 @@ ul.none {
 
 .area-divider {
     padding-top: 30px;
+}
+
+.quick-link {
+    padding: 30px 0;
+}
+.quick-link div {
+    padding: 5px 20px;
+}
+.quick-link .btn {
+    width: 100%;
+    margin: 5px 0;
 }
 
 .hw-link {

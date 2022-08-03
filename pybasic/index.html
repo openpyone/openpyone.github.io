@@ -48,12 +48,12 @@
     <div id="ch01" class="section-divider"></div>
     <section class="section-chapter code-desc">
         <h2>程式基本概念</h2>
-        <div class="row extra-link btn-block">
+        <div class="row quick-link">
             <div class="col-lg-4">
                 <a class="btn btn-lg btn-success" href="#secmath">計算</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-success" href="#secif">if 決策</a>
+                <a class="btn btn-lg btn-success" href="#secif">決策</a>
             </div>
             <div class="col-lg-4">
                 <a class="btn btn-lg btn-success" href="#secfor">for 迴圈</a>
@@ -490,6 +490,15 @@
         <h3>Decision making(決策) <span class="text-dark">- 決策式(分支或選擇結構)</span></h3>
 
         <h4>if條件式</h4>
+        <div class="desc">
+            4 種 if 區段結構
+            <ul>
+                <li>(1) if</li>
+                <li>(2) if-else</li>
+                <li>(3) if-elif... (可以有多個 elif，elif 需要接條件式)</li>
+                <li>(4) if-elif...else</li>
+            </ul>
+        </div>
         <pre>
             <code class="python">
             print("Beebo: Let's hang out.\n")
@@ -499,7 +508,7 @@
             </code>
         </pre>
 
-        <h4>if-else <span class="text-muted">條件-否則式</span></h4>
+        <h4>if-else條件否則式</h4>
         <pre>
             <code class="python">
             print("Beebo: Let's hang out.\n")
@@ -526,6 +535,36 @@
                     print("Gecko")
                 else:
                     print("Crocodile")
+            </code>
+        </pre>
+
+        <h4>正負奇偶</h4>
+        <div class="desc">
+            比較運算子
+            <ul>
+                <li>== 是否相等/相同</li>
+                <li>!= 是否不相等/不相同</li>
+                <li>&gt;&nbsp; 大於</li>
+                <li>&gt;= 大於等於</li>
+                <li>&lt;&nbsp; 小於</li>
+                <li>&gt;= 小於等於</li>
+            </ul>
+        </div>
+        <pre>
+            <code class="python">
+            n = int(input('n: '))
+            if n == 0:
+                print('zero')
+            elif n > 0:
+                if n % 2 == 0:
+                    print('positive even')
+                else:
+                    print('positive odd')
+            elif n < 0:
+                if n % 2 == 1:
+                    print('negative odd')
+                else:
+                    print('negative even')
             </code>
         </pre>
 
@@ -585,6 +624,9 @@
             # ex(+).
             # i 為 3 的倍數時，輸出 ***，其他值則輸出 *
 
+            # range(stop): 0 ~ stop-1
+            # range(start, stop): start ~ stop-1
+
             1 *
             2 *
             3 ***
@@ -593,8 +635,6 @@
             6 ***
             """
 
-            # range(stop): 0 ~ stop-1
-            # range(start, stop): start ~ stop-1
             for i in range(1, 7):
                 if False:
                     print(i, '***')
@@ -672,9 +712,9 @@
         <pre>
             <code class="python">
             """
-            range(stop): 0 ~ stop-1
-            range(start, stop): start ~ stop-1
-            range(start, stop, step): start ~ stop-1, every step
+            # range(stop): 0 ~ stop-1
+            # range(start, stop): start ~ stop-1
+            # range(start, stop, step): start ~ stop-1, positive/negative step
             """
 
             for i in range(1, 10, 2):
@@ -841,16 +881,6 @@
             while t < 10:
                 t += 1
                 print(t)
-            </code>
-        </pre>
-
-        <h4>無窮迴圈</h4>
-        <pre>
-            <code class="python">
-            # 以 [Ctrl] + [C] 強制中斷
-
-            while True:
-                print('infinite')
             </code>
         </pre>
 

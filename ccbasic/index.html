@@ -44,30 +44,68 @@
 </div>
 
 <div class="container">
+        <div id="ch00" class="section-divider"></div>
+    <section class="section-chapter code-desc">
+        <h2 class="text-primary">參考資源</h2>
+
+        <div class="row quick-link">
+            <div class="col-lg-4">
+                <a target="_blank" rel="noopener noreferrer" class="btn btn-lg btn-info" href="https://cplusplus.com/">cplusplus.com</a>
+            </div>
+            <div class="col-lg-4">
+                <a target="_blank" rel="noopener noreferrer" class="btn btn-lg btn-info" href="https://www.programiz.com/cpp-programming">Learn C++ Programming</a>
+            </div>
+            <div class="col-lg-4">
+                <a target="_blank" rel="noopener noreferrer" class="btn btn-lg btn-info" href="https://usaco.guide/">USACO Guide</a>
+            </div>
+        </div>
+    </section>
+
     <div id="ch01" class="section-divider"></div>
     <section class="section-chapter code-desc">
         <h2 class="text-primary">程式基本概念</h2>
 
-        <div class="row extra-link btn-block">
+        <div class="row quick-link">
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-success" href="#secmath" role="button">計算</a>
+                <a class="btn btn-lg btn-success" href="#secmath">計算</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-success" href="#secvar" role="button">變數</a>
+                <a class="btn btn-lg btn-success" href="#secvar">變數</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-success" href="#secif" role="button">if 決策</a>
+                <a class="btn btn-lg btn-success" href="#secif">if 決策</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-success" href="#secfor" role="button">for 迴圈</a>
+                <a class="btn btn-lg btn-success" href="#secfor">for 迴圈</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-success" href="#secwhile" role="button">while 迴圈</a>
+                <a class="btn btn-lg btn-success" href="#secwhile">while 迴圈</a>
             </div>
             <div class="col-lg-4">
-                <a class="btn btn-lg btn-success" href="#secjudge" role="button">基礎解題操作</a>
+                <a class="btn btn-lg btn-success" href="#secjudge">基礎解題操作</a>
             </div>
         </div>
+
+        <h3>編譯與執行</h3>
+        <pre>
+            <code class="">
+            // 編譯
+            $ g++ p1.cpp -o p1
+
+            // 執行
+            $ ./p1
+
+            // 執行時輸入測資
+            $ ./p1 < d1.txt
+
+            // 編譯及執行
+            $ g++ p1.cpp -o p1 && ./p1
+
+            // APCS 指令
+            $ g++ -g -O2 -std=gnu++11 -static -o p1.out p1.cpp -lm
+            $ ./p1.out
+            </code>
+        </pre>
 
         <h3>Output(輸出)</h3>
 
@@ -78,15 +116,22 @@
             using namespace std;
 
             int main() {
-                // my first program in C++
                 cout << "Hello, World!" << endl;
-                // return an integer
                 return 0;
             }
             </code>
         </pre>
 
         <h4>各種進位值</h4>
+        <div class="desc">
+            進位制基底與位數範圍
+            <ul>
+                <li>10進位(Dec): 0123456789</li>
+                <li>&nbsp;2進位(Bin): 01</li>
+                <li>&nbsp;8進位(Oct): 01234567</li>
+                <li>16進位(Hex): 0123456789abcdef (a~f 依序表示 10~15)</li>
+            </ul>
+        </div>
         <pre>
             <code class="cpp">
             #include &lt;iostream&gt;
@@ -98,10 +143,9 @@
                 cout << "Dec: " << n << endl;
                 cout << "Oct: " << oct << n << endl;
                 cout << "Hex: " << hex << n << endl;
-                cout << "Hex: " << uppercase << hex << n << endl;
-                cout << "Oct: " << showbase << oct << n << endl;
-                cout << "Hex: " << showbase << hex << n << endl;
-                cout << "Hex: " << showbase << uppercase << hex << n << endl;
+                cout << showbase;
+                cout << "Oct: " << oct << n << endl;
+                cout << "Hex: " << hex << n << endl;
                 return 0;
             }
             </code>
@@ -110,21 +154,31 @@
         <h3>Input(輸入)</h3>
 
         <h4>名字與年齡</h4>
+        <div class="desc">
+            <ul>
+                <li>string: 字串 (必須用一對雙引號 "" 括住)</li>
+                <li>&nbsp;int: 整數</li>
+                <li>&nbsp;cin: 輸入</li>
+                <li>cout: 輸出</li>
+                <li>endl: 換行</li>
+            </ul>
+        </div>
         <pre>
             <code class="cpp">
             #include &lt;iostream&gt;
+            #include &lt;string&gt;
             using namespace std;
 
             int main() {
-                char name[30];
+                string name;
                 int age;
 
                 cout << "What is your name? ";
                 cin >> name;
                 cout << "How old are you? ";
                 cin >> age;
-                cout << "Your name is " << name;
-                cout << ", and you are " << age << " years old. \n";
+                cout << "Name: " << name << endl;
+                cout << "Age: " << age << endl;
                 return 0;
             }
             </code>
@@ -137,13 +191,13 @@
             using namespace std;
 
             int main() {
-                int n1, n2;
+                int a, b;
 
-                cout << " n1: ";
-                cin >> n1;
-                cout << " n2: ";
-                cin >> n2;
-                cout << "Sum: " << n1+n2 << endl;
+                cout << "a: ";
+                cin >> a;
+                cout << "b: ";
+                cin >> b;
+                cout << "Sum: " << a + b << endl;
                 return 0;
             }
             </code>
@@ -159,54 +213,34 @@
             using namespace std;
 
             int main() {
-                int a = 333;
-                int b = 123;
-                int diff;
-                diff = a - b;
+                int a, b;
+                int x;
 
-                cout << "a - b = " << diff << endl;
+                cout << "a: ";
+                cin >> a;
+                cout << "b: ";
+                cin >> b;
+                x = a - b;
+                cout << "Difference: " << x << endl;
                 return 0;
             }
             </code>
         </pre>
 
-        <h4>輸入兩數相減</h4>
+        <h4>三數相乘</h4>
+        <p>一列一數 vs. 一列多數</p>
         <pre>
             <code class="cpp">
             #include &lt;iostream&gt;
             using namespace std;
 
             int main() {
-                int a, b;
-                int diff;
+                int a, b, c;
+                int x;
 
-                cout << "1st number: ";
-                cin >> a;
-                cout << "2nd number: ";
-                cin >> b;
-                diff = a - b;
-                cout << a << " - " << b << " = " << diff << endl;
-                return 0;
-            }
-            </code>
-        </pre>
-
-        <h4>兩數相乘</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;iostream&gt;
-            using namespace std;
-
-            int main() {
-                int a, b;
-                int product;
-
-                cout << "1st number: ";
-                cin >> a;
-                cout << "2nd number: ";
-                cin >> b;
-                product = a * b;
-                cout << a << " * " << b << " = " << product << endl;
+                cin >> a >> b >> c;
+                x = a * b * c;
+                cout << "Product: " << x << endl;
                 return 0;
             }
             </code>
@@ -222,10 +256,10 @@
                 int sum = 10;
                 int diff = 4;
                 int large, small;
+
                 large = (sum + diff) / 2;
                 small = (sum - diff) / 2;
-
-                cout << "  Big number: " << large << endl;
+                cout << "Large number: " << large << endl;
                 cout << "Small number: " << small << endl;
                 return 0;
             }
@@ -253,7 +287,7 @@
                 cout << a << " * " << b << " = " << a * b << endl;
                 // 除法(/) 其中之一為浮點數，結果為浮點數
                 cout << a << " / " << b << " = " << (float)a / b << endl;
-                // 商數(.) 兩整數相除結果為商數
+                // 商數(/) 兩整數相除結果為商數
                 cout << a << " / " << b << " = " << a / b << endl;
                 // 餘數(%)
                 cout << a << " % " << b << " = " << a % b << endl;
@@ -279,7 +313,7 @@
             </code>
         </pre>
 
-        <h4>輸出圓周率</h4>
+        <h4>圓周率第一版</h4>
         <pre>
             <code class="cpp">
             #include &lt;iostream&gt;
@@ -289,12 +323,28 @@
 
             int main() {
                 double pi = M_PI;
+                cout << fixed;
+                cout << setprecision(4) << pi << endl;
+                cout << setprecision(6) << pi << endl;
                 cout << setprecision(8) << pi << endl;
-                cout << setprecision(16) << pi << endl;
-                cout << setprecision(32) << pi << endl;
-                cout << fixed << setprecision(8) << pi << endl;
-                cout << fixed << setprecision(16) << pi << endl;
-                cout << fixed << setprecision(32) << pi << endl;
+                return 0;
+            }
+            </code>
+        </pre>
+
+        <h4>圓周率第二版</h4>
+        <pre>
+            <code class="cpp">
+            #include &lt;iostream&gt;
+            #include &lt;cmath&gt;
+            using namespace std;
+
+            int main() {
+                double pi = M_PI;
+                printf("%f\n", M_PI);
+                printf("%.2f\n", M_PI);
+                printf("%.4f\n", M_PI);
+                printf("%.8f\n", M_PI);
                 return 0;
             }
             </code>
@@ -309,16 +359,17 @@
             using namespace std;
 
             int main() {
-                double a = 12.4;
+                double a = 12.40;
                 double b = 12.50;
                 double c = 12.55;
-                double d = 12.6;
+                double d = 12.60;
 
-                cout << setprecision(32) << a << endl;
-                cout << setprecision(32) << b << endl;
-                cout << setprecision(32) << c << endl;
-                cout << setprecision(32) << d << endl;
-
+                cout << setprecision(32);
+                cout << a << endl;
+                cout << b << endl;
+                cout << c << endl;
+                cout << d << endl;
+                cout << endl;
                 cout << round(a) << endl;
                 cout << round(b) << endl;
                 cout << round(c) << endl;
@@ -358,30 +409,41 @@
             </code>
         </pre>
 
-        <h4>名字欄寬</h4>
+        <h4>整數範圍</h4>
         <pre>
             <code class="cpp">
             #include &lt;iostream&gt;
-            #include &lt;iomanip&gt;
-            using namespace std;
+            #include &lt;climits&gt;
 
             int main() {
-                char name[30];
-                char divider[] = "--------------------";
-
-                cout << "What is the name? ";
-                cin >> name;
-                cout << divider << endl;
-                cout << "The name: " << name << endl;
-                cout << "The name: " << setw(10) << name << endl;
-                cout << "The name: " << left << setw(10) << name << endl;
-                cout << "The name: " << right << setw(10) << setfill('*') << name << endl;
-                cout << "The name: " << name << endl;
-                cout << setw(20) << setfill('-') << "" << endl;
+                printf(" CHAR: %d ~ %d  \n", CHAR_MIN, CHAR_MAX);
+                printf(" SHRT: %d ~ %d  \n", SHRT_MIN, SHRT_MAX);
+                printf("  INT: %d ~ %d  \n", INT_MIN, INT_MAX);
+                printf(" LONG: %ld ~ %ld\n", LONG_MIN, LONG_MAX);
+                printf("UCHAR: %d \n", UCHAR_MAX);
+                printf("USHRT: %d \n", USHRT_MAX);
+                printf(" UINT: %u \n", UINT_MAX);
+                printf("ULONG: %lu\n", ULONG_MAX);
                 return 0;
             }
             </code>
         </pre>
+
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr><th>Type</th><th>Range</th></tr>
+            </thead>
+            <tbody>
+                <tr><td> CHAR</td><td>-128 ~ 127</td></tr>
+                <tr><td> SHRT</td><td>-32768 ~ 32767</td></tr>
+                <tr class="table-primary"><td>  INT</td><td>-2147483648 ~ 2147483647</td></tr>
+                <tr><td> LONG</td><td>-9223372036854775808 ~ 9223372036854775807</td></tr>
+                <tr><td>UCHAR</td><td>255</td></tr>
+                <tr><td>USHRT</td><td>65535</td></tr>
+                <tr><td> UINT</td><td>4294967295</td></tr>
+                <tr><td>ULONG</td><td>18446744073709551615</td></tr>
+            </tbody>
+        </table>
 
         <h4>整數與字元</h4>
         <pre>
@@ -411,7 +473,8 @@
 
             int main() {
                 int a, b, temp;
-                cout << "Enter 2 different numbers: ";
+
+                cout << "Enter 2 numbers: ";
                 cin >> a >> b;
                 temp = a;
                 a = b;
@@ -432,7 +495,7 @@
                 float a, b;
                 int n;
 
-                cout << "Enter 2 different numbers: ";
+                cout << "Enter 2 numbers: ";
                 cin >> a >> b;
 
                 cout << a / b << endl;
@@ -447,25 +510,26 @@
         <pre>
             <code class="cpp">
             #include &lt;iostream&gt;
+            #include &lt;iomanip&gt;
             using namespace std;
 
             int main() {
                 int dividend = 19;
                 int divisor1 = 3;
                 float divisor2 = 6.0;
-                float answer1, answer2;
-                answer1 = dividend / divisor1;
-                answer2 = dividend / divisor2;
+                float answer;
 
-                cout << "answer1: " << answer1 << endl;
-                cout << fixed;
-                cout.precision(2);
-                cout << "answer2: " << answer2 << endl;
-                answer1 = (float)dividend / divisor1;
-                cout.precision(3);
-                cout << "answer1: " << answer1 << endl;
-                cout << scientific;
-                cout << "answer1: " << answer1 << endl;
+                answer = dividend / divisor1;
+                cout << "answer1: " << answer << endl;
+
+                cout << fixed << setprecision(3);
+
+                answer = dividend / divisor2;
+                cout << "answer2: " << answer << endl;
+
+                answer = (float)dividend / divisor1;
+                cout << "answer3: " << answer << endl;
+
                 return 0;
             }
             </code>
@@ -479,7 +543,7 @@
 
             int main() {
                 int a, b, c;
-                cout << "Enter 3 different numbers: ";
+                cout << "Enter 3 numbers: ";
                 cin >> a >> b >> c;
                 cout << a << " " << &a << endl;
                 cout << b << " " << &b << endl;
@@ -503,7 +567,7 @@
                 string weather = "sunny";
 
                 cout << "Let's hang out.\n";
-                if (weather.compare("sunny") == 0) {
+                if (weather == "sunny") {
                     cout << "Sure. Why not?\n";
                 }
                 return 0;
@@ -511,7 +575,7 @@
             </code>
         </pre>
 
-        <h4>if-else條件否則式</span></h4>
+        <h4>if-else條件否則式</h4>
         <pre>
             <code class="cpp">
             #include &lt;iostream&gt;
@@ -525,7 +589,7 @@
                 cout << "How is the weather? ";
                 cin >> weather;
 
-                if (weather.compare("sunny") == 0) {
+                if (weather == "sunny") {
                     cout << "Sure. Why not?\n";
                 }
                 else {
@@ -547,10 +611,6 @@
                 cout << "> ";
                 cin >> n;
                 cout << "abs: " << abs(n) << endl;
-                if (n < 0) {
-                    n = -n;
-                }
-                cout << "abs: " << n << endl;
                 return 0;
             }
             </code>
@@ -581,6 +641,7 @@
         </pre>
 
         <h4>三元運算子</h4>
+        <p>條件式 ? 條件成立的運算式 : 不成立的運算式</p>
         <pre>
             <code class="cpp">
             #include &lt;iostream&gt;
@@ -649,15 +710,15 @@
                 cin >> op;
 
                 switch(op) {
-                    case '+': cout << x+y;
+                    case '+': cout << x + y;
                               break;
-                    case '-': cout << x-y;
+                    case '-': cout << x - y;
                               break;
-                    case '*': cout << x*y;
+                    case '*': cout << x * y;
                               break;
-                    case '/': cout << x/y;
+                    case '/': cout << x / y;
                               break;
-                    case '%': cout << x%y;
+                    case '%': cout << x % y;
                               break;
                     default: cout << "Wrong operation!";
                 }
@@ -709,11 +770,11 @@
             using namespace std;
 
             int main() {
-                int price = 320;
+                int price = 500;
                 int tickets;
                 char credit_card;
                 int total;
-                int is_credit_card;
+                int has_card;
 
                 cout << "How many tickets? ";
                 cin >> tickets;
@@ -721,8 +782,8 @@
                 cin >> credit_card;
 
                 credit_card = toupper(credit_card);
-                is_credit_card = credit_card == 'Y';
-                total = is_credit_card ? (int)price*tickets*0.8 : price*tickets;
+                has_card = credit_card == 'Y';
+                total = has_card ? (int)price*tickets*0.8 : price*tickets;
                 cout << "$" << total << " for " << tickets << " tickets." << endl;
                 return 0;
             }
@@ -741,15 +802,15 @@
 
                 if (furry) {
                     if (small)
-                        cout << "It's a cat!" << endl;
+                        cout << "Cat" << endl;
                     else
-                        cout << "It's a bear!" << endl;
+                        cout << "Bear" << endl;
                 }
                 else {
                     if (small)
-                        cout << "It's a skink!" << endl;
+                        cout << "Gecko" << endl;
                     else
-                        cout << "It's a crocodile!" << endl;
+                        cout << "Crocodile" << endl;
                 }
                 return 0;
             }
@@ -790,6 +851,30 @@
         <div id="secfor" class="section-divider"></div>
         <h3>Repetition(重複) <span class="text-dark">- <span class="text-danger">for loop</span>迴圈式(迴圈或重複結構)</span></h3>
 
+        <h4>五個整數</h4>
+        <div class="desc">
+            for (1.迴圈變數預設初值; 2.迴圈可執行條件; 4.迴圈變數遞增遞減) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;3.迴圈功能程式<br>
+            }<br>
+            1->2->3->4->2->3->4...直到 2 的條件不成立<br>
+            註: 1 只執行一次
+        </div>
+        <pre>
+            <code class="cpp">
+            #include &lt;iostream&gt;
+            using namespace std;
+
+            int main() {
+                int i;
+
+                for (i = 0; i < 5; i++) {
+                    cout << i << endl;
+                }
+                return 0;
+            }
+            </code>
+        </pre>
+
         <h4>五個星號</h4>
         <pre>
             <code class="cpp">
@@ -801,23 +886,6 @@
 
                 for (i = 0; i < 5; i++) {
                     cout << '*' << endl;
-                }
-                return 0;
-            }
-            </code>
-        </pre>
-
-        <h4>五個整數</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;iostream&gt;
-            using namespace std;
-
-            int main() {
-                int i;
-
-                for (i = 0; i < 5; i++) {
-                    cout << i << endl;
                 }
                 return 0;
             }
@@ -928,6 +996,7 @@
         </pre>
 
         <h4>星號三角</h4>
+        <p>正左直角、倒左直角、正右直角、倒右直角、金字塔形</p>
         <pre>
             <code class="cpp">
             #include &lt;iostream&gt;
@@ -966,9 +1035,9 @@
                 for (ri = 0; ri < n; ri++) {
                     for (ci = 0; ci < n; ci++) {
                         i = ri * n + ci;
-                        cout << "ri: " << ri
-                            << " ci: " << ci << " -> "
-                            << "i: " << i << endl;
+                        cout << "ri: " << ri << " "
+                             << "ci: " << ci << " -> "
+                             << "i: " << i << endl;
                     }
                 }
                 return 0;
@@ -995,9 +1064,9 @@
                 for (i = 0; i < n; i++) {
                     ri = i / m;
                     ci = i % m;
-                    cout << "ri: " << ri
-                        << " ci: " << ci << " <- "
-                        << "i: " << i << endl;
+                    cout << "ri: " << ri << " "
+                         << "ci: " << ci << " <- "
+                         << "i: " << i << endl;
                 }
                 return 0;
             }
@@ -1079,11 +1148,11 @@
             using namespace std;
 
             int main() {
-                int sum = 10;
+                int N = 10;
 
-                while (sum) {
-                    cout << sum << endl;
-                    sum = sum - 1;
+                while (N) {
+                    cout << N << endl;
+                    N = N - 1;
                 }
                 return 0;
             }
@@ -1304,7 +1373,7 @@
             }
             </code>
         </pre>
-      </section>
+    </section>
     <hr class="footer-hr">
 
     <footer>
