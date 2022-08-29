@@ -7,12 +7,6 @@ pre code {
     margin-left: -80px;
 }
 
-.navbar-collapse {
-    /* https://css-tricks.com/viewport-sized-typography/ */
-    max-height: 100vh !important;
-    overflow-x: hidden !important;
-}
-
 .navbar-toggler {
     padding: 3px 8px 2px 8px;
 }
@@ -84,6 +78,10 @@ pre code {
 
 .nav-item .nav-link.ex-count:hover {
     color: #a5d1e4 !important;
+}
+
+.nav-item .dropdown-item {
+    font-size: 18px;
 }
 
 .btn:hover {
@@ -303,6 +301,11 @@ img.img-apcs {
     padding-bottom: 5px;
 }
 
+.texti-code,
+.texti-code * {
+    font-family: Consolas, "Microsoft JhengHei";
+}
+
 .footer-hr {
     margin-top: 60px;
 }
@@ -339,6 +342,11 @@ img.img-apcs {
 
     .nav-item .nav-link {
         padding: 5px 0px;
+        font-size: 20px;
+    }
+
+    .nav-item .dropdown-item {
+        padding: 5px 20px;
         font-size: 20px;
     }
 
