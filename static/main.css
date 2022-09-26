@@ -310,6 +310,30 @@ img.img-apcs {
     margin-top: 60px;
 }
 
+.icon-pybasic,
+.icon-ccbasic,
+.icon-links,
+.icon-apcs {
+    padding: 30px;
+    color: #fff;
+}
+
+.icon-pybasic {
+    background-color: #3aaa2b;
+}
+
+.icon-ccbasic {
+    background-color: #9c004c;
+}
+
+.icon-links {
+    background-color: #333;
+}
+
+.icon-apcs {
+    background-color: #1a68a7;
+}
+
 @media screen and (max-device-width: 640px) {
     h1 {
         font-size: 28px;
