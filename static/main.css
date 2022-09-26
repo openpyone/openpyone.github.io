@@ -310,12 +310,13 @@ img.img-apcs {
     margin-top: 60px;
 }
 
-.icon-pybasic,
-.icon-ccbasic,
-.icon-links,
-.icon-apcs {
+.icon-block  {
     color: #fff;
     padding: 50px 30px;
+}
+
+.icon-block i {
+    opacity: 0.9;
 }
 
 .icon-pybasic {
