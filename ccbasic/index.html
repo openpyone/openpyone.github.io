@@ -43,7 +43,7 @@
 </div>
 
 <div class="container">
-    <div id="ch01" class="section-divider"></div>
+        <div id="ch01" class="section-divider"></div>
     <section class="section-chapter code-desc">
         <h2 class="text-primary">程式基本概念</h2>
 
@@ -114,18 +114,6 @@
             </code>
         </pre>
 
-        <h4>第一支程式(C)</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-
-            int main() {
-                printf("Hello, World!\n");
-                return 0;
-            }
-            </code>
-        </pre>
-
         <h4>各種進位值</h4>
         <div class="desc">
             進位制基底與位數範圍
@@ -155,23 +143,6 @@
             </code>
         </pre>
 
-        <h4>各種進位值(C)</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-
-            int main() {
-                int n = 987;
-
-                printf("Dec: %d\n", n);
-                printf("Oct: %o\n", n);
-                printf("Hex: %x\n", n);
-                printf("Hex: %X\n", n);
-                return 0;
-            }
-            </code>
-        </pre>
-
         <h3>Input(輸入)</h3>
 
         <h4>名字與年齡</h4>
@@ -191,27 +162,6 @@
                 cin >> age;
                 cout << "Name: " << name << endl;
                 cout << "Age: " << age << endl;
-                return 0;
-            }
-            </code>
-        </pre>
-
-        <h4>名字與年齡(C)</h4>
-        <p>C語言以字元陣列儲存字串</p>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-
-            int main() {
-                char name[30];
-                int age;
-
-                printf("What is your name? ");
-                scanf("%s", name);
-                printf("How old are you? ");
-                scanf("%d", &age);
-                printf("Name: %s\n", name);
-                printf("Age: %d\n", age);
                 return 0;
             }
             </code>
@@ -249,26 +199,6 @@
             </code>
         </pre>
 
-        <h4>兩數相加(C)</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-
-            int main() {
-                int a, b;
-                int x;
-
-                printf("a: ");
-                scanf("%d", &a);
-                printf("b: ");
-                scanf("%d", &b);
-                x = a + b;
-                printf("Sum: %d\n", x);
-                return 0;
-            }
-            </code>
-        </pre>
-
         <h4>和差問題</h4>
         <pre>
             <code class="cpp">
@@ -289,25 +219,6 @@
             </code>
         </pre>
 
-        <h4>和差問題(C)</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-
-            int main() {
-                int sum = 10;
-                int diff = 4;
-                int large, small;
-
-                large = (sum + diff) / 2;
-                small = (sum - diff) / 2;
-                printf("Large number: %d\n", large);
-                printf("Small number: %d\n", small);
-                return 0;
-            }
-            </code>
-        </pre>
-
         <h4>三數相乘</h4>
         <pre>
             <code class="cpp">
@@ -321,23 +232,6 @@
                 cin >> a >> b >> c;
                 x = a * b * c;
                 cout << "Product: " << x << endl;
-                return 0;
-            }
-            </code>
-        </pre>
-
-        <h4>三數相乘(C)</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-
-            int main() {
-                int a, b, c;
-                int x;
-
-                scanf("%d %d %d", &a, &b, &c);
-                x = a * b * c;
-                printf("Product: %d\n", x);
                 return 0;
             }
             </code>
@@ -412,24 +306,6 @@
             </code>
         </pre>
 
-        <h4>圓周率(C)</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-            #include &lt;math.h&gt;
-
-            int main() {
-                double pi = M_PI;
-
-                printf("%f\n", pi);
-                printf("%.2f\n", pi);
-                printf("%.4f\n", pi);
-                printf("%.8f\n", pi);
-                return 0;
-            }
-            </code>
-        </pre>
-
         <h4>浮點數精度</h4>
         <pre>
             <code class="cpp">
@@ -485,36 +361,6 @@
                 cout << (a << b) << endl;
                 // >> (右移)
                 cout << (a >> b)<< endl;
-                return 0;
-            }
-            </code>
-        </pre>
-
-        <h4>位元運算(C)</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-
-            int main() {
-                int a, b;
-
-                printf("a: ");
-                scanf("%d", &a);
-                printf("b: ");
-                scanf("%d", &b);
-                // ~ (NOT)
-                printf("%d\n", ~a);
-                printf("%d\n", ~b);
-                // & (AND)
-                printf("%d\n", a & b);
-                // | (OR)
-                printf("%d\n", a | b);
-                // ^ (XOR)
-                printf("%d\n", a ^ b);
-                // << (左移)
-                printf("%d\n", a << b);
-                // >> (右移)
-                printf("%d\n", a >> b);
                 return 0;
             }
             </code>
@@ -584,37 +430,6 @@
         <div id="secvar" class="section-divider"></div>
         <h3>Variable(變數)</h3>
 
-        <h4>資料型別長度(C)</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-            #include &lt;stdint.h&gt;
-
-            int main() {
-                printf("         char   : %ld byte(s)\n", sizeof(char));
-                printf("         short  : %ld byte(s)\n", sizeof(short));
-                printf("         int    : %ld byte(s)\n", sizeof(int));
-                printf("         long   : %ld byte(s)\n", sizeof(long));
-                printf("unsigned short  : %ld byte(s)\n", sizeof(unsigned short));
-                printf("unsigned int    : %ld byte(s)\n", sizeof(unsigned int));
-                printf("unsigned long   : %ld byte(s)\n", sizeof(unsigned long));
-                printf("         float  : %ld byte(s)\n", sizeof(float));
-                printf("         double : %ld byte(s)\n", sizeof(double));
-                printf("\n");
-                printf("         size_t : %ld byte(s)\n", sizeof(size_t));
-                printf("         int8_t : %ld byte(s)\n", sizeof(int8_t));
-                printf("         int16_t: %ld byte(s)\n", sizeof(int16_t));
-                printf("         int32_t: %ld byte(s)\n", sizeof(int32_t));
-                printf("         int64_t: %ld byte(s)\n", sizeof(int64_t));
-                printf("         uint8_t: %ld byte(s)\n", sizeof(uint8_t));
-                printf("        uint16_t: %ld byte(s)\n", sizeof(uint16_t));
-                printf("        uint32_t: %ld byte(s)\n", sizeof(uint32_t));
-                printf("        uint64_t: %ld byte(s)\n", sizeof(uint64_t));
-                return 0;
-            }
-            </code>
-        </pre>
-
         <h4>變數最大值</h4>
         <pre>
             <code class="cpp">
@@ -637,26 +452,6 @@
                 cout << "  long : " << i8 << endl;
                 cout << " float : " << f4 << endl;
                 cout << "double : " << f8 << endl;
-                return 0;
-            }
-            </code>
-        </pre>
-
-        <h4>整數範圍(C)</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-            #include &lt;limits.h&gt;
-
-            int main() {
-                printf(" CHAR: %d ~ %d  \n", CHAR_MIN, CHAR_MAX);
-                printf(" SHRT: %d ~ %d  \n", SHRT_MIN, SHRT_MAX);
-                printf("  INT: %d ~ %d  \n", INT_MIN, INT_MAX);
-                printf(" LONG: %ld ~ %ld\n", LONG_MIN, LONG_MAX);
-                printf("UCHAR: %d \n", UCHAR_MAX);
-                printf("USHRT: %d \n", USHRT_MAX);
-                printf(" UINT: %u \n", UINT_MAX);
-                printf("ULONG: %lu\n", ULONG_MAX);
                 return 0;
             }
             </code>
@@ -699,7 +494,7 @@
             </code>
         </pre>
 
-        <h4>兩數交換</h4>
+        <h4>兩數對調(交換)</h4>
         <pre>
             <code class="cpp">
             #include &lt;iostream&gt;
@@ -788,24 +583,6 @@
             </code>
         </pre>
 
-        <h4>變數值與位址(C)</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-
-            int main() {
-                int a, b, c;
-
-                printf("Enter 3 numbers: ");
-                scanf("%d %d %d", &a, &b, &c);
-                printf("%p\n", &a);
-                printf("%p\n", &b);
-                printf("%p\n", &c);
-                return 0;
-            }
-            </code>
-        </pre>
-
         <div id="secif" class="section-divider"></div>
         <h3>Decision making(決策) <span class="text-dark">- 決策式(分支或選擇結構)</span></h3>
 
@@ -821,24 +598,6 @@
                 cout << "Let's hang out.\n";
                 if (weather == "sunny") {
                     cout << "Sure. Why not?\n";
-                }
-                return 0;
-            }
-            </code>
-        </pre>
-
-        <h4>if條件式(C)</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-            #include &lt;string.h&gt;
-
-            int main() {
-                char weather[] = "sunny";
-
-                printf("Let's hang out.\n");
-                if (strcmp(weather, "sunny") == 0) {
-                    printf("Sure. Why not?\n");
                 }
                 return 0;
             }
@@ -863,30 +622,6 @@
                 }
                 else {
                     cout << "I want to stay at home.\n";
-                }
-                return 0;
-            }
-            </code>
-        </pre>
-
-        <h4>if-else條件否則式(C)</h4>
-        <pre>
-            <code class="cpp">
-            #include &lt;stdio.h&gt;
-            #include &lt;string.h&gt;
-
-            int main() {
-                char weather[10];
-
-                printf("Let's hang out.\n");
-                printf("How is the weather? ");
-                scanf("%s", weather);
-
-                if (strcmp(weather, "sunny") == 0) {
-                    printf("Sure. Why not?\n");
-                }
-                else {
-                    printf("I want to stay at home.\n");
                 }
                 return 0;
             }
