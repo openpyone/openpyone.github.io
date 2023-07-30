@@ -367,12 +367,12 @@ img.img-apcs {
 
     .nav-item .nav-link {
         padding: 5px 0px;
-        font-size: 20px;
+        font-size: 24px;
     }
 
     .nav-item .dropdown-item {
         padding: 5px 20px;
-        font-size: 20px;
+        font-size: 22px;
     }
 
     .nav-item:first-child {
