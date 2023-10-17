@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>APCS 從考題到專題 | 碼寶程式教育中心</title>
+
+        <meta name="description" content="112學年度高雄中學均質化計畫「程式設計培訓增能計畫」研習 - APCS 從考題到專題">
+        <meta name="author" content="Python Code School">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="/reveal/dist/reset.css">
+        <link rel="stylesheet" href="/reveal/dist/reveal.css">
+        <link rel="stylesheet" href="/reveal/dist/theme/black.css" id="theme">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="/reveal/plugin/highlight/monokai.css">
+        <link rel="canonical" href="https://open.pyone.tw/">
+        <style>
+            ul li {
+                margin: 20px 0;
+            }
+            .outline {
+                color: #5cc54f !important;
+            }
+            .topic {
+                color: #fed84b !important;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <p><small>112學年度高雄中學「程式設計培訓增能計畫」研習</small></p>
+                    <h1>APCS 從考題到專題</h1>
+                    <h2><small><a href="https://pyone.tw/" target="_blank">碼寶程式教育中心</a> <s>張老師</s></small></h2>
+                </section>
+
+                <section>
+                    <h2 class="outline">課程大綱</h2>
+                    <ul>
+                        <li>Python基礎語法與結構</li>
+                        <li>APCS考題範例</li>
+                        <li>Pygame小專題</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <section>
+                        <h2 class="topic">選擇結構 - 4種if區段</h2>
+                        <ul>
+                            <li>(1) if</li>
+                            <li>(2) if-else</li>
+                            <li>(3) if-elif... (可以有多個 elif，都必須接條件式)</li>
+                            <li>(4) if-elif...else</li>
+                        </ul>
+                    </section>
+
+                    <section data-auto-animate>
+                        <h3>(1) if</h3>
+                        <pre><code class="hljs python" data-trim data-line-numbers>
+                            print("Beebo: Let's hang out.")
+                            weather = input("How is the weather? ")
+                            if weather == "sunny":
+                                print("Sure. Why not?")
+                        </code></pre>
+                    </section>
+
+                    <section data-auto-animate>
+                        <h3>(2) if-else</h3>
+                        <pre><code class="hljs python" data-trim data-line-numbers>
+                            print("Beebo: Let's hang out.")
+                            weather = input("How is the weather? ")
+                            if weather == "sunny":
+                                print("(1) Sure. Why not?")
+                            else:
+                                print("(2) I want to stay home.")
+                        </code></pre>
+                    </section>
+
+                    <section data-auto-animate>
+                        <h3>(3) if-elif...</h3>
+                        <pre><code class="hljs python" data-trim data-line-numbers>
+                            print('L.Left')
+                            print('R.Right')
+                            print('U.Up')
+                            print('D.Down')
+                            op = input('> ').upper()
+
+                            if op == 'L':
+                                print('Left')
+                            elif op == 'R':
+                                print('Right')
+                            elif op == 'U':
+                                print('Up')
+                            elif op == 'D':
+                                print('Down')
+                        </code></pre>
+                    </section>
+
+                    <section data-auto-animate>
+                        <h3>(4) if-elif...else</h3>
+                        <pre><code class="hljs python" data-trim data-line-numbers>
+                            print('L.Left')
+                            print('R.Right')
+                            print('U.Up')
+                            print('D.Down')
+                            op = input('> ').upper()
+
+                            if op == 'L':
+                                print('Left')
+                            elif op == 'R':
+                                print('Right')
+                            elif op == 'U':
+                                print('Up')
+                            elif op == 'D':
+                                print('Down')
+                            else:
+                                print('Wrong direction')
+                        </code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2 class="topic">重複結構 - 迴圈</h2>
+                        <ul>
+                            <li>for 迴圈</li>
+                            <li>while 迴圈</li>
+                        </ul>
+                    </section>
+
+                    <section data-auto-animate>
+                        <h3>for 迴圈</h3>
+                        <pre><code class="hljs python" data-trim data-line-numbers>
+                            for i in range(10):
+                                print(f'#{i}')
+                                print('L.Left')
+                                print('R.Right')
+                                print('U.Up')
+                                print('D.Down')
+                                op = input('> ').upper()
+
+                                if op == 'L':
+                                    print('Left')
+                                elif op == 'R':
+                                    print('Right')
+                                elif op == 'U':
+                                    print('Up')
+                                elif op == 'D':
+                                    print('Down')
+                                else:
+                                    print('Wrong direction')
+                        </code></pre>
+                    </section>
+
+                    <section data-auto-animate>
+                        <h3>while 迴圈</h3>
+                        <pre><code class="hljs python" data-trim data-line-numbers>
+                            while True:
+                                print('L.Left')
+                                print('R.Right')
+                                print('U.Up')
+                                print('D.Down')
+                                print('Q.Quit')
+                                op = input('> ').upper()
+
+                                if op == 'Q':
+                                    break
+                                elif op == 'L':
+                                    print('Left')
+                                elif op == 'R':
+                                    print('Right')
+                                elif op == 'U':
+                                    print('Up')
+                                elif op == 'D':
+                                    print('Down')
+                                else:
+                                    print('Wrong direction')
+                        </code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2 class="topic">一維 & 二維</h2>
+                        <ul>
+                            <li>一維轉二維</li>
+                            <li>二維轉一維</li>
+                        </ul>
+                    </section>
+
+                    <section data-auto-animate>
+                        <h3>一維轉二維</h3>
+                        <pre><code class="hljs python" data-trim data-line-numbers>
+                            rows = 4
+                            cols = 3
+                            nums = rows * cols
+
+                            for i in range(nums):
+                                ri = i // cols
+                                ci = i % cols
+                                print(f'{i} -> ({ri}, {ci})')
+                        </code></pre>
+                    </section>
+
+                    <section data-auto-animate>
+                        <h3>二維轉一維</h3>
+                        <pre><code class="hljs python" data-trim data-line-numbers>
+                            rows = 4
+                            cols = 3
+                            nums = rows * cols
+
+                            for ri in range(rows):
+                                for ci in range(cols):
+                                    i = ri * cols + ci
+                                    print(f'({ri}, {ci}) -> {i}')
+                        </code></pre>
+                    </section>
+
+                    <section data-auto-animate>
+                        <h3>一維亂數存到二維</h3>
+                        <pre><code class="hljs python" data-trim data-line-numbers>
+                            import random
+                            random.seed(1)
+                            rows = 4
+                            cols = 3
+                            alist = list(range(1, rows*cols+1))
+
+                            random.shuffle(alist)
+                            print('1D-list')
+                            print(*alist)
+                            print()
+
+                            atable = []
+                            for ri in range(rows):
+                                arow = []
+                                for ci in range(cols):
+                                    arow.append(alist[ri*cols+ci])
+                                atable.append(arow)
+                            print('2D-table')
+                            for row in atable:
+                                print(*row)
+                        </code></pre>
+                    </section>
+
+                    <section data-auto-animate>
+                        <h3>二維亂數存到一維</h3>
+                        <pre><code class="hljs python" data-trim data-line-numbers>
+                            import random
+                            random.seed(1)
+                            rows = 4
+                            cols = 3
+                            nlist = list(range(1, rows*cols+1))
+
+                            atable = []
+                            for ri in range(rows):
+                                arow = []
+                                for ci in range(cols):
+                                    arow.append(nlist.pop(random.randrange(len(nlist))))
+                                atable.append(arow)
+                            print('2D-table')
+                            for row in atable:
+                                print(*row)
+
+                            alist = []
+                            for row in atable:
+                                alist = alist + row
+                            print('1D-list')
+                            print(*alist)
+                            print()
+                        </code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2 class="topic">數字龍捲風 - 考題討論</h2>
+                        <h3>APCS - 實作題_題型範例 - P18</h3>
+                        <h2><small><a href="https://zerojudge.tw/ShowProblem?problemid=c292" target="_blank">c292. APCS2017-0304-3數字龍捲風</a></small></h2>
+                    </section>
+                    <section data-background-video="https://static.slid.es/site/homepage/v1/homepage-video-editor.mp4" data-background-color="#000000">
+                        <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+                            <h2>數字龍捲風 - 專題實作</h2>
+                        </div>
+                    </section>
+                </section>
+
+                <section style="text-align: left;">
+                    <h1>THE END</h1>
+                </section>
+
+            </div>
+
+        </div>
+
+        <script src="/reveal/dist/reveal.js"></script>
+        <script src="/reveal/plugin/zoom/zoom.js"></script>
+        <script src="/reveal/plugin/notes/notes.js"></script>
+        <script src="/reveal/plugin/search/search.js"></script>
+        <script src="/reveal/plugin/markdown/markdown.js"></script>
+        <script src="/reveal/plugin/highlight/highlight.js"></script>
+        <script>
+
+            // Also available as an ES module, see:
+            // https://revealjs.com/initialization/
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                center: true,
+                hash: true,
+
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+            });
+
+        </script>
+
+    </body>
+</html>
