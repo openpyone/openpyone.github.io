@@ -4,13 +4,14 @@ for key, value in colors.items():
     print(f'{key:10} {value}')
 
 # YOUR CODE HERE
+N = 12
 atable = []
-for row_index in range(12):
+for row_index in range(N):
     arow = []
-    for col_index in range(12):
-        if row_index + col_index == 11:
+    for col_index in range(N):
+        if row_index + col_index == N-1:
             arow.append('yellow')
-        elif col_index < 11-row_index:
+        elif col_index < N-1-row_index:
             arow.append('green')
         else:
             arow.append('')
