@@ -20,13 +20,19 @@ def html_table(atable):
     str_html = ''
     str_html += '<div style="margin-top: 20px; display: flex; justify-content: center;">'
     str_html += '<table style="border: 1px solid;">'
-    for row in atable:
+    atable.insert(0, ['gray' for _ in range(len(atable))])
+    for ri, row in enumerate(atable):
         str_html += '<tr style="border: 1px solid;">'
-        for col in row:
+        row = ['gray'] + row
+        for ci, col in enumerate(row):
             if col == '':
                 col = 'white'
             color = colors[col]
-            str_html += f'<td style="background: {color}; width:40px; height: 40px; border: 1px solid;">'
+            str_html += f'<td style="background: {color}; width:20px; height: 20px; border: 1px solid; text-align: center;">'
+            if ri == 0 and ci > 0:
+                str_html += str(ci-1)
+            elif ci == 0 and ri > 0:
+                str_html += str(ri-1)
             str_html += '</td>'
         str_html += '</tr>'
     str_html += '</table>'
@@ -38,3 +44,6 @@ def save_html(str_html, filename):
     file = open(f'{filename}.html', 'w')
     file.write(str_html)
     file.close()
+
+# NxN
+N = 12
