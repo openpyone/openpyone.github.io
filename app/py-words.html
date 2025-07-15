@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -12,15 +12,6 @@
       --button-color: #8e4ad2;
       --button-hover-color: #7124be;
       --input-bg-color: #2a183c;
-    }
-
-    body.light {
-      --bg-color: #ffffff;
-      --text-color: #111111;
-      --accent-color: #7124be;
-      --button-color: #7124be;
-      --button-hover-color: #b084dc;
-      --input-bg-color: #f0f0f0;
     }
 
     * {
@@ -36,7 +27,6 @@
       flex-direction: column;
       align-items: center;
       padding: 2em 1em;
-      transition: background-color 0.3s, color 0.3s;
     }
 
     h1 {
@@ -64,7 +54,6 @@
       background-color: var(--input-bg-color);
       color: var(--text-color);
       margin: 0.5em 0;
-      transition: background-color 0.3s, color 0.3s;
     }
 
     #score, #accuracy {
@@ -81,12 +70,13 @@
       background-color: var(--button-color);
       color: white;
       border: none;
-      padding: 0.7em 2em;
+      padding: 0.7em;
       font-size: 1.2rem;
       border-radius: 10px;
       cursor: pointer;
-      margin: 0.5em;
-      transition: background-color 0.3s;
+      margin: 0.5em 0;
+      width: 90%;
+      max-width: 400px;
     }
 
     button:hover {
@@ -97,7 +87,7 @@
       h1 { font-size: 1.8rem; }
       #word-display { font-size: 1.5rem; }
       #input-box { font-size: 1.5rem; }
-      button { font-size: 1.5rem; padding: 0.6em 1.5em; }
+      button { font-size: 1.5rem; }
     }
 
     @media (max-width: 768px) {
@@ -106,13 +96,13 @@
   </style>
 </head>
 <body>
-  <h1>Python 字彙練習</h1>
-  <div id="word-display">請按 "開始練習打字"</div>
+  <h1 id="title">Python 字彙練習</h1>
+  <div id="word-display">請按「開始練習打字」</div>
   <input type="text" id="input-box" disabled placeholder="輸入完畢後按 [Enter]..." />
   <div id="score">分數: 0</div>
   <div id="accuracy">正確率: 0%</div>
-  <button onclick="startPractice()">開始練習打字</button>
-  <button onclick="toggleTheme()">切換主題配色</button>
+  <button id="start-btn" onclick="startPractice()">開始練習打字</button>
+  <button id="lang-btn" onclick="toggleLanguage()">English</button>
 
   <script>
     const pythonKeywords = [
@@ -165,11 +155,38 @@
     let current = 0;
     let score = 0;
     let correct = 0;
+    let lang = "zh";
 
     const inputBox = document.getElementById("input-box");
     const wordDisplay = document.getElementById("word-display");
     const scoreDisplay = document.getElementById("score");
     const accuracyDisplay = document.getElementById("accuracy");
+    const titleEl = document.getElementById("title");
+    const startBtn = document.getElementById("start-btn");
+    const langBtn = document.getElementById("lang-btn");
+
+    const i18n = {
+      zh: {
+        title: "Python 字彙練習",
+        start: "開始練習打字",
+        prompt: "請按「開始練習打字」",
+        done: "完成練習！",
+        placeholder: "輸入完畢後按 [Enter]...",
+        score: s => `分數: ${s}`,
+        accuracy: a => `正確率: ${a}%`,
+        langButton: "English"
+      },
+      en: {
+        title: "Python Typing Practice",
+        start: "Start Typing Practice",
+        prompt: "Press \"Start Typing Practice\"",
+        done: "Practice complete!",
+        placeholder: "Type the word and press [Enter]...",
+        score: s => `Score: ${s}`,
+        accuracy: a => `Accuracy: ${a}%`,
+        langButton: "中文"
+      }
+    };
 
     function startPractice() {
       words = shuffleArray(wordPool).slice(0, 50);
@@ -178,6 +195,7 @@
       correct = 0;
       inputBox.disabled = false;
       inputBox.value = '';
+      inputBox.placeholder = i18n[lang].placeholder;
       inputBox.focus();
       updateDisplay();
       updateWordDisplay();
@@ -194,7 +212,7 @@
         if (current < words.length) {
           inputBox.value = '';
         } else {
-          wordDisplay.innerHTML = "完成練習！";
+          wordDisplay.innerHTML = i18n[lang].done;
           inputBox.disabled = true;
         }
         updateDisplay();
@@ -205,8 +223,8 @@
     inputBox.addEventListener("input", updateWordDisplay);
 
     function updateDisplay() {
-      scoreDisplay.textContent = `分數: ${score}`;
-      accuracyDisplay.textContent = `正確率: ${((correct / (current || 1)) * 100).toFixed(1)}%`;
+      scoreDisplay.textContent = i18n[lang].score(score);
+      accuracyDisplay.textContent = i18n[lang].accuracy(((correct / (current || 1)) * 100).toFixed(1));
     }
 
     function updateWordDisplay() {
@@ -235,8 +253,18 @@
       return a;
     }
 
-    function toggleTheme() {
-      document.body.classList.toggle("light");
+    function toggleLanguage() {
+      lang = lang === "zh" ? "en" : "zh";
+      titleEl.textContent = i18n[lang].title;
+      startBtn.textContent = i18n[lang].start;
+      langBtn.textContent = i18n[lang].langButton;
+      inputBox.placeholder = i18n[lang].placeholder;
+      if (current >= words.length || words.length === 0) {
+        wordDisplay.textContent = i18n[lang].prompt;
+      } else {
+        updateWordDisplay();
+      }
+      updateDisplay();
     }
   </script>
 </body>
