@@ -78,23 +78,3 @@ table, th, td {
     color: #d60d5f;
     font-weight: bold;
 }
-
-@media (max-width:767px) {
-    h1 {
-        font-size: 2em;
-    }
-
-    h2 {
-        font-size: 1.5em;
-    }
-
-    p {
-        font-size: 1.2em;
-    }
-
-    li,
-    li.list-group-item {
-        font-size: 1.2em;
-    }
-
-}
