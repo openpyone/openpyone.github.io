@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>1A2B 猜數字遊戲</title>
+  <style>
+    :root {
+      --bg-color: #1c1124;
+      --text-color: white;
+      --accent-color: #b084dc;
+      --button-color: #8e4ad2;
+      --button-hover-color: #7124be;
+      --input-bg-color: #2a183c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2em 1em;
+    }
+
+    h1 {
+      color: var(--accent-color);
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 0.5em;
+    }
+
+    #input-container {
+      display: flex;
+      gap: 0.5em;
+      margin-bottom: 1em;
+    }
+
+    .digit-box {
+      width: 2.5em;
+      height: 3em;
+      font-size: 1.8rem;
+      text-align: center;
+      border: 2px solid var(--accent-color);
+      border-radius: 10px;
+      background-color: var(--input-bg-color);
+      color: var(--text-color);
+    }
+
+    button {
+      background-color: var(--button-color);
+      color: white;
+      border: none;
+      padding: 0.7em;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 0.5em;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    button:hover {
+      background-color: var(--button-hover-color);
+    }
+
+    #result-message {
+      margin-bottom: 0.5em;
+      font-size: 1.5rem;
+      color: var(--accent-color);
+      text-align: center;
+      min-height: 1.8em;
+      width: 90%;
+      max-width: 400px;
+      display: none;
+    }
+
+    #history {
+      width: 90%;
+      max-width: 400px;
+      margin: 1em 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .guess-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.44rem;
+      padding: 0.3em 0.5em;
+      border-bottom: 1px solid var(--accent-color);
+    }
+
+    #guess-count {
+      margin-top: 0.5em;
+      font-size: 1.3rem;
+      text-align: center;
+      color: var(--accent-color);
+    }
+
+    #difficulty-container {
+      margin: 0.5em 0;
+      display: flex;
+      gap: 0.3em;
+      width: 100%;
+      max-width: 400px;
+      justify-content: center;
+    }
+
+    #difficulty-container input[type="radio"] {
+      display: none;
+    }
+
+    .difficulty-btn {
+      user-select: none;
+      cursor: pointer;
+      padding: 0.7em 1.3em;
+      border-radius: 10px;
+      border: 2px solid var(--button-color);
+      background-color: white;
+      color: black;
+      font-weight: bold;
+      font-size: 1.2rem;
+      min-width: 180px;
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #difficulty-container input[type="radio"]:checked + label {
+      background-color: var(--button-color);
+      color: white;
+    }
+
+    #modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #modal {
+      background: var(--bg-color);
+      border: 2px solid var(--accent-color);
+      border-radius: 12px;
+      padding: 1.5em 2em;
+      max-width: 90%;
+      color: var(--text-color);
+      font-size: 1.44rem;
+      text-align: center;
+      box-shadow: 0 0 15px var(--accent-color);
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 1em 0.5em;
+      }
+      .digit-box {
+        font-size: 1.44rem;
+        width: 2em;
+        height: 2.5em;
+      }
+      .difficulty-btn {
+        min-width: 140px;
+        font-size: 1.5rem;
+      }
+      button {
+        font-size: 1.5rem;
+        max-width: 100%;
+      }
+      #modal {
+        font-size: 1.3rem;
+        padding: 1em 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 id="title">1A2B 猜數字遊戲</h1>
+
+  <div id="history"></div>
+  <div id="result-message"></div>
+
+  <div id="input-container">
+    <input class="digit-box" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+    <input class="digit-box" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+    <input class="digit-box" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+    <input class="digit-box" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+  </div>
+
+  <button onclick="submitGuess()" id="submit-btn">提交猜測</button>
+  <button onclick="restartGame()" id="restart-btn">重新開始</button>
+
+  <div id="difficulty-container">
+    <input type="radio" id="easy" name="difficulty" value="easy" checked>
+    <label for="easy" class="difficulty-btn">容易</label>
+
+    <input type="radio" id="hard" name="difficulty" value="hard">
+    <label for="hard" class="difficulty-btn">困難</label>
+  </div>
+
+  <button onclick="toggleLanguage()" id="lang-btn">English</button>
+  <div id="guess-count">猜測次數：0</div>
+
+  <div id="modal-overlay" onclick="closeModal()">
+    <div id="modal">
+      <div id="modal-message"></div>
+    </div>
+  </div>
+
+  <script>
+    const inputBoxes = document.querySelectorAll(".digit-box");
+    const history = document.getElementById("history");
+    const resultMessage = document.getElementById("result-message");
+    const guessCountEl = document.getElementById("guess-count");
+    const submitBtn = document.getElementById("submit-btn");
+    const restartBtn = document.getElementById("restart-btn");
+    const langBtn = document.getElementById("lang-btn");
+    const titleEl = document.getElementById("title");
+    const difficultyRadios = document.querySelectorAll('input[name="difficulty"]');
+    const modalOverlay = document.getElementById("modal-overlay");
+    const modalMessage = document.getElementById("modal-message");
+
+    let lang = "zh";
+    let difficulty = "easy";
+    let answer = [];
+    let guessCount = 0;
+
+    const i18n = {
+      zh: {
+        title: "1A2B 猜數字遊戲",
+        submit: "提交猜測",
+        restart: "重新開始",
+        correct: "恭喜你答對了！",
+        langButton: "English",
+        difficulty: { easy: "容易", hard: "困難" },
+        guessCountText: count => `猜測次數：${count}`,
+        inputAlert: "請輸入4個數字",
+        repeatAlert: "數字不能重複"
+      },
+      en: {
+        title: "1A2B Number Guessing",
+        submit: "Submit Guess",
+        restart: "Restart",
+        correct: "Great! You guessed it!",
+        langButton: "中文",
+        difficulty: { easy: "Easy", hard: "Hard" },
+        guessCountText: count => `Guesses: ${count}`,
+        inputAlert: "Please enter 4 digits.",
+        repeatAlert: "Digits must be unique."
+      }
+    };
+
+    function generateAnswer() {
+      const digits = [...Array(10).keys()];
+      if (difficulty === "easy") {
+        for (let i = digits.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [digits[i], digits[j]] = [digits[j], digits[i]];
+        }
+        return digits.slice(0, 4);
+      } else {
+        return Array.from({ length: 4 }, () => Math.floor(Math.random() * 10));
+      }
+    }
+
+    function updateGuessCount() {
+      guessCountEl.textContent = i18n[lang].guessCountText(guessCount);
+    }
+
+    function showModal(message) {
+      modalMessage.textContent = message;
+      modalOverlay.style.display = "flex";
+    }
+
+    function closeModal() {
+      modalOverlay.style.display = "none";
+    }
+
+    function submitGuess() {
+      const guess = Array.from(inputBoxes).map(box => box.value.trim());
+      if (guess.includes("")) {
+        showModal(i18n[lang].inputAlert);
+        return;
+      }
+      if (difficulty === "easy" && new Set(guess).size < 4) {
+        showModal(i18n[lang].repeatAlert);
+        return;
+      }
+
+      guessCount++;
+      updateGuessCount();
+
+      const guessNums = guess.map(Number);
+      let a = 0, b = 0;
+      for (let i = 0; i < 4; i++) {
+        if (guessNums[i] === answer[i]) a++;
+        else if (answer.includes(guessNums[i])) b++;
+      }
+
+      const guessStr = guess.join("");
+      const resultStr = `${a}A${b}B`;
+      const row = document.createElement("div");
+      row.className = "guess-row";
+      row.innerHTML = `<div>${guessStr}</div><div>${resultStr}</div>`;
+      history.appendChild(row); // ✅ 由上到下排列，最新加在下方
+
+      if (a === 4) {
+        resultMessage.textContent = i18n[lang].correct;
+        resultMessage.style.display = "block";
+        inputBoxes.forEach(box => box.disabled = true);
+      } else {
+        resultMessage.textContent = "";
+        resultMessage.style.display = "none";
+      }
+
+      inputBoxes.forEach(box => box.value = "");
+      inputBoxes[0].focus();
+    }
+
+    function restartGame() {
+      difficulty = document.querySelector('input[name="difficulty"]:checked').value;
+      answer = generateAnswer();
+      console.log("答案:", answer);
+      history.innerHTML = "";
+      resultMessage.textContent = "";
+      resultMessage.style.display = "none";
+      guessCount = 0;
+      updateGuessCount();
+      inputBoxes.forEach(box => {
+        box.value = "";
+        box.disabled = false;
+      });
+      inputBoxes[0].focus();
+    }
+
+    function toggleLanguage() {
+      lang = lang === "zh" ? "en" : "zh";
+      titleEl.textContent = i18n[lang].title;
+      submitBtn.textContent = i18n[lang].submit;
+      restartBtn.textContent = i18n[lang].restart;
+      langBtn.textContent = i18n[lang].langButton;
+      difficultyRadios.forEach(radio => {
+        const label = document.querySelector(`label[for="${radio.id}"]`);
+        label.textContent = i18n[lang].difficulty[radio.value];
+      });
+      updateGuessCount();
+      resultMessage.textContent = "";
+      resultMessage.style.display = "none";
+    }
+
+    difficultyRadios.forEach(radio => {
+      radio.addEventListener("change", () => {
+        difficulty = radio.value;
+        restartGame();
+      });
+    });
+
+    inputBoxes.forEach((box, index) => {
+      box.addEventListener("focus", () => box.select());
+      box.addEventListener("input", () => {
+        if (box.value.length === 1 && index < inputBoxes.length - 1) {
+          inputBoxes[index + 1].focus();
+        }
+      });
+      box.addEventListener("keydown", e => {
+        if (e.key === "Enter") {
+          const guess = Array.from(inputBoxes).map(box => box.value.trim());
+          if (guess.every(val => val !== "")) submitGuess();
+        } else if (e.key === "Backspace" && box.value === "" && index > 0) {
+          inputBoxes[index - 1].focus();
+        }
+      });
+      box.addEventListener("keypress", e => {
+        if (!/[0-9]/.test(e.key)) e.preventDefault();
+      });
+    });
+
+    restartGame();
+  </script>
+</body>
+</html>
