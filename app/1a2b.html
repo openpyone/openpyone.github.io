@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>1A2B 猜數字遊戲</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-color: #1c1124;
@@ -20,7 +21,7 @@
 
     body {
       margin: 0;
-      font-family: Consolas, sans-serif;
+      font-family: "Segoe UI", sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
       display: flex;
@@ -54,6 +55,7 @@
       margin: 1em 0;
       display: flex;
       flex-direction: column;
+      font-family: 'Roboto Mono', monospace;
     }
 
     .guess-row {
@@ -266,7 +268,6 @@
   <div id="difficulty-container">
     <input type="radio" id="easy" name="difficulty" value="easy" checked>
     <label for="easy" class="difficulty-btn">容易</label>
-
     <input type="radio" id="hard" name="difficulty" value="hard">
     <label for="hard" class="difficulty-btn">困難</label>
   </div>
@@ -275,9 +276,7 @@
   <div id="guess-count">猜測次數：0</div>
 
   <div id="modal-overlay" onclick="closeModal()">
-    <div id="modal">
-      <div id="modal-message"></div>
-    </div>
+    <div id="modal"><div id="modal-message"></div></div>
   </div>
 
   <script>
@@ -361,10 +360,8 @@
 
     function submitGuess() {
       if (gameOver) return;
-
       const guess = Array.from(inputs).map(input => parseInt(input.value));
       if (guess.some(isNaN)) return;
-
       const result = checkAB(guess);
       guessCount++;
       updateGuessCount();
@@ -414,9 +411,7 @@
       if (currentInput < 4) {
         inputs[currentInput].value = digit;
         currentInput++;
-        if (currentInput < 4) {
-          inputs[currentInput].focus();
-        }
+        if (currentInput < 4) inputs[currentInput].focus();
       }
     }
 
@@ -443,7 +438,7 @@
     document.getElementById('clear-btn').addEventListener('click', clearInputs);
     document.getElementById('backspace-btn').addEventListener('click', backspace);
 
-    inputs.forEach((input) => {
+    inputs.forEach(input => {
       input.addEventListener('focus', () => {
         input.select();
       });
@@ -454,6 +449,9 @@
         if (Array.from(inputs).every(input => input.value !== "")) {
           submitGuess();
         }
+      }
+      if (!isNaN(e.key) && e.key.length === 1 && !gameOver) {
+        handleDigitInput(e.key);
       }
     });
 
