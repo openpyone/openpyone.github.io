@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ApplePy</title>
+
+<!-- CodeMirror CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+
+<style>
+html, body {
+    margin:0;
+    height:100%;
+    font-size:20px;
+    overflow:hidden;
+}
+body {
+    font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
+    background:#f0f0f0;
+    color:#000;
+}
+.app {
+    display:grid;
+    grid-template-columns: 1fr 8px 1fr;
+    height:90vh;
+    gap:0;
+    padding:12px 0;
+}
+.card {
+    background:#ffffff;
+    border-radius:0;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    padding:12px;
+    height:100%;
+}
+.editor-panel { padding:0; height:100%; }
+.editor-top {
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:6px;
+}
+.controls {
+    margin-left:auto;
+    display:flex;
+    gap:8px;
+}
+button {
+    border:none;
+    padding:6px 12px;
+    cursor:pointer;
+    font-size:inherit;
+}
+.btn {background:#ddd;color:#000;border-radius:0;}
+.btn:hover {background:#ccc;}
+.btn.primary {background:#11a211;color:white;font-weight:400;border-radius:6px;}
+.btn.save {background:MediumBlue;color:white;font-weight:400;border-radius:6px;}
+.btn.clear-output {background:#303841;color:white;font-weight:400;border-radius:6px;}
+span.help {font-size:18px;color:#b21016;font-weight:700;}
+#clearOut {border-radius:6px;}
+#editor { width:100%; font-size:20px; height:100%; }
+
+.right-panel { display:flex; flex-direction:column; height:100%; }
+.box { display:flex; flex-direction:column; overflow:hidden; }
+#stdin {
+    flex:1; resize:none; border-radius:0; padding:12px;
+    background:#000; border:1px solid #333; color:yellow;
+    font-family:monospace; font-size:20px; white-space:pre-wrap; overflow:auto;
+}
+#stdout {
+    flex:1; background:#000; color:#fff; padding:12px;
+    border-radius:0; border:1px solid #333; font-family:monospace;
+    font-size:20px; overflow:auto; white-space:pre-wrap;
+}
+.hdragbar { cursor: row-resize; background: #ccc; height: 8px; width: 100%; }
+.dragbar { cursor: col-resize; background: #ccc; width: 8px; height: 100%; }
+
+/* 載入動畫 */
+#loadingOverlay {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:#f0f0f0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  flex-direction:column;
+}
+.spinner {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #11a211;
+  border-radius: 50%;
+  width: 80px; height: 80px;
+  animation: spin 1s linear infinite;
+  margin-bottom:12px;
+}
+@keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
+#loadingText { font-size:24px; color:#11a211; }
+</style>
+</head>
+<body>
+<!-- 載入動畫 -->
+<div id="loadingOverlay">
+  <div class="spinner"></div>
+  <div id="loadingText">Loading...</div>
+</div>
+
+<div class="app" id="app">
+  <div class="card editor-panel" id="leftPanel">
+    <div class="editor-top">
+      <div>&nbsp;ApplePy — Editor(編程區)</div>
+      <div class="controls">
+        <button id="runBtn" class="btn primary" title="執行">Run ▶</button>
+        <button id="saveBtn" class="btn save" title="存檔">Save</button>
+        <button id="clearOut" class="btn clear-output" title="清空輸出區">Clear Output</button>
+      </div>
+    </div>
+    <textarea id="editor"></textarea>
+  </div>
+
+  <div class="dragbar" id="dragbar"></div>
+
+  <div class="card" id="rightPanel">
+    <div class="right-panel">
+      <div class="box" id="inputBox">
+        <div style="margin-bottom:4px;">Input(輸入區) <span class="help">每行代表一次 input() 回傳字串值</span></div>
+        <textarea id="stdin"></textarea>
+      </div>
+      <div class="hdragbar" id="hdragbar"></div>
+      <div class="box" id="outputBox">
+        <div style="margin-bottom:4px;">Output(輸出區)</div>
+        <div id="stdout"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CodeMirror JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/comment/comment.min.js"></script>
+
+<!-- Brython -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.11.3/brython.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.11.3/brython_stdlib.js"></script>
+
+<script>
+var editor;
+window.addEventListener('load', function(){
+    // 初始化 CodeMirror
+    editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+        mode: "python",
+        theme: "default",
+        lineNumbers: true,
+        matchBrackets: true,
+        tabSize: 4,
+        indentUnit: 4,
+        indentWithTabs: false,
+        extraKeys: {
+          "Ctrl-/": "toggleComment",
+          "Cmd-/": "toggleComment",
+          "Tab": function(cm){cm.replaceSelection("    ", "end");},
+          "Shift-Tab": "indentLess",
+          "F5": function(cm){document.getElementById("runBtn").click();}
+        }
+    });
+
+    editor.setValue(`# 範例程式
+a = input("請輸入一個數字: ")
+n = int(a)
+lst = [1, 3, 2]
+lst.append(n)
+lst.sort()
+print("列表內容:", lst)
+
+for i in range(len(lst)):
+    print("索引", i, "的值是", lst[i])
+
+def add(x, y):
+    return x + y
+
+print("3 + 4 =", add(3,4))
+for k in range(5,0,-1):
+    print("down:", k)`);
+
+    // 初始化 Brython
+    brython();
+
+    // 等 CodeMirror + Brython 初始化完成後，隱藏載入動畫
+    setTimeout(function(){
+        document.getElementById('loadingOverlay').style.display='none';
+        adjustHeight();
+    }, 200);
+});
+
+// 調整 Editor 與右側高度
+function adjustHeight() {
+    var vh = window.innerHeight * 0.9 - 12*2;
+    editor.setSize(null, vh - document.querySelector('.editor-top').offsetHeight);
+    var rightHeight = vh - 24;
+    document.getElementById('inputBox').style.height = (rightHeight/2) + 'px';
+    document.getElementById('outputBox').style.height = (rightHeight/2 - 8) + 'px';
+}
+window.addEventListener('resize', adjustHeight);
+
+// 左右拖拉
+const dragbar = document.getElementById('dragbar');
+let dragging = false;
+dragbar.addEventListener('mousedown', function(e){ dragging = true; document.body.style.cursor = 'col-resize'; e.preventDefault(); });
+window.addEventListener('mousemove', function(e){
+  if (!dragging) return;
+  let minLeft = 200, maxLeft = window.innerWidth - 200 - dragbar.offsetWidth;
+  let leftWidth = e.clientX; if(leftWidth<minLeft) leftWidth=minLeft; if(leftWidth>maxLeft) leftWidth=maxLeft;
+  document.getElementById('app').style.gridTemplateColumns = `${leftWidth}px 8px 1fr`;
+  editor.setSize(null, document.getElementById('leftPanel').clientHeight - document.querySelector('.editor-top').offsetHeight);
+});
+window.addEventListener('mouseup', function(e){ dragging = false; document.body.style.cursor='default'; });
+
+// 上下拖拉
+const hdragbar = document.getElementById('hdragbar');
+let vdragging = false;
+hdragbar.addEventListener('mousedown', function(e){ vdragging=true; document.body.style.cursor='row-resize'; e.preventDefault(); });
+window.addEventListener('mousemove', function(e){
+    if(!vdragging) return;
+    const rightPanel = document.getElementById('rightPanel');
+    const inputBox = document.getElementById('inputBox');
+    const outputBox = document.getElementById('outputBox');
+    const rect = rightPanel.getBoundingClientRect();
+    let offsetY = e.clientY - rect.top;
+    const minH = 50;
+    if(offsetY<minH) offsetY=minH;
+    if(offsetY>rect.height - minH) offsetY = rect.height - minH;
+    inputBox.style.height = offsetY+'px';
+    outputBox.style.height = (rect.height - offsetY - hdragbar.offsetHeight)+'px';
+});
+window.addEventListener('mouseup', function(e){ vdragging=false; document.body.style.cursor='default'; });
+
+// Save 按鈕
+document.getElementById('saveBtn').addEventListener('click', function(){
+    const code = editor.getValue();
+    const now = new Date();
+    const pad = n => n.toString().padStart(2,'0');
+    const filename = now.getFullYear().toString()+
+                     pad(now.getMonth()+1)+
+                     pad(now.getDate())+
+                     pad(now.getHours())+
+                     pad(now.getMinutes())+
+                     pad(now.getSeconds())+".py";
+    const blob = new Blob([code], {type: "text/plain;charset=utf-8"});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+});
+</script>
+
+<script type="text/python">
+from browser import document
+import sys
+
+class StdoutCatcher:
+    def write(self, data):
+        document["stdout"].textContent += str(data)
+    def flush(self): pass
+
+sys.stdout = StdoutCatcher()
+sys.stderr = StdoutCatcher()
+
+def run_code(js_code):
+    document["stdout"].textContent = ""
+    stdin_lines = document["stdin"].value.strip().split("\n")
+    def input_func(prompt=""):
+        if prompt:
+            document["stdout"].textContent += prompt
+        if stdin_lines:
+            return stdin_lines.pop(0)
+        return ""
+    __builtins__.input = input_func
+    try:
+        exec(js_code, {})
+    except Exception as e:
+        print("Error:", e)
+
+def clear_out(ev):
+    document["stdout"].textContent = ""
+
+document["clearOut"].bind("click", clear_out)
+
+from browser import window
+def run_btn(ev):
+    code = window.editor.getValue()
+    run_code(code)
+
+document["runBtn"].bind("click", run_btn)
+</script>
+</body>
+</html>
