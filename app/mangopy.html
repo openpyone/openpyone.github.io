@@ -19,7 +19,7 @@ button {border:none; padding:6px 12px; cursor:pointer; font-size:inherit;}
 .btn {background:#ddd;color:#000;border-radius:0;}
 .btn:hover {background:#ccc;}
 .btn.primary {background:#11a211;color:white;font-weight:400;border-radius:5px;}
-.btn.save {background:#0000cd;color:white;font-weight:400;border-radius:5px;}
+.btn.save {background:#0000cd;color:white;font-weight:400;border-radius:5px;margin-right:6px;}
 #editor { width:100%; font-size:20px; height:100%; }
 
 #terminal { flex:1; background:#1e1e1e; color:#fff; font-family:monospace; font-size:20px; overflow:auto; padding:12px;}
@@ -39,7 +39,6 @@ button {border:none; padding:6px 12px; cursor:pointer; font-size:inherit;}
       <div class="controls">
         <button id="runBtn" class="btn primary" title="執行">Run ▶</button>
         <button id="saveBtn" class="btn save" title="存檔">Save</button>
-        &nbsp;
       </div>
     </div>
     <textarea id="editor"></textarea>
@@ -108,7 +107,7 @@ let dragging = false;
 dragbar.addEventListener('mousedown', function(e){ dragging = true; document.body.style.cursor = 'col-resize'; e.preventDefault(); });
 window.addEventListener('mousemove', function(e){
   if (!dragging) return;
-  let minLeft = 500, maxLeft = window.innerWidth - 500 - dragbar.offsetWidth;
+  let minLeft = 450, maxLeft = window.innerWidth - 450 - dragbar.offsetWidth;
   let leftWidth = e.clientX; if(leftWidth<minLeft) leftWidth=minLeft; if(leftWidth>maxLeft) leftWidth=maxLeft;
   document.getElementById('app').style.gridTemplateColumns = `${leftWidth}px 8px 1fr`;
   editor.setSize(null, document.getElementById('leftPanel').clientHeight - document.querySelector('.editor-top').offsetHeight);
