@@ -56,11 +56,9 @@ button {
 }
 .btn {background:#ddd;color:#000;border-radius:0;}
 .btn:hover {background:#ccc;}
-.btn.primary {background:#11a211;color:white;font-weight:400;border-radius:6px;}
-.btn.save {background:MediumBlue;color:white;font-weight:400;border-radius:6px;}
-.btn.clear-output {background:#303841;color:white;font-weight:400;border-radius:6px;}
+.btn.primary {background:#11a211;color:white;font-weight:400;border-radius:5px;}
+.btn.save {background:#0000cd;color:white;font-weight:400;border-radius:5px;}
 span.help {font-size:18px;color:#b21016;font-weight:700;}
-#clearOut {border-radius:6px;}
 #editor { width:100%; font-size:20px; height:100%; }
 
 .right-panel { display:flex; flex-direction:column; height:100%; }
@@ -75,8 +73,8 @@ span.help {font-size:18px;color:#b21016;font-weight:700;}
     border-radius:0; border:1px solid #333; font-family:monospace;
     font-size:20px; overflow:auto; white-space:pre-wrap;
 }
-.hdragbar { cursor: row-resize; background: #ccc; height: 8px; width: 100%; }
-.dragbar { cursor: col-resize; background: #ccc; width: 8px; height: 100%; }
+.hdragbar { cursor: row-resize; background: #8ec82d; height: 4px; width: 100%; }
+.dragbar { cursor: col-resize; background: #fa5964; width: 4px; height: 100%; }
 
 /* 載入動畫 */
 #loadingOverlay {
@@ -118,7 +116,7 @@ span.help {font-size:18px;color:#b21016;font-weight:700;}
       <div class="controls">
         <button id="runBtn" class="btn primary" title="執行">Run ▶</button>
         <button id="saveBtn" class="btn save" title="存檔">Save</button>
-        <button id="clearOut" class="btn clear-output" title="清空輸出區">Clear Output</button>
+        &nbsp;
       </div>
     </div>
     <textarea id="editor"></textarea>
@@ -222,7 +220,7 @@ let dragging = false;
 dragbar.addEventListener('mousedown', function(e){ dragging = true; document.body.style.cursor = 'col-resize'; e.preventDefault(); });
 window.addEventListener('mousemove', function(e){
   if (!dragging) return;
-  let minLeft = 200, maxLeft = window.innerWidth - 200 - dragbar.offsetWidth;
+  let minLeft = 500, maxLeft = window.innerWidth - 500 - dragbar.offsetWidth;
   let leftWidth = e.clientX; if(leftWidth<minLeft) leftWidth=minLeft; if(leftWidth>maxLeft) leftWidth=maxLeft;
   document.getElementById('app').style.gridTemplateColumns = `${leftWidth}px 8px 1fr`;
   editor.setSize(null, document.getElementById('leftPanel').clientHeight - document.querySelector('.editor-top').offsetHeight);
@@ -297,11 +295,6 @@ def run_code(js_code):
         exec(js_code, {})
     except Exception as e:
         print("Error:", e)
-
-def clear_out(ev):
-    document["stdout"].textContent = ""
-
-document["clearOut"].bind("click", clear_out)
 
 from browser import window
 def run_btn(ev):
