@@ -58,10 +58,10 @@ button {
 .btn:hover {background:#ccc;}
 .btn.primary {background:#11a211;color:white;font-weight:400;border-radius:5px;margin-top:6px;}
 .btn.save {background:#0000cd;color:white;font-weight:400;border-radius:5px;margin-top:6px;margin-right:6px;}
-span.help {font-size:18px;color:#b21016;font-weight:700;}
+span.help {font-size:20px;color:#fbcfd0;font-weight:400;}
 #editor { width:100%; font-size:20px; height:100%; }
 
-.right-panel { display:flex; flex-direction:column; height:100%;}
+.right-panel { display:flex; flex-direction:column; height:100%; background-color: #01310f;}
 .box { display:flex; flex-direction:column; overflow:hidden; }
 #stdin {
     flex:1; resize:none; border-radius:0; padding:12px;
@@ -126,12 +126,12 @@ span.help {font-size:18px;color:#b21016;font-weight:700;}
   <div class="card" id="rightPanel">
     <div class="right-panel">
       <div class="box" id="inputBox">
-        <div style="margin-bottom:4px;">Input(輸入區) <span class="help">每行代表一次 input() 回傳字串值</span></div>
+        <div style="margin:4px 6px;color:#c8efd4;">Input(輸入區) <span class="help">一列是一次 input() 回傳字串</span></div>
         <textarea id="stdin"></textarea>
       </div>
       <div class="hdragbar" id="hdragbar"></div>
       <div class="box" id="outputBox">
-        <div style="margin-bottom:4px;">Output(輸出區)</div>
+        <div style="margin:4px 6px;color:#c8efd4;">Output(輸出區)</div>
         <div id="stdout"></div>
       </div>
     </div>
@@ -169,7 +169,8 @@ window.addEventListener('load', function(){
         }
     });
 
-    editor.setValue(`print("Hello World ❤️")`);
+    editor.setValue(`name = input()
+print(f"Hello {name} ❤️")`);
 
     // 模擬 loading 百分比
     let percent = 0;
@@ -193,7 +194,7 @@ function adjustHeight() {
     editor.setSize(null, vh - document.querySelector('.editor-top').offsetHeight);
     var rightHeight = vh - 24;
     document.getElementById('inputBox').style.height = (rightHeight/4) + 'px';
-    document.getElementById('outputBox').style.height = (rightHeight/4*3) + 'px';
+    document.getElementById('outputBox').style.height = (rightHeight/4*3)+50 + 'px';
 }
 window.addEventListener('resize', adjustHeight);
 
