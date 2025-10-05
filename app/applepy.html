@@ -12,20 +12,20 @@
 html, body {
     margin:0;
     height:100%;
-    font-size:20px;
+    font-size:24px;
     overflow:hidden;
 }
 body {
     font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
-    background:#bdd599;
+    background:white;
     color:#000;
 }
 .app {
     display:grid;
     grid-template-columns: 1fr 8px 1fr;
-    height:90vh;
+    height:100vh;
     gap:0;
-    padding:12px 0;
+    /*padding:12px 0;*/
 }
 .card {
     background:#ffffff;
@@ -36,12 +36,12 @@ body {
     padding:12px;
     height:100%;
 }
-.editor-panel { padding:0; height:104%; }
+.editor-panel { padding:0; margin:0; height:100%; }
 .editor-top {
     display:flex;
     align-items:center;
-    gap:8px;
-    margin-bottom:6px;
+    /*gap:8px;*/
+    /*margin-bottom:6px;*/
 }
 .controls {
     margin-left:auto;
@@ -58,22 +58,22 @@ button {
 .btn:hover {background:#ccc;}
 .btn.primary {background:#11a211;color:white;font-weight:400;border-radius:5px;margin-top:6px;}
 .btn.save {background:#0000cd;color:white;font-weight:400;border-radius:5px;margin-top:6px;margin-right:6px;}
-span.help {font-size:20px;color:#fbcfd0;font-weight:400;}
-#editor { width:100%; font-size:20px; height:100%; }
+span.help {font-size:18px;color:#fbcfd0;font-weight:400;}
+#editor { width:100%; font-size:24px; height:100%; }
 .right-panel { display:flex; flex-direction:column; height:100%; background-color: #01310f;}
 .box { display:flex; flex-direction:column; overflow:hidden; }
 #stdin {
     flex:1; resize:none; border-radius:0; padding:12px;
     background:#000; border:1px solid #333; color:yellow;
-    font-family:monospace; font-size:20px; white-space:pre-wrap; overflow:auto;
+    font-family:monospace; font-size:24px; white-space:pre-wrap; overflow:auto;
 }
 #stdout {
     flex:1; background:#000; color:#fff; padding:12px;
     border-radius:0; border:1px solid #333; font-family:monospace;
-    font-size:20px; overflow:auto; white-space:pre-wrap;
+    font-size:24px; overflow:auto; white-space:pre-wrap;
 }
 .hdragbar { cursor: row-resize; background: #8ec82d; height: 4px; width: 100%; }
-.dragbar { cursor: col-resize; background: #fa5964; width: 4px; height: 104%; }
+.dragbar { cursor: col-resize; background: #fa5964; width: 4px; height: 100%; }
 
 /* 載入動畫 */
 #loadingOverlay {
@@ -97,7 +97,7 @@ span.help {font-size:20px;color:#fbcfd0;font-weight:400;}
 }
 @keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
 #loadingText { font-size:24px; color:#11a211; margin-bottom:8px; }
-#loadingPercent { font-size:20px; color:#11a211; }
+#loadingPercent { font-size:24px; color:#11a211; }
 small {font-size: 0.8em;}
 .footer-line {margin:2px 6px;border-top:solid 2px green;}
 </style>
@@ -120,7 +120,7 @@ small {font-size: 0.8em;}
       </div>
     </div>
     <textarea id="editor"></textarea>
-    <p class="footer-line"><strong>&copy; 碼寶程式教育 </strong><small>兒童青少年程語教學 + APCS程式檢定培訓</small></p>
+    <p class="footer-line"><strong>&copy; 碼寶程式教育 </strong><small>兒童青少年程語教學 + APCS檢定培訓</small></p>
   </div>
 
   <div class="dragbar" id="dragbar"></div>
@@ -128,7 +128,7 @@ small {font-size: 0.8em;}
   <div class="card" id="rightPanel">
     <div class="right-panel">
       <div class="box" id="inputBox">
-        <div style="margin:4px 6px;color:#c8efd4;">Input(輸入區) <span class="help">一列是一次 input() 回傳字串</span></div>
+        <div style="margin:4px 6px;color:#c8efd4;">Input(輸入區) <span class="help">1列是執行1次 input() 回傳輸入字串</span></div>
         <textarea id="stdin"></textarea>
       </div>
       <div class="hdragbar" id="hdragbar"></div>
@@ -192,8 +192,8 @@ print(f"Hello {name} ❤️")`);
 
 // 調整 Editor 與右側高度
 function adjustHeight() {
-    var vh = window.innerHeight * 0.9 - 12*2;
-    editor.setSize(null, vh - document.querySelector('.editor-top').offsetHeight);
+    var vh = window.innerHeight;
+    editor.setSize(null, vh);
     var rightHeight = vh - 24;
     document.getElementById('inputBox').style.height = (rightHeight/4) + 'px';
     document.getElementById('outputBox').style.height = (rightHeight/4*3)+50 + 'px';
