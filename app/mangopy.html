@@ -10,10 +10,10 @@
 <!-- CodeMirror CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
 <style>
-html, body {margin:0; height:100%; font-size:24px; overflow:hidden;}
+html, body {margin:0; height:100%; font-size:28px; overflow:hidden;}
 body {font-family:Inter,system-ui,Segoe UI,Roboto,Arial; background:white; color:#000;}
 .app {display:grid; grid-template-columns:1fr 8px 1fr; height:100vh; gap:0; padding:0;}
-.card {background:#ffffff; border-radius:0; display:flex; flex-direction:column; overflow:hidden; padding:12px; height:100%;}
+.card {background:#ffffff; border-radius:0; display:flex; flex-direction:column; overflow:hidden; padding:0px; height:100%;}
 .editor-panel {padding:0; height:100%;}
 .editor-top {display:flex; align-items:center; gap:8px; margin-bottom:6px;}
 .controls {margin-left:auto; display:flex; gap:8px;}
@@ -22,10 +22,10 @@ button {border:none; padding:6px 12px; cursor:pointer; font-size:inherit;}
 .btn:hover {background:#ccc;}
 .btn.primary {background:#11a211;color:white;font-weight:400;border-radius:5px;margin-top:6px;}
 .btn.save {background:#0000cd;color:white;font-weight:400;border-radius:5px;margin-top:6px;margin-right:6px;}
-#editor { width:100%; font-size:24px; height:100%; }
-#terminal { flex:1; background:#1e1e1e; color:#fff; font-family:monospace; font-size:24px; overflow:auto; padding:12px;}
+#editor { width:100%; font-size:28px; height:100%; }
+#terminal { flex:1; background:#1e1e1e; color:#fff; font-family:monospace; font-size:28px; overflow:auto; padding:12px;}
 .cell {display:flex; padding:1px 4px; margin-bottom:2px; border-radius:0px; word-wrap: break-word;}
-.cell-number { width:40px; background:#000; color:#fff; text-align:right; margin-right:8px; border-radius:3px; padding-right:4px; }
+.cell-number { width:50px; background:#000; color:#fff; text-align:right; margin-right:8px; border-radius:3px; padding-right:4px; }
 .output-cell { background:#002200; color:#a6f2a6; flex:1; }
 .error-cell { background:#330000; color:#ff7b7b; flex:1; }
 .dragbar { cursor: col-resize; background: #f87f2a; width: 4px; height: 100%; }
@@ -73,21 +73,35 @@ window.addEventListener('load', function(){
         theme:"default",
         lineNumbers:true,
         matchBrackets:true,
+        autoCloseBrackets:true,
         tabSize:4,
         indentUnit:4,
         indentWithTabs:false,
-        extraKeys:{
-            "Ctrl-/":"toggleComment",
-            "Cmd-/":"toggleComment",
-            "Tab":cm=>cm.replaceSelection("    ","end"),
-            "Shift-Tab":"indentLess",
-            "F5":()=>document.getElementById("runBtn").click()
-        },
         viewportMargin: Infinity,
-        lineWrapping:true
+        lineWrapping:true,
+        extraKeys: {
+            "Ctrl-/": "toggleComment",
+            "Cmd-/": "toggleComment",
+            "Tab": function(cm) {
+                if (cm.somethingSelected()) {
+                    cm.indentSelection("add");
+                } else {
+                    cm.replaceSelection("    ", "end"); // 或用 cm.execCommand("insertSoftTab");
+                }
+            },
+            "Shift-Tab": function(cm) {
+                cm.indentSelection("subtract");
+            }
+        }
     });
     editor.setSize(null, window.innerHeight);
-    editor.setValue(`print("Hello World ❤️")`);
+    editor.setValue(`# 碼寶程式教育
+print("Hello World ❤️")
+for i in range(1, 100+1):
+    if i % 2 == 0:
+        print(i, "even")
+    elif i % 2 == 1:
+        print(i, "odd")`);
     brython();
 });
 

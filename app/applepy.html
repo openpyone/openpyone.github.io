@@ -9,12 +9,13 @@
 
 <!-- CodeMirror CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/eclipse.min.css">
 
 <style>
 html, body {
     margin:0;
     height:100%;
-    font-size:24px;
+    font-size:28px;
     overflow:hidden;
 }
 body {
@@ -35,7 +36,7 @@ body {
     display:flex;
     flex-direction:column;
     overflow:hidden;
-    padding:12px;
+    padding:0px;
     height:100%;
 }
 .editor-panel { padding:0; margin:0; height:100%; }
@@ -60,19 +61,19 @@ button {
 .btn:hover {background:#ccc;}
 .btn.primary {background:#11a211;color:white;font-weight:400;border-radius:5px;margin-top:6px;}
 .btn.save {background:#0000cd;color:white;font-weight:400;border-radius:5px;margin-top:6px;margin-right:6px;}
-span.help {font-size:18px;color:#fbcfd0;font-weight:400;}
-#editor { width:100%; font-size:24px; height:100%; }
+span.help {font-size:18px;color:#fff;font-weight:400;}
+#editor { width:100%; font-size:28px; height:100%; }
 .right-panel { display:flex; flex-direction:column; height:100%; background-color: #01310f;}
 .box { display:flex; flex-direction:column; overflow:hidden; }
 #stdin {
     flex:1; resize:none; border-radius:0; padding:12px;
     background:#000; border:1px solid #333; color:yellow;
-    font-family:monospace; font-size:24px; white-space:pre-wrap; overflow:auto;
+    font-family:monospace; font-size:28px; white-space:pre-wrap; overflow:auto;
 }
 #stdout {
     flex:1; background:#000; color:#fff; padding:12px;
     border-radius:0; border:1px solid #333; font-family:monospace;
-    font-size:24px; overflow:auto; white-space:pre-wrap;
+    font-size:28px; overflow:auto; white-space:pre-wrap;
 }
 .hdragbar { cursor: row-resize; background: #8ec82d; height: 4px; width: 100%; }
 .dragbar { cursor: col-resize; background: #fa5964; width: 4px; height: 100%; }
@@ -82,7 +83,7 @@ span.help {font-size:18px;color:#fbcfd0;font-weight:400;}
   position: fixed;
   top:0; left:0;
   width:100%; height:100%;
-  background:#f0f0f0;
+  background:#303841;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -98,8 +99,8 @@ span.help {font-size:18px;color:#fbcfd0;font-weight:400;}
   margin-bottom:12px;
 }
 @keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
-#loadingText { font-size:24px; color:#11a211; margin-bottom:8px; }
-#loadingPercent { font-size:24px; color:#11a211; }
+#loadingText { font-size:28px; color:#0f0; margin-bottom:8px; text-align: center;}
+#loadingPercent { font-size:28px; color:#0f0; }
 small {font-size: 0.8em;}
 .footer-line {margin:2px 6px;border-top:solid 2px green;}
 </style>
@@ -108,7 +109,7 @@ small {font-size: 0.8em;}
 <!-- 載入動畫 -->
 <div id="loadingOverlay">
   <div class="spinner"></div>
-  <div id="loadingText">Loading...</div>
+  <div id="loadingText"><p><small>碼寶程式教育</small></p><p>Python 環境載入中</p></div>
   <div id="loadingPercent">0%</div>
 </div>
 
@@ -130,7 +131,7 @@ small {font-size: 0.8em;}
   <div class="card" id="rightPanel">
     <div class="right-panel">
       <div class="box" id="inputBox">
-        <div style="margin:4px 6px;color:#c8efd4;">Input(輸入區) <span class="help">1列是執行1次 input() 回傳輸入字串</span></div>
+        <div style="margin:4px 6px;color:#c8efd4;">Input(輸入區) <span class="help">1行輸入 &#10231; 1次 input() 回傳字串</span></div>
         <textarea id="stdin"></textarea>
       </div>
       <div class="hdragbar" id="hdragbar"></div>
@@ -158,23 +159,37 @@ window.addEventListener('load', function(){
     // 初始化 CodeMirror
     editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
         mode: "python",
-        theme: "default",
+        theme: "eclipse",
         lineNumbers: true,
         matchBrackets: true,
+        autoCloseBrackets:true,
         tabSize: 4,
         indentUnit: 4,
         indentWithTabs: false,
         extraKeys: {
-          "Ctrl-/": "toggleComment",
-          "Cmd-/": "toggleComment",
-          "Tab": function(cm){cm.replaceSelection("    ", "end");},
-          "Shift-Tab": "indentLess",
-          "F5": function(cm){document.getElementById("runBtn").click();}
+            "Ctrl-/": "toggleComment",
+            "Cmd-/": "toggleComment",
+            "Tab": function(cm) {
+                if (cm.somethingSelected()) {
+                    cm.indentSelection("add");
+                } else {
+                    cm.replaceSelection("    ", "end"); // 或用 cm.execCommand("insertSoftTab");
+                }
+            },
+            "Shift-Tab": function(cm) {
+                cm.indentSelection("subtract");
+            }
         }
     });
 
-    editor.setValue(`name = input()
-print(f"Hello {name} ❤️")`);
+    editor.setValue(`# 碼寶程式教育
+name = input()
+print(f"Hello {name} ❤️")
+for i in range(1, 100+1):
+    if i % 2 == 0:
+        print(i, "even")
+    elif i % 2 == 1:
+        print(i, "odd")`);
 
     // 模擬 loading 百分比
     let percent = 0;
