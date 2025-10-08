@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>符號速貼 | 碼寶程式教育</title>
+  <style>
+    :root{
+      --bg:#0f1720;
+      --card:#0b1220;
+      --muted:#9aa6b2;
+      --accent:#38bdf8;
+      --glass: rgba(255,255,255,0.03);
+      --glass-2: rgba(255,255,255,0.02);
+      --glass-3: rgba(255,255,255,1);
+      --success:#10b981;
+      --radius:12px;
+      --fs-scale:1.5; /* 全站字型放大比例 150% */
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "EmojiOne Color", sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#07101a);color:#e6eef6}
+    .wrap{max-width:920px;margin:28px auto;padding:20px;border-radius:16px;background:linear-gradient(180deg,var(--card),rgba(3,10,18,0.6));box-shadow:0 6px 30px rgba(2,8,14,0.6)}
+    header{display:flex;align-items:center;gap:16px}
+    header h1{font-size:calc(20px * var(--fs-scale));margin:0}
+    header p{margin:0;color:var(--muted);font-size:calc(13px * var(--fs-scale))}
+
+    /* tabs */
+    .tabs{display:flex;gap:12px;margin:18px 0}
+    .tab{padding:calc(8px * var(--fs-scale)) calc(12px * var(--fs-scale));border-radius:999px;background:var(--glass);cursor:pointer;border:1px solid transparent;color:var(--muted);user-select:none;font-size:calc(13px * var(--fs-scale));line-height:1}
+    .tab.active{background:linear-gradient(90deg, rgba(56,189,248,0.12), rgba(16,185,129,0.04));color:var(--accent);border-color:rgba(56,189,248,0.12);box-shadow:0 4px 18px rgba(20,130,190,0.06)}
+
+    /* grid */
+    .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+    .card{background:var(--glass-2);border-radius:10px;padding:calc(12px * var(--fs-scale));display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:pointer;border:1px solid rgba(255,255,255,0.02);transition:transform .12s ease,box-shadow .12s ease,background .12s ease}
+    .card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(2,8,14,0.6)}
+    .card:active{transform:translateY(-2px)}
+    .card.copied{background:linear-gradient(90deg, rgba(56,189,248,0.12), rgba(16,185,129,0.04));box-shadow:0 10px 26px rgba(20,130,190,0.06)}
+    .glyph{font-size:calc(28px * var(--fs-scale));line-height:1;margin-bottom:calc(8px * var(--fs-scale))}
+    .label{font-size:calc(12px * var(--fs-scale));color:var(--muted);text-align:center;word-break:break-word}
+
+    /* responsive */
+    @media (max-width:900px){.wrap{margin:12px} .grid{grid-template-columns:repeat(5,1fr)}}
+    @media (max-width:720px){.grid{grid-template-columns:repeat(4,1fr)} .glyph{font-size:calc(24px * var(--fs-scale))}}
+    @media (max-width:480px){.grid{grid-template-columns:repeat(3,1fr)} .tab{padding:calc(8px * var(--fs-scale)) calc(10px * var(--fs-scale))}}
+
+    /* toast (使用 opacity 來顯示/隱藏以利動畫) */
+    .toast{position:fixed;right:18px;bottom:18px;padding:calc(10px * var(--fs-scale)) calc(14px * var(--fs-scale));background:rgba(2,6,10,0.9);border-radius:10px;border:1px solid rgba(255,255,255,0.04);color:#dff6f9;display:flex;gap:8px;align-items:center;box-shadow:0 8px 28px rgba(2,6,10,0.6);opacity:0;transform:translateY(8px);transition:opacity .18s ease,transform .18s ease;pointer-events:none;font-size:calc(13px * var(--fs-scale))}
+    .toast.show{opacity:1;transform:translateY(0);pointer-events:auto}
+
+    footer{margin-top:18px;color:var(--muted);font-size:calc(13px * var(--fs-scale))}
+
+    /* focus */
+    .card:focus{outline:3px solid rgba(56,189,248,0.15)}
+    .tab:focus{outline:2px solid rgba(56,189,248,0.12);outline-offset:2px}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>符號速貼</h1>
+        <p>點選任一圖示即可複製該符號到剪貼簿</p>
+      </div>
+    </header>
+
+    <div class="tabs" role="tablist" aria-label="分類選單">
+      <button type="button" class="tab active" data-tab="fruits" role="tab" aria-selected="true">水果</button>
+      <button type="button" class="tab" data-tab="hearts" role="tab" aria-selected="false">愛心</button>
+      <button type="button" class="tab" data-tab="emoji" role="tab" aria-selected="false">表情</button>
+      <button type="button" class="tab" data-tab="animals" role="tab" aria-selected="false">動物</button>
+    </div>
+
+    <!-- containers for categories -->
+    <div id="content">
+      <div class="grid" data-name="animals" aria-hidden="false">
+        <button type="button" class="card" data-char="🐶"><div class="glyph">🐶</div><div class="label">Dog</div></button>
+        <button type="button" class="card" data-char="🐱"><div class="glyph">🐱</div><div class="label">Cat</div></button>
+        <button type="button" class="card" data-char="🦊"><div class="glyph">🦊</div><div class="label">Fox</div></button>
+        <button type="button" class="card" data-char="🐼"><div class="glyph">🐼</div><div class="label">Panda</div></button>
+        <button type="button" class="card" data-char="🐨"><div class="glyph">🐨</div><div class="label">Koala</div></button>
+        <button type="button" class="card" data-char="🦁"><div class="glyph">🦁</div><div class="label">Lion</div></button>
+        <button type="button" class="card" data-char="🐵"><div class="glyph">🐵</div><div class="label">Monkey</div></button>
+        <button type="button" class="card" data-char="🐸"><div class="glyph">🐸</div><div class="label">Frog</div></button>
+        <button type="button" class="card" data-char="🐧"><div class="glyph">🐧</div><div class="label">Penguin</div></button>
+        <button type="button" class="card" data-char="🐯"><div class="glyph">🐯</div><div class="label">Tiger</div></button>
+        <button type="button" class="card" data-char="🐢"><div class="glyph">🐢</div><div class="label">Turtle</div></button>
+        <button type="button" class="card" data-char="🐇"><div class="glyph">🐇</div><div class="label">Rabbit</div></button>
+        <button type="button" class="card" data-char="🦄"><div class="glyph">🦄</div><div class="label">Unicorn</div></button>
+        <button type="button" class="card" data-char="🐙"><div class="glyph">🐙</div><div class="label">Octopus</div></button>
+        <button type="button" class="card" data-char="🦉"><div class="glyph">🦉</div><div class="label">Owl</div></button>
+        <button type="button" class="card" data-char="🦋"><div class="glyph">🦋</div><div class="label">Butterfly</div></button>
+        <button type="button" class="card" data-char="🐞"><div class="glyph">🐞</div><div class="label">Ladybug</div></button>
+        <button type="button" class="card" data-char="🦀"><div class="glyph">🦀</div><div class="label">Crab</div></button>
+        <button type="button" class="card" data-char="🐘"><div class="glyph">🐘</div><div class="label">Elephant</div></button>
+        <button type="button" class="card" data-char="🦓"><div class="glyph">🦓</div><div class="label">Zebra</div></button>
+        <button type="button" class="card" data-char="🐬"><div class="glyph">🐬</div><div class="label">Dolphin</div></button>
+        <button type="button" class="card" data-char="🦜"><div class="glyph">🦜</div><div class="label">Parrot</div></button>
+        <button type="button" class="card" data-char="🐝"><div class="glyph">🐝</div><div class="label">Bee</div></button>
+        <button type="button" class="card" data-char="🐊"><div class="glyph">🐊</div><div class="label">Crocodile</div></button>
+      </div>
+
+      <div class="grid" data-name="hearts" aria-hidden="true" style="display:none">
+        <button type="button" class="card" data-char="&#x2764;&#xFE0F;"><div class="glyph">&#x2764;&#xFE0F;</div><div class="label">Heart</div></button>
+        <button type="button" class="card" data-char="🖤"><div class="glyph">🖤</div><div class="label">Black</div></button>
+        <button type="button" class="card" data-char="🤍"><div class="glyph">🤍</div><div class="label">White</div></button>
+        <button type="button" class="card" data-char="🤎"><div class="glyph">🤎</div><div class="label">Brown</div></button>
+        <button type="button" class="card" data-char="💙"><div class="glyph">💙</div><div class="label">Blue</div></button>
+        <button type="button" class="card" data-char="💚"><div class="glyph">💚</div><div class="label">Green</div></button>
+        <button type="button" class="card" data-char="💛"><div class="glyph">💛</div><div class="label">Yellow</div></button>
+        <button type="button" class="card" data-char="🧡"><div class="glyph">🧡</div><div class="label">Orange</div></button>
+        <button type="button" class="card" data-char="💜"><div class="glyph">💜</div><div class="label">Purple</div></button>
+        <button type="button" class="card" data-char="🩷"><div class="glyph">🩷</div><div class="label">Pink</div></button>
+        <button type="button" class="card" data-char="🩵"><div class="glyph">🩵</div><div class="label">LightBlue</div></button>
+        <button type="button" class="card" data-char="💖"><div class="glyph">💖</div><div class="label">Sparkling</div></button>
+        <button type="button" class="card" data-char="💘"><div class="glyph">💘</div><div class="label">Cupid</div></button>
+        <button type="button" class="card" data-char="❣️"><div class="glyph">❣️</div><div class="label">Exclamation</div></button>
+        <button type="button" class="card" data-char="💕"><div class="glyph">💕</div><div class="label">Two Hearts</div></button>
+        <button type="button" class="card" data-char="💞"><div class="glyph">💞</div><div class="label">Revolving</div></button>
+        <button type="button" class="card" data-char="💓"><div class="glyph">💓</div><div class="label">Beating</div></button>
+        <button type="button" class="card" data-char="💗"><div class="glyph">💗</div><div class="label">Growing</div></button>
+        <button type="button" class="card" data-char="💝"><div class="glyph">💝</div><div class="label">Gift</div></button>
+        <button type="button" class="card" data-char="⭐"><div class="glyph">⭐</div><div class="label">Star</div></button>
+        <button type="button" class="card" data-char="🌹"><div class="glyph">🌹</div><div class="label">Rose</div></button>
+        <button type="button" class="card" data-char="🌷"><div class="glyph">🌷</div><div class="label">Tulip</div></button>
+        <button type="button" class="card" data-char="🌻"><div class="glyph">🌻</div><div class="label">Sunflower</div></button>
+        <button type="button" class="card" data-char="💎"><div class="glyph">💎</div><div class="label">Gem</div></button>
+      </div>
+
+      <div class="grid" data-name="emoji" aria-hidden="true" style="display:none">
+        <button type="button" class="card" data-char="😀"><div class="glyph">😀</div><div class="label">Grin</div></button>
+        <button type="button" class="card" data-char="😂"><div class="glyph">😂</div><div class="label">Joy</div></button>
+        <button type="button" class="card" data-char="😍"><div class="glyph">😍</div><div class="label">Heart Eyes</div></button>
+        <button type="button" class="card" data-char="🤔"><div class="glyph">🤔</div><div class="label">Thinking</div></button>
+        <button type="button" class="card" data-char="😢"><div class="glyph">😢</div><div class="label">Crying</div></button>
+        <button type="button" class="card" data-char="😎"><div class="glyph">😎</div><div class="label">Cool</div></button>
+        <button type="button" class="card" data-char="🙃"><div class="glyph">🙃</div><div class="label">Upside</div></button>
+        <button type="button" class="card" data-char="😴"><div class="glyph">😴</div><div class="label">Sleep</div></button>
+        <button type="button" class="card" data-char="🤩"><div class="glyph">🤩</div><div class="label">Starstruck</div></button>
+        <button type="button" class="card" data-char="😅"><div class="glyph">😅</div><div class="label">Relief</div></button>
+        <button type="button" class="card" data-char="😭"><div class="glyph">😭</div><div class="label">Sob</div></button>
+        <button type="button" class="card" data-char="😇"><div class="glyph">😇</div><div class="label">Angel</div></button>
+        <button type="button" class="card" data-char="😡"><div class="glyph">😡</div><div class="label">Angry</div></button>
+        <button type="button" class="card" data-char="🤤"><div class="glyph">🤤</div><div class="label">Drool</div></button>
+        <button type="button" class="card" data-char="🤯"><div class="glyph">🤯</div><div class="label">Mindblown</div></button>
+        <button type="button" class="card" data-char="😜"><div class="glyph">😜</div><div class="label">Wink</div></button>
+        <button type="button" class="card" data-char="😬"><div class="glyph">😬</div><div class="label">Awkward</div></button>
+        <button type="button" class="card" data-char="🤠"><div class="glyph">🤠</div><div class="label">Cowboy</div></button>
+        <button type="button" class="card" data-char="💩"><div class="glyph">💩</div><div class="label">Poo</div></button>
+        <button type="button" class="card" data-char="🤢"><div class="glyph">🤢</div><div class="label">Nausea</div></button>
+        <button type="button" class="card" data-char="✊"><div class="glyph">✊</div><div class="label">Rock</div></button>
+        <button type="button" class="card" data-char="✋"><div class="glyph">✋</div><div class="label">Paper</div></button>
+        <button type="button" class="card" data-char="✌"><div class="glyph">✌</div><div class="label">Scissors</div></button>
+        <button type="button" class="card" data-char="💯"><div class="glyph">💯</div><div class="label">100</div></button>
+      </div>
+
+      <div class="grid" data-name="fruits" aria-hidden="true" style="display:none">
+        <button type="button" class="card" data-char="🍎"><div class="glyph">🍎</div><div class="label">Apple</div></button>
+        <button type="button" class="card" data-char="🍌"><div class="glyph">🍌</div><div class="label">Banana</div></button>
+        <button type="button" class="card" data-char="🍓"><div class="glyph">🍓</div><div class="label">Strawberry</div></button>
+        <button type="button" class="card" data-char="🍍"><div class="glyph">🍍</div><div class="label">Pineapple</div></button>
+        <button type="button" class="card" data-char="🍇"><div class="glyph">🍇</div><div class="label">Grapes</div></button>
+        <button type="button" class="card" data-char="🍉"><div class="glyph">🍉</div><div class="label">Watermelon</div></button>
+        <button type="button" class="card" data-char="🥭"><div class="glyph">🥭</div><div class="label">Mango</div></button>
+        <button type="button" class="card" data-char="🍑"><div class="glyph">🍑</div><div class="label">Peach</div></button>
+        <button type="button" class="card" data-char="🍒"><div class="glyph">🍒</div><div class="label">Cherry</div></button>
+        <button type="button" class="card" data-char="🥝"><div class="glyph">🥝</div><div class="label">Kiwi</div></button>
+        <button type="button" class="card" data-char="🍋"><div class="glyph">🍋</div><div class="label">Lemon</div></button>
+        <button type="button" class="card" data-char="🫐"><div class="glyph">🫐</div><div class="label">Blueberry</div></button>
+        <button type="button" class="card" data-char="🍊"><div class="glyph">🍊</div><div class="label">Orange</div></button>
+        <button type="button" class="card" data-char="🍐"><div class="glyph">🍐</div><div class="label">Pear</div></button>
+        <button type="button" class="card" data-char="🥥"><div class="glyph">🥥</div><div class="label">Coconut</div></button>
+        <button type="button" class="card" data-char="🍈"><div class="glyph">🍈</div><div class="label">Melon</div></button>
+        <button type="button" class="card" data-char="🍏"><div class="glyph">🍏</div><div class="label">Green Apple</div></button>
+        <button type="button" class="card" data-char="🍅"><div class="glyph">🍅</div><div class="label">Tomato</div></button>
+        <button type="button" class="card" data-char="🍆"><div class="glyph">🍆</div><div class="label">Eggplant</div></button>
+        <button type="button" class="card" data-char="🌽"><div class="glyph">🌽</div><div class="label">Corn</div></button>
+        <button type="button" class="card" data-char="🥕"><div class="glyph">🥕</div><div class="label">Carrot</div></button>
+        <button type="button" class="card" data-char="🥦"><div class="glyph">🥦</div><div class="label">Broccoli</div></button>
+        <button type="button" class="card" data-char="🥔"><div class="glyph">🥔</div><div class="label">Potato</div></button>
+        <button type="button" class="card" data-char="🍄‍🟫"><div class="glyph">🍄‍🟫</div><div class="label">Mushroom</div></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const tabs = Array.from(document.querySelectorAll('.tab'));
+      const grids = Array.from(document.querySelectorAll('.grid'));
+      const toast = document.getElementById('toast');
+
+      function setActive(tabBtn){
+        if(!tabBtn) return;
+        tabs.forEach(t=>{
+          const isActive = t === tabBtn;
+          t.classList.toggle('active', isActive);
+          t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+        const name = tabBtn.dataset.tab;
+        grids.forEach(g=>{
+          const show = g.dataset.name === name;
+          g.style.display = show ? 'grid' : 'none';
+          g.setAttribute('aria-hidden', show ? 'false' : 'true');
+        });
+      }
+
+      tabs.forEach(t=> t.addEventListener('click', ()=> setActive(t)));
+
+      // keyboard arrow navigation for tabs
+      document.addEventListener('keydown', (e)=>{
+        const activeIndex = tabs.findIndex(t=>t.classList.contains('active'));
+        if(e.key === 'ArrowRight'){
+          const next = tabs[(activeIndex+1) % tabs.length]; next.focus(); setActive(next);
+        } else if(e.key === 'ArrowLeft'){
+          const prev = tabs[(activeIndex-1+tabs.length) % tabs.length]; prev.focus(); setActive(prev);
+        }
+      });
+
+      // toast helper
+      function showToast(text){
+        toast.textContent = text;
+        toast.classList.add('show');
+        clearTimeout(window._toastTimer);
+        window._toastTimer = setTimeout(()=>{ toast.classList.remove('show'); }, 1600);
+      }
+
+      // copy helper with fallback
+      async function copyText(text){
+        try{
+          if(navigator.clipboard && navigator.clipboard.writeText){
+            await navigator.clipboard.writeText(text);
+            return true;
+          }
+        }catch(e){
+          // continue to fallback
+        }
+        try{
+          const ta = document.createElement('textarea');
+          ta.value = text; ta.setAttribute('readonly',''); ta.style.position='absolute'; ta.style.left='-9999px';
+          document.body.appendChild(ta); ta.select();
+          const ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          return ok;
+        }catch(e){
+          return false;
+        }
+      }
+
+      // attach copy behaviour
+      document.querySelectorAll('.card').forEach(btn=>{
+        btn.addEventListener('click', async ()=>{
+          const ch = btn.dataset.char;
+          const ok = await copyText(ch);
+          if(ok){
+            btn.classList.add('copied');
+            setTimeout(()=>btn.classList.remove('copied'), 420);
+            showToast(`已複製：${ch}`);
+          } else {
+            showToast('複製失敗：請確認瀏覽器權限或在新分頁開啟此檔案');
+          }
+        });
+        btn.addEventListener('keyup', (e)=>{ if(e.key === 'Enter' || e.key === ' ') btn.click(); });
+      });
+
+      // initial active tab
+      setActive(document.querySelector('.tab.active') || tabs[0]);
+    });
+  </script>
+</body>
+</html>
