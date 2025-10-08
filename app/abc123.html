@@ -2,8 +2,9 @@
 <html>
 <head>
 	<meta charset="utf-8">
-    <title>Hi ABC</title>
+    <title>ABC123 | 碼寶程式教育</title>
     <link rel="icon" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="stylesheet" href="/static/bootstrap.min.css">
     <style>
         body, button, html, input, select {
@@ -14,7 +15,7 @@
             margin: 5px 20px;
         }
         .player-bg {
-            background-color: #addfa5;
+            background-color: #e7ece6;
         }
 		.btn:hover {
 			cursor: pointer;
@@ -26,36 +27,40 @@
         }
         .btn-main {
             border: 1px solid #666;
-            padding: 8px 3px 8px 1px;
+            padding: 8px 1px 8px 1px;
             width: 2em;
             border-radius: 0;
         }
         .face {
-            font-size: 48px;
+            font-size: 42px;
+        }
+        .btn-123 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .btn-animal {
+            font-size: 28px;
         }
 	</style>
 </head>
 <body>
 	<div>
-        <h1 class="text-center"><small>Hi ABC</small>
-            <span id="face" class="col-lg-1 text-right face">&#128513;</span>
-            <button id="btnAlpha1" class="btn btn-dark">1</button>
-            <button id="btnAlpha2" class="btn btn-dark">2</button>
-            <button id="btnAlpha3" class="btn btn-dark">3</button>
-            <button id="btnPlayerRabbit" class="btn btn-light">&#128007;</button>
-            <button id="btnPlayerCat" class="btn btn-light">&#128008;</button>
-            <button id="btnPlayerDog" class="btn btn-light">&#128021;</button>
-            <button id="btnPlayerPig" class="btn btn-light">&#128022;</button>
-            <button id="btnPlayerChick" class="btn btn-light">&#128036;</button>
-            <button id="btnPlayerAnt" class="btn btn-light">&#128028;</button>
-            <button id="btnPlayerHoneybee" class="btn btn-light">&#128029;</button>
-            <button id="btnPlayerBug" class="btn btn-light">&#128027;</button>
-        </h1>
-        <hr>
+        <p class="text-center">
+            <button id="btnAlpha1" class="btn btn-dark btn-123" title="A排">1</button>
+            <button id="btnAlpha2" class="btn btn-dark btn-123" title="A排+Q排">2</button>
+            <button id="btnAlpha3" class="btn btn-dark btn-123" title="A排+Q排+Z排">3</button>
+            <button class="btn face" id="face" title="Rabbit">&#128513;</button>
+            <button class="btn btn-light btn-animal" id="btnPlayerRabbit" title="Rabbit">&#128007;</button>
+            <button class="btn btn-light btn-animal" id="btnPlayerCat" title="Cat">&#128008;</button>
+            <button class="btn btn-light btn-animal" id="btnPlayerDog" title="Dog">&#128021;</button>
+            <button class="btn btn-light btn-animal" id="btnPlayerPig" title="Pig">&#128022;</button>
+            <button class="btn btn-light btn-animal" id="btnPlayerChick" title="Chick">&#128036;</button>
+            <button class="btn btn-light btn-animal" id="btnPlayerAnt" title="Ant">&#128028;</button>
+            <button class="btn btn-light btn-animal" id="btnPlayerHoneybee" title="Honeybee">&#128029;</button>
+            <button class="btn btn-light btn-animal" id="btnPlayerBug" title="Bug">&#128027;</button>
+        </p>
 
-        <div class="row">
-            <div id="board" class="col-lg-12 text-center">
-            </div>
+        <div id="board" class="col-lg-12 text-center">
         </div>
 	</div>
 
@@ -77,8 +82,8 @@
             alpha3 = Array.from('zxcvbnm');
             islower = true;
             current = 0;
-            M = 7;
-            N = 16;
+            M = 6;
+            N = 12;
             // local variables
             var nums = initBoard(nums, 1);
             // $('#btn1').text();
