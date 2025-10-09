@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>TablePy 彩色表格 | 碼寶程式教育</title>
+<link rel="shortcut icon" href="/favicon.png">
+
+<!-- CodeMirror CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/eclipse.min.css">
+
+<style>
+html, body { margin:0; height:100%; font-size:24px; overflow:hidden; }
+body { font-family:Inter,system-ui,Segoe UI,Roboto,Arial; background:white; color:#000; }
+a,a:hover { text-decoration: none; }
+.app { display:grid; grid-template-columns: 60% 8px 40%; height:100vh; gap:0; }
+.card { background:#ffffff; border-radius:0; display:flex; flex-direction:column; overflow:hidden; padding:0; height:100%; }
+.editor-panel { padding:0; margin:0; height:100%; }
+.editor-top { display:flex; align-items:center; }
+.controls { margin-left:auto; display:flex; gap:8px; }
+button { border:none; padding:6px 12px; cursor:pointer; font-size:inherit; }
+.btn {background:#ddd;color:#000;border-radius:0;margin: 3px 6px;}
+.btn:hover {background:#ccc;}
+.btn.primary {background:#11a211;color:white;font-weight:400;border-radius:5px;margin-top:6px;}
+span.help {font-size:18px;color:#fff;font-weight:400;}
+#editor { width:100%; font-size:24px; height:100%; }
+.right-panel { display:flex; flex-direction:column; height:100%; background-color: #01310f;}
+.box { display:flex; flex-direction:column; overflow:hidden; }
+#stdin { flex:1; resize:none; border-radius:0; padding:12px; background:#000; border:1px solid #333; color:yellow; font-family:monospace; font-size:24px; white-space:pre-wrap; overflow:auto; }
+#stdout { flex:1; background:#000; color:#fff; padding:12px; border-radius:0; border:1px solid #333; font-family:monospace; font-size:24px; overflow:auto; white-space:pre-wrap; }
+.hdragbar { cursor: row-resize; background: #8ec82d; height: 4px; width: 100%; }
+.dragbar { cursor: col-resize; background: #fa5964; width: 4px; height: 100%; }
+#loadingOverlay { position: fixed; top:0; left:0; width:100%; height:100%; background:#303841; display:flex; align-items:center; justify-content:center; z-index:9999; flex-direction:column; }
+.spinner { border: 8px solid #f3f3f3; border-top: 8px solid #11a211; border-radius: 50%; width: 80px; height: 80px; animation: spin 1s linear infinite; margin-bottom:12px; }
+@keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
+#loadingText { font-size:24px; color:#0e0; margin-bottom:8px; text-align: center;}
+#loadingPercent { font-size:24px; color:#0e0; }
+small {font-size: 0.8em;}
+.footer-line {margin:2px 6px;border-top:solid 2px green;}
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.6); display: none; justify-content: center; align-items: center; z-index: 1000; }
+.open-modal { cursor: pointer; }
+.modal { background-color: #282828; padding: 32px; border-radius: 12px; width: 90%; max-width: 500px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); font-size: 20px; }
+.modal h2 { margin-top: 0; font-size: 28px; border-bottom: 1px solid #444; padding-bottom: 8px; color: #0c0; }
+.shortcut-table { width: 100%; margin-top: 16px; border-collapse: collapse; }
+.shortcut-table th, .shortcut-table td { padding: 8px; text-align: left; }
+.shortcut-table th { color: #b3b3b3; }
+.shortcut-table td { color: #fff; }
+.close-btn { background: none; border: none; color: #b3b3b3; font-size: 32px; position: absolute; top: 20px; right: 30px; cursor: pointer; }
+.close-btn:hover { color: white; }
+.modal-wrapper { position: relative; }
+.table-wrap { width:100%; height:100%; display:flex; align-items:stretch; justify-content:stretch; }
+.color-matrix { width:100%; height:100%; border-collapse: collapse; }
+.color-matrix td { border:3px solid #000; padding:0; margin:0; }
+@media (max-width: 768px) { .app { grid-template-columns: 1fr; grid-template-rows: 50vh 4px 50vh; } }
+</style>
+</head>
+<body>
+<div id="loadingOverlay">
+  <div class="spinner"></div>
+  <div id="loadingText"><p><small>碼寶程式教育</small></p><p>Python 環境載入中</p></div>
+  <div id="loadingPercent">0%</div>
+</div>
+
+<div class="app" id="app">
+  <div class="card editor-panel" id="leftPanel">
+    <div class="editor-top">
+      <div>&nbsp;TablePy | 彩色表格<span id="openModal" class="open-modal">⚡</span></div>
+      <div class="controls">
+        <button id="runBtn" class="btn primary" title="執行">Run ▶</button>
+      </div>
+    </div>
+    <textarea id="editor"></textarea>
+    <p class="footer-line"><strong>&copy; 碼寶程式教育 </strong><small>兒童青少年程語教學 + APCS檢定培訓</small></p>
+  </div>
+
+  <div class="dragbar" id="dragbar"></div>
+
+  <div class="card" id="rightPanel">
+    <div class="right-panel">
+      <div class="box" id="inputBox">
+        <div style="margin:4px 6px;color:#c8efd4;">Input(輸入) <span class="help">1行輸入 &#10231; 1次 input() 回傳字串</span></div>
+        <textarea id="stdin"></textarea>
+      </div>
+      <div class="hdragbar" id="hdragbar"></div>
+      <div class="box" id="outputBox">
+        <div style="margin:4px 6px;color:#c8efd4;">Output(輸出)</div>
+        <div id="stdout"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+<div class="modal-wrapper">
+  <button class="close-btn" id="closeModal">&times;</button>
+  <div class="modal">
+    <h2>常用快捷鍵</h2>
+    <table class="shortcut-table">
+      <thead>
+        <tr><th>功能</th><th>Windows</th><th>macOS</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>全選</td><td>Ctrl + A</td><td>⌘ + A</td></tr>
+        <tr><td>複製</td><td>Ctrl + C</td><td>⌘ + C</td></tr>
+        <tr><td>剪下</td><td>Ctrl + X</td><td>⌘ + X</td></tr>
+        <tr><td>貼上</td><td>Ctrl + V</td><td>⌘ + V</td></tr>
+        <tr><td>復原</td><td>Ctrl + Z</td><td>⌘ + Z</td></tr>
+        <tr><td>縮排(右推)</td><td>Tab</td><td>Tab</td></tr>
+        <tr><td>減縮(左推)</td><td>Shift + Tab</td><td>Shift + Tab</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/comment/comment.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.11.3/brython.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.11.3/brython_stdlib.js"></script>
+
+<script>
+// 編輯器初始化
+var editor;
+window.addEventListener('load', function(){
+    editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+        mode: "python",
+        theme: "eclipse",
+        lineNumbers: true,
+        matchBrackets: false,
+        autoCloseBrackets:true,
+        tabSize: 4,
+        indentUnit: 4,
+        indentWithTabs: false,
+        extraKeys: {
+            "Tab": function(cm) {
+                if(cm.somethingSelected()) cm.indentSelection("add");
+                else cm.replaceSelection("    ", "end");
+            },
+            "Shift-Tab": function(cm) { cm.indentSelection("subtract"); },
+        }
+    });
+    const saved = localStorage.getItem('tablepy_code');
+    if(saved) editor.setValue(saved);
+    else editor.setValue("# 輸入彩色表格，格式為 #RRGGBB");
+    editor.on('change', ()=>localStorage.setItem('tablepy_code',editor.getValue()));
+
+    let percent=0;
+    const percentEl=document.getElementById('loadingPercent');
+    const interval=setInterval(()=>{
+        percent+=Math.floor(Math.random()*5+1);
+        if(percent>=100) percent=100;
+        percentEl.textContent=percent+"%";
+        if(percent>=100){ clearInterval(interval); brython(); setTimeout(()=>{document.getElementById('loadingOverlay').style.display='none'; adjustHeight();},200);}
+    },50);
+});
+
+function adjustHeight(){
+    var vh=window.innerHeight;
+    editor.setSize(null,vh);
+    var rightHeight=vh-24;
+    document.getElementById('inputBox').style.height=(rightHeight/4)+'px';
+    document.getElementById('outputBox').style.height=(rightHeight/4*3+50)+'px';
+}
+window.addEventListener('resize', adjustHeight);
+
+// 左右拖拉
+const dragbar=document.getElementById('dragbar');
+let dragging=false;
+dragbar.addEventListener('mousedown', e=>{ dragging=true; document.body.style.cursor='col-resize'; e.preventDefault(); });
+window.addEventListener('mousemove', e=>{
+    if(!dragging) return;
+    let minLeft=450, maxLeft=window.innerWidth-450-dragbar.offsetWidth;
+    let leftWidth=e.clientX; if(leftWidth<minLeft) leftWidth=minLeft; if(leftWidth>maxLeft) leftWidth=maxLeft;
+    document.getElementById('app').style.gridTemplateColumns=`${leftWidth}px 8px 1fr`;
+    editor.setSize(null,document.getElementById('leftPanel').clientHeight - document.querySelector('.editor-top').offsetHeight);
+});
+window.addEventListener('mouseup', ()=>{ dragging=false; document.body.style.cursor='default'; });
+
+// 上下拖拉
+const hdragbar=document.getElementById('hdragbar');
+let vdragging=false;
+hdragbar.addEventListener('mousedown', e=>{ vdragging=true; document.body.style.cursor='row-resize'; e.preventDefault(); });
+window.addEventListener('mousemove', e=>{
+    if(!vdragging) return;
+    const rightPanel=document.getElementById('rightPanel');
+    const inputBox=document.getElementById('inputBox');
+    const outputBox=document.getElementById('outputBox');
+    const rect=rightPanel.getBoundingClientRect();
+    let offsetY=e.clientY-rect.top;
+    const minH=50;
+    if(offsetY<minH) offsetY=minH;
+    if(offsetY>rect.height-minH) offsetY=rect.height-minH;
+    inputBox.style.height=offsetY+'px';
+    outputBox.style.height=(rect.height-offsetY-hdragbar.offsetHeight)+'px';
+});
+window.addEventListener('mouseup', ()=>{ vdragging=false; document.body.style.cursor='default'; });
+
+// Modal 開關
+const openBtn=document.getElementById('openModal');
+const closeBtn=document.getElementById('closeModal');
+const modalOverlay=document.getElementById('modalOverlay');
+openBtn.addEventListener('click', ()=>{ modalOverlay.style.display='flex'; });
+closeBtn.addEventListener('click', ()=>{ modalOverlay.style.display='none'; });
+window.addEventListener('click', e=>{ if(e.target===modalOverlay) modalOverlay.style.display='none'; });
+</script>
+
+<script type="text/python">
+from browser import document
+import sys, traceback
+
+def clear_stdout_area(): document["stdout"].innerHTML=""
+
+def append_text(s): document["stdout"].textContent += str(s)
+
+def is_valid_hex_color(s):
+    if isinstance(s,str) and len(s)==7 and s[0]=="#" and all(c in "0123456789abcdefABCDEF" for c in s[1:]):
+        return True
+    return False
+
+def matrix_to_html(mat):
+    n_rows=len(mat)
+    n_cols=max(len(r) for r in mat) if n_rows>0 else 0
+    rows_html=[]
+    for r_idx,r in enumerate(mat):
+        cells=[]
+        for c_idx,c in enumerate(r):
+            color=c.strip()
+            cells.append(f'<td style="background-color:{color}; padding:0; margin:0; border:2px solid #666;"></td>')
+        rows_html.append(f'<tr style="height:{100.0/n_rows}%;">{"".join(cells)}</tr>')
+    return f'<div class="table-wrap"><table class="color-matrix" style="height:100%; border-collapse: collapse;">{"".join(rows_html)}</table></div>'
+
+def is_valid_color_matrix(obj):
+    if not isinstance(obj,list) or len(obj)==0: return False, "矩陣不是 list 或為空"
+    for r_idx,row in enumerate(obj):
+        if not isinstance(row,list) or len(row)==0: return False, f"第 {r_idx+1} 列不是 list 或為空"
+        for c_idx,cell in enumerate(row):
+            if not isinstance(cell,str): return False, f"第 {r_idx+1} 列，第 {c_idx+1} 格不是字串"
+            if not is_valid_hex_color(cell): return False, f"第 {r_idx+1} 列，第 {c_idx+1} 格顏色 '{cell}' 不合法"
+    return True,""
+
+def run_user_code(js_code):
+    clear_stdout_area()
+    stdin_lines=document["stdin"].value.replace('\r','').split('\n') if document["stdin"].value.strip()!='' else []
+    input_ptr=0
+    def input_func(prompt=""):
+        nonlocal input_ptr
+        if prompt: append_text(prompt)
+        if input_ptr<len(stdin_lines):
+            val=stdin_lines[input_ptr]; input_ptr+=1; return val
+        raise EOFError
+
+    matrices=[]
+    text_outputs=[]
+
+    def custom_print(*args, sep=' ', end='\n'):
+        try:
+            if len(args)==1:
+                valid, err_msg = is_valid_color_matrix(args[0])
+                if valid: matrices.append(args[0]); return
+                elif isinstance(args[0],list): text_outputs.append(err_msg); return
+            s=sep.join(str(a) for a in args)+end
+            text_outputs.append(s)
+        except Exception as e: text_outputs.append("Print Error: "+str(e)+"\n")
+
+    glbs={'input': input_func, 'print': custom_print}
+
+    try: exec(js_code, glbs)
+    except Exception as e:
+        tb=traceback.format_exc()
+        clear_stdout_area()
+        append_text("Runtime Error:\n"+tb)
+        return
+
+    if len(matrices)==1 and len(text_outputs)==0:
+        html=matrix_to_html(matrices[0])
+        document["stdout"].innerHTML=html
+    else:
+        clear_stdout_area()
+        if matrices and len(text_outputs)==0:
+            valid, err_msg = is_valid_color_matrix(matrices[0])
+            append_text("無法輸出彩色表格: "+err_msg)
+        else:
+            append_text("無法輸出彩色表格"+("\n"+"".join(text_outputs) if text_outputs else ""))
+
+from browser import window
+document["runBtn"].bind("click", lambda ev: run_user_code(window.editor.getValue()))
+</script>
+
+</body>
+</html>
