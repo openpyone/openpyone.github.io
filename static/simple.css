@@ -57,6 +57,15 @@ table, th, td {
     text-align: center;
 }
 
+table th {
+    background-color: #303841;
+    color: #fff;
+}
+
+table td {
+    background-color: #d4dbe2;
+}
+
 @media screen and (max-device-width: 640px) {
     .nav-item .nav-link {
         padding: 5px 0px;
