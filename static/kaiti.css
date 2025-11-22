@@ -1,0 +1,22 @@
+@font-face {
+    font-family: "EduKai";
+    src: url("edukai-5.0.woff2") format("woff2");
+}
+
+body {
+    background-color: #303841;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+textarea {
+    margin-top: 5vh;
+    padding: 10px;
+    height: 90vh;
+    width: 90vw;
+    font-family: "Times New Roman", "EduKai";
+    font-size: 2em;
+}
