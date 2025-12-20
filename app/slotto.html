@@ -1,82 +1,85 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Slotto 大樂透拉霸</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Slotto 大樂透拉霸 | 碼寶程式教育</title>
+  <link rel="icon" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 
-<style>
-body {
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: radial-gradient(circle, #222, #2f373d);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #fff;
-}
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle, #222, #2f373d);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #fff;
+    }
 
-.container {
-  text-align: center;
-  padding: 0 8%; /* 左右留白 */
-  width: 100%;
-  box-sizing: border-box;
-}
+    .container {
+      text-align: center;
+      padding: 0 8%; /* 左右留白 */
+      width: 100%;
+      box-sizing: border-box;
+    }
 
-.slots {
-  display: flex;
-  justify-content: center; /* 整列置中 */
-  gap: 2%; /* 格子間距 */
-  margin: 24px 0;
-  flex-wrap: nowrap; /* 保證 6 格在同一列 */
-}
+    .slots {
+      display: flex;
+      justify-content: center; /* 整列置中 */
+      gap: 2%; /* 格子間距 */
+      margin: 24px 0;
+      flex-wrap: nowrap; /* 保證 6 格在同一列 */
+    }
 
-.slot {
-  flex: 0 1 calc((100% - 10%) / 6); /* 六格平均寬度 */
-  aspect-ratio: 7/9;
-  min-width: 40px;
-  background: #282828;
-  border-radius: 12px;
-  box-shadow: inset 0 0 10px rgba(255,255,255,0.1), 0 3px 6px rgba(0,0,0,0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: calc(2.5vw + 12px);
-  font-weight: bold;
-  color: #ffeb3b;
-  transition: all 0.1s ease;
-}
+    .slot {
+      flex: 0 1 calc((100% - 10%) / 6); /* 六格平均寬度 */
+      aspect-ratio: 7/9;
+      min-width: 40px;
+      background: #282828;
+      border-radius: 12px;
+      box-shadow: inset 0 0 10px rgba(255,255,255,0.1), 0 3px 6px rgba(0,0,0,0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: calc(2.5vw + 12px);
+      font-weight: bold;
+      color: #ffeb3b;
+      transition: all 0.1s ease;
+    }
 
-.slot.selected {
-  color: #ff66aa; /* 粉紅色固定文字 */
-  transform: none;
-  text-shadow: none;
-}
+    .slot.selected {
+      color: #ff66aa; /* 粉紅色固定文字 */
+      transform: none;
+      text-shadow: none;
+    }
 
-button {
-  padding: 12px 28px;
-  font-size: 24px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  background: #ff66aa; /* 按鈕粉紅色 */
-  color: #fff;
-}
+    button {
+      padding: 12px 28px;
+      font-size: 24px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      background: #ff66aa; /* 按鈕粉紅色 */
+      color: #fff;
+    }
 
-button:disabled {
-  background: #777;
-  cursor: not-allowed;
-}
+    button:disabled {
+      background: #777;
+      cursor: not-allowed;
+    }
 
-/* 手機優化 */
-@media (max-width: 600px) {
-  .slot {
-    font-size: calc(4vw + 12px);
-    min-width: 40px;
-  }
-}
-</style>
+    /* 手機優化 */
+    @media (max-width: 600px) {
+      .slot {
+        font-size: calc(4vw + 12px);
+        min-width: 40px;
+      }
+    }
+  </style>
 </head>
 
 <body>
