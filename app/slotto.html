@@ -9,34 +9,47 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 
   <style>
-    body {
+    html, body {
       margin: 0;
-      min-height: 100vh;
+      padding: 0;
+      height: 100%;
+      max-height: 100vh;
+      overflow: hidden; /* 避免上下捲軸 */
+    }
+
+    body {
       display: flex;
       justify-content: center;
       align-items: center;
       background: radial-gradient(circle, #222, #2f373d);
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: #fff;
+      box-sizing: border-box;
     }
 
     .container {
       text-align: center;
-      padding: 0 8%; /* 左右留白 */
       width: 100%;
+      max-width: 600px; /* 最大寬度 */
+      padding: 16px; /* 四周 padding */
       box-sizing: border-box;
+    }
+
+    h1 {
+      margin: 0 0 16px 0;
+      font-size: 2rem;
     }
 
     .slots {
       display: flex;
-      justify-content: center; /* 整列置中 */
-      gap: 2%; /* 格子間距 */
-      margin: 24px 0;
-      flex-wrap: nowrap; /* 保證 6 格在同一列 */
+      justify-content: center;
+      gap: 2%;
+      margin: 16px 0;
+      flex-wrap: nowrap;
     }
 
     .slot {
-      flex: 0 1 calc((100% - 10%) / 6); /* 六格平均寬度 */
+      flex: 0 1 calc((100% - 10%) / 6);
       aspect-ratio: 7/9;
       min-width: 40px;
       background: #282828;
@@ -52,7 +65,7 @@
     }
 
     .slot.selected {
-      color: #ff66aa; /* 粉紅色固定文字 */
+      color: #ff66aa;
       transform: none;
       text-shadow: none;
     }
@@ -63,7 +76,7 @@
       border-radius: 10px;
       border: none;
       cursor: pointer;
-      background: #ff66aa; /* 按鈕粉紅色 */
+      background: #ff66aa;
       color: #fff;
     }
 
@@ -77,6 +90,11 @@
       .slot {
         font-size: calc(4vw + 12px);
         min-width: 40px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 12px;
       }
     }
   </style>
@@ -101,9 +119,9 @@
 <script>
 const TOTAL_NUMBERS = 49;
 const SLOT_COUNT = 6;
-const INTERVAL = 50;   // 每格滾動更新時間(ms)
-const ROLL_COUNT = 15;  // 每格滾動次數
-const STOP_DELAY = 300; // 每格停下間隔(ms)
+const INTERVAL = 50;
+const ROLL_COUNT = 15;
+const STOP_DELAY = 300;
 
 const slots = document.querySelectorAll(".slot");
 const startBtn = document.getElementById("startBtn");
@@ -128,7 +146,6 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// 單格滾動動畫
 async function rollSlot(slot, finalNumber) {
   for (let i = 0; i < ROLL_COUNT; i++) {
     slot.textContent = Math.floor(Math.random() * TOTAL_NUMBERS) + 1;
@@ -142,16 +159,14 @@ async function startSlot() {
   running = true;
   startBtn.disabled = true;
 
-  // 移除先前選定樣式
   slots.forEach(slot => slot.classList.remove("selected"));
 
   const finalNumbers = generateResult();
 
-  // 依序滾動每格
   for (let i = 0; i < SLOT_COUNT; i++) {
     await rollSlot(slots[i], finalNumbers[i]);
-    slots[i].classList.add("selected"); // 停下後固定粉紅色
-    await sleep(STOP_DELAY); // 下一格滾動前的間隔
+    slots[i].classList.add("selected");
+    await sleep(STOP_DELAY);
   }
 
   running = false;
